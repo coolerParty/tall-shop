@@ -1,7 +1,7 @@
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -15,13 +15,10 @@
 
     <!-- Styles -->
     @livewireStyles
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
-        />
-  </head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+</head>
 
-  <body class="min-h-full">
+<body class="min-h-full">
     <!--Nav-->
     <x-nav-menu-component></x-nav-menu-component>
 
@@ -30,7 +27,7 @@
     <main>
         {{ $slot }}
     </main>
-<x-footer-component></x-footer-component>
+    <x-footer-component></x-footer-component>
 
     @stack('modals')
     @livewireScripts
@@ -55,9 +52,10 @@
             },
             // And if we need scrollbar
             scrollbar: {
-              el: '.swiper-scrollbar',
+                el: '.swiper-scrollbar',
             },
-          });
+        });
     </script>
-  </body>
+</body>
+
 </html>
