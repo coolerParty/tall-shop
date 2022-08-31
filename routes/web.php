@@ -3,7 +3,9 @@
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Livewire\Admin\AdminDashboardComponent;
-use App\Http\Livewire\Admin\HomeSliderComponent;
+use App\Http\Livewire\Admin\HomeSlider\HomeSliderAddComponent;
+use App\Http\Livewire\Admin\Homeslider\HomeSliderComponent;
+use App\Http\Livewire\Admin\HomeSlider\HomeSliderEditComponent;
 use App\Http\Livewire\Admin\Users\UserAddComponent;
 use App\Http\Livewire\Admin\Users\UserComponent;
 use App\Http\Livewire\Admin\Users\UserEditComponent;
@@ -29,7 +31,10 @@ Route::middleware([
     'verified','role_or_permission:super-admin|dashboard-access|admin'
 ])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', AdminDashboardComponent::class)->name('dashboard');
+
     Route::get('/home-slider', HomeSliderComponent::class)->name('homeslider.index');
+    Route::get('/home-slider/create', HomeSliderAddComponent::class)->name('homeslider.create');
+    Route::get('/home-slider/{homeslider_id}/edit', HomeSliderEditComponent::class)->name('homeslider.edit');
 
     Route::resource('permissions', PermissionController::class);
     Route::resource('roles', RoleController::class);
