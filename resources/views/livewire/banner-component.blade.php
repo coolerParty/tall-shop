@@ -5,12 +5,12 @@
             height: auto;
         }
     </style>
-    <div class="swiper p-6">
+    <div class="swiper p-6 w-full cursor-grab">
         <!-- Additional required wrapper -->
-        <div class="swiper-wrapper bg-black">
+        <div class="swiper-wrapper w-full">
             <!-- Slides -->
-            <div class="swiper-slide text-center"
-                style="background: url({{ asset('assets/images/homesliders/home-slide-1.jpg') }}) no-repeat;">
+            <div class="swiper-slide text-center w-full object-cover"
+                style="background: black url({{ asset('assets/images/homesliders/home-slide-1.jpg') }}) no-repeat  fixed center;">
                 <div
                     class="text-center w-full text-white  h-[400px] md:h-[600px] flex items-center justify-center bg-blend-hard-light">
                     <div class="text-center">
@@ -23,8 +23,8 @@
                     </div>
                 </div>
             </div>
-            <div class="swiper-slide text-center"
-                style="background: url({{ asset('assets/images/homesliders/home-slide-2.jpg') }}) no-repeat;">
+            <div class="swiper-slide text-center w-full object-cover"
+                style="background: black url({{ asset('assets/images/homesliders/home-slide-2.jpg') }}) no-repeat  fixed center;">
                 <div
                     class="text-center w-full text-white  h-[400px] md:h-[600px] flex items-center justify-center bg-blend-hard-light">
                     <div class="text-center">
@@ -37,8 +37,8 @@
                     </div>
                 </div>
             </div>
-            <div class="swiper-slide text-center"
-                style="background: url({{ asset('assets/images/homesliders/home-slide-3.jpg') }}) no-repeat;">
+            <div class="swiper-slide text-center w-full object-cover"
+                style="background: black url({{ asset('assets/images/homesliders/home-slide-3.jpg') }}) no-repeat  fixed center;">
                 <div
                     class="text-center w-full text-white  h-[400px] md:h-[600px]  flex items-center justify-center bg-blend-hard-light">
                     <div class="text-center">
@@ -52,8 +52,16 @@
                 </div>
             </div>
         </div>
+
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+
         <!-- If we need pagination -->
         <div class="swiper-pagination"></div>
 
     </div>
+
 </div>
+
+
