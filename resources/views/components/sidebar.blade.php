@@ -25,7 +25,8 @@
     <nav class="flex-1 overflow-hidden hover:overflow-y-auto">
         <ul class="p-2 overflow-hidden">
             <li title="Dashboard">
-                <a href="{{ route('admin.dashboard') }}" class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
+                <a href="{{ route('admin.dashboard') }}"
+                    class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
                     :class="{'justify-center': !isSidebarOpen}">
                     <span>
                         <svg class="w-6 h-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -138,54 +139,107 @@
                     </li>
                 </ul>
             </li>
-            @can('user-show')
-            <li title="Users">
-                <a href="#"
-                    class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
-                    :class="{'justify-center': !isSidebarOpen}">
+            <li title="Security" x-data="{
+                open: false,
+                toggle() {
+                    if (this.open) {
+                        return this.close()
+                    }
+
+                    this.$refs.button.focus()
+
+                    this.open = true
+                },
+                close(focusAfter) {
+                    if (! this.open) return
+
+                    this.open = false
+
+                    focusAfter && focusAfter.focus()
+                }
+            }" x-on:keydown.escape.prevent.stop="close($refs.button)"
+                x-on:focusin.window="! $refs.panel.contains($event.target) && close()" x-id="['dropdown-button']">
+
+                <a class="relative flex items-center w-full p-2 space-x-2 cursor-pointer hover:bg-gray-100
+                    {{ (route('admin.users.index') == substr(url()->current(), 0, strlen(route('admin.users.index')) )) ? 'bg-gray-100' : '' }}
+                    {{ (route('admin.roles.index') == substr(url()->current(), 0, strlen(route('admin.roles.index')) )) ? 'bg-gray-100' : '' }}
+                    {{ (route('admin.permissions.index') == substr(url()->current(), 0, strlen(route('admin.permissions.index')) )) ? 'bg-gray-100' : '' }}
+                " :class="{'justify-center': !isSidebarOpen}" x-ref="button" x-on:click="toggle()"
+                    :aria-expanded="open" :aria-controls="$id('dropdown-button')">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-400" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                         </svg>
                     </span>
-                    <span :class="{ 'lg:hidden': !isSidebarOpen }">Users</span>
-                </a>
-            </li>
-            @endcan
-            @can('role-show')
-            <li title="Roles">
-                <a href="#"
-                    class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
-                    :class="{'justify-center': !isSidebarOpen}">
-                    <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-400" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    <span :class="{ 'lg:hidden': !isSidebarOpen }">Security</span>
+                    <span class="absolute right-2" :class="{ 'lg:hidden': !isSidebarOpen }">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2 transition-all"
+                            :class="{'rotate-90': open}" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                         </svg>
                     </span>
-                    <span :class="{ 'lg:hidden': !isSidebarOpen }">Roles</span>
                 </a>
+                <ul x-ref="panel" x-show="open" x-transition:enter="transition ease-out duration-300"
+                    x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
+                    x-transition:leave="transition ease-in duration-300"
+                    x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
+                    :id="$id('dropdown-button')" style="display: none;">
+                    @can('user-show')
+                    <li title="Users">
+                        <a class="flex items-center p-2 space-x-2 text-sm border-t border-b hover:bg-gray-100
+                        {{ (route('admin.users.index') == substr(url()->current(), 0, strlen(route('admin.users.index')) )) ? 'bg-gray-100' : '' }}
+                        " :class="{'justify-center': !isSidebarOpen}" href="{{ route('admin.users.index') }}">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
+                                    fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Users</span>
+                        </a>
+                    </li>
+                    @endcan
+                    @can('role-show')
+                    <li title="Roles">
+                        <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
+                            {{ (route('admin.roles.index') == substr(url()->current(), 0, strlen(route('admin.roles.index')) )) ? 'bg-gray-100' : '' }}
+                        " :class="{'justify-center': !isSidebarOpen}" href="{{ route('admin.roles.index') }}">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
+                                    fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Roles</span>
+                        </a>
+                    </li>
+                    @endcan
+                    @can('permission-show')
+                    <li title="Permissions">
+                        <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
+                            {{ (route('admin.permissions.index') == substr(url()->current(), 0, strlen(route('admin.permissions.index')) )) ? 'bg-gray-100' : '' }}
+                        " :class="{'justify-center': !isSidebarOpen}" href="{{ route('admin.permissions.index') }}">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
+                                    fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Permissions</span>
+                        </a>
+                    </li>
+                    @endcan
+                </ul>
             </li>
-            @endcan
-            @can('permission-show')
-            <li title="Permissions">
-                <a href="#"
-                    class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
-                    :class="{'justify-center': !isSidebarOpen}">
-                    <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-400" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016zM12 9v2m0 4h.01" />
-                        </svg>
-                    </span>
-                    <span :class="{ 'lg:hidden': !isSidebarOpen }">Permissions</span>
-                </a>
-            </li>
-            @endcan
             <!-- Sidebar Links... -->
         </ul>
     </nav>
