@@ -18,7 +18,7 @@ class PermissionSeeder extends Seeder
     {
         // create permissions
 			$permissions = [
-				'dashboard-access',
+				'admin-dashboard-access',
 				'role-create',
 				'role-edit',
 				'role-show',
@@ -48,7 +48,7 @@ class PermissionSeeder extends Seeder
 			$roleAdmin = Role::create(['guard_name' => 'web', 'name' => 'admin']);
 
 			$adminPermissions = [
-				'dashboard-access',
+				'admin-dashboard-access',
 				'role-create',
 				'role-edit',
 				'role-show',
