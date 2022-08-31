@@ -1,4 +1,5 @@
 <div class="w-full">
+    @section('title', 'Food')
     @livewire('slider-component')
     @livewire('home-about-component')
     @livewire('featured-product-component')
