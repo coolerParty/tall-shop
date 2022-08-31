@@ -4,10 +4,10 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 
-class BannerComponent extends Component
+class ReviewComponent extends Component
 {
     public function render()
     {
-        return view('livewire.banner-component');
+        return view('livewire.review-component');
     }
 }
