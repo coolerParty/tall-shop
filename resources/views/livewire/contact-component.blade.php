@@ -6,7 +6,7 @@
                 <div class="mt-2 md:mr-4 dark:bg-gray-800 sm:rounded-lg">
                     <img src="{{ asset('assets/images/contact/order-img.jpg') }}" alt="" class="object-cover w-full">
                 </div>
-                <form class="flex flex-col justify-center">
+                <form class="flex flex-col justify-center m-2 md:m-0">
                     <div class="flex flex-col">
                         <label for="name" class="hidden">Full Name</label>
                         <input type="name" name="name" id="name" placeholder="Full Name" class="px-3 py-3 mt-2 font-semibold text-gray-800 bg-white border border-gray-400 w-100 dark:bg-gray-800 dark:border-gray-700 focus:border-indigo-500 focus:outline-none">
