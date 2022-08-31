@@ -1,12 +1,12 @@
 <div class="px-3 pt-10 pb-10 mt-10 mb-10 font-sans leading-normal tracking-normal bg-orange-200">
     <h3 class="mt-10 text-3xl font-semibold text-center capitalize">customer's review </h3>
-        <h1 class="text-5xl font-bold tracking-tighter text-center text-orange-500 capitalize">what they say</h1>
+    <h1 class="text-5xl font-bold tracking-tighter text-center text-orange-500 capitalize">what they say</h1>
     <div class="container mx-auto mt-10" x-data="{myForData: sourceData}">
         <div class="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
             <template x-for="item in myForData" :key="item">
 
                 <div
-                    class="p-3 transition duration-150 ease-in-out transform bg-white hover:shadow-lg hover:rounded hover:scale-102 hover:z-40">
+                    class="p-3 transition duration-150 ease-in-out transform bg-white hover:shadow-lg hover:rounded hover:scale-102">
                     <div class="m-5">
                         <div class="flex space-x-0.5">
                             <svg :class="1 <= item.rating ? 'text-yellow-300' : 'text-gray-300'" class="w-5 h-5"
