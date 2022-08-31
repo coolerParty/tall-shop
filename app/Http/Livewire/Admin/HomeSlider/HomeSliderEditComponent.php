@@ -19,17 +19,14 @@ class HomeSliderEditComponent extends Component
     public $link;
     public $image;
     public $active;
-    
+
     public $slide_id;
     public $new_image;
 
     public function mount($homeslider_id)
     {
-        $this->confirmation();
-
         $slider = HomeSlider::find($homeslider_id);
-        if(empty($slider))
-        {
+        if (empty($slider)) {
             abort(404);
         }
 
@@ -39,17 +36,79 @@ class HomeSliderEditComponent extends Component
         $this->link      = $slider->link;
         $this->image     = $slider->image;
         $this->active    = $slider->active;
+    }
 
+    public function updated($fields)
+    {
+        $this->validateOnly($fields, [
+            'title'     => ['required', 'min:3', 'max:10', 'string'],
+            'sub_title' => ['required', 'min:3', 'max:10', 'string'],
+            'link'      => ['required', 'url'],
+            'active'    => ['required', 'boolean'],
+        ]);
+
+        if ($this->new_image) {
+            $this->validateOnly($fields, ['new_image' => ['required', 'image', 'max:2048']]);
+        }
     }
 
     public function update()
     {
-        
+        $this->confirmation();
+
+        $this->validate([
+            'title'     => ['required', 'min:3', 'max:10', 'string'],
+            'sub_title' => ['required', 'min:3', 'max:10', 'string'],
+            'link'      => ['required', 'url'],
+            'active'    => ['required', 'boolean'],
+        ]);
+
+        if ($this->new_image) {
+            $this->validate(['new_image' => ['required', 'image', 'max:2048']]);
+        }
+
+        $slider            = HomeSlider::find($this->slide_id);
+        if (empty($slider)) {
+            abort(404);
+        }
+        $slider->title     = $this->title;
+        $slider->sub_title = $this->sub_title;
+        $slider->link      = $this->link;
+        $slider->active    = $this->active;
+
+        if ($this->new_image) {
+            if (
+                !empty($slider->image) &&
+                file_exists('storage/assets/homeslider/thumbnail' . '/' . $slider->image)
+            ) {
+                unlink('storage/assets/homeslider/thumbnail' . '/' . $slider->image); // Deleting Image
+            }
+            if (
+                !empty($slider->image) &&
+                file_exists('storage/assets/homeslider/large' . '/' . $slider->image)
+            ) {
+                unlink('storage/assets/homeslider/large' . '/' . $slider->image); // Deleting Image
+            }
+
+            $imagename      = Carbon::now()->timestamp . '.' . $this->new_image->extension();
+            $originalPath   = storage_path() . '/app/public/assets/homeslider/large/';
+            $thumbnailPath  = storage_path() . '/app/public/assets/homeslider/thumbnail/';
+            $thumbnailImage = Image::make($this->new_image);
+            $thumbnailImage->fit(1920, 1017);
+            $thumbnailImage->save($originalPath . $imagename);
+            $thumbnailImage->fit(189, 100);
+            $thumbnailImage->save($thumbnailPath . $imagename);
+
+            $slider->image = $imagename;
+        }
+        $slider->save();
+
+        return redirect()->route('admin.homeslider.index')
+            ->with('update-success', 'Slide "' . $this->title . '" updated successfully.');
     }
 
     public function confirmation()
     {
-
         $this->authorize('slider-edit');
     }
 
@@ -60,6 +119,8 @@ class HomeSliderEditComponent extends Component
 
     public function render()
     {
+        $this->confirmation();
+
         return view('livewire.admin.home-slider.home-slider-edit-component')->layout('layouts.base');
     }
 }

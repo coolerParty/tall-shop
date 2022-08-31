@@ -142,7 +142,7 @@
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
                             @forelse($sliders as $slider)
-                            <tr class="transition-all hover:bg-gray-100 hover:shadow-lg">
+                            <tr class="transition-all hover:bg-gray-100 ">
                                 <td class="px-3 py-2 whitespace-nowrap">
                                     @if($slider->image)
                                     <a href="{{ asset('storage/assets/homeslider/large') }}/{{ $slider->image }}" target="_blank"><img class="object-cover w-10 h-10 rounded-md cursor-pointer hover:shadow-lg" src="{{ asset('storage/assets/homeslider/thumbnail') }}/{{ $slider->image }}" /></a>
@@ -159,7 +159,7 @@
                                     <div class="text-sm font-medium text-gray-900">{{ $slider->sub_title }}</div>
                                 </td>
                                 <td class="px-6 py-4 text-gray-900 dark:text-white whitespace-nowrap">
-                                    <div class="text-sm text-gray-900 hover:text-indigo-700"><a href="{{ $slider->link }}" target="_blank">{{ $slider->link }}</a></div>
+                                    <div class="text-sm text-indigo-600 hover:text-indigo-900"><a href="{{ $slider->link }}" target="_blank">{{ $slider->link }}</a></div>
                                 </td>
                                 <td class="px-6 py-4 text-gray-900 dark:text-white">
                                     <div class="text-sm font-medium text-gray-900">{{ $slider->active }}</div>

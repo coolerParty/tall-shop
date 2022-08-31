@@ -53,7 +53,7 @@ class HomeSliderAddComponent extends Component
             $imagename = Carbon::now()->timestamp . '.' . $this->image->extension();
 
             $originalPath   = storage_path() . '/app/public/assets/homeslider/large/';
-            $thumbnailPath   = storage_path() . '/app/public/assets/homeslider/thumbnail/';
+            $thumbnailPath  = storage_path() . '/app/public/assets/homeslider/thumbnail/';
             $thumbnailImage = Image::make($this->image);
             $thumbnailImage->fit(1920, 1017);
             $thumbnailImage->save($originalPath . $imagename);
