@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
 </head>
 
-<body class="min-h-full">
+<body class="min-h-full antialiased">
     <!--Nav-->
     <x-nav-menu-component></x-nav-menu-component>
 
@@ -53,6 +53,18 @@
                 el: '.swiper-scrollbar',
             },
         });
+
+        const setup = () => {
+            return {
+                loading: true,
+                isSidebarOpen: false,
+                toggleSidbarMenu() {
+                    this.isSidebarOpen = !this.isSidebarOpen
+                },
+                isSettingsPanelOpen: false,
+                isSearchBoxOpen: false,
+            }
+        }
     </script>
 </body>
 
