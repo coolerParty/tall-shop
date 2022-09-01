@@ -61,7 +61,7 @@
 
                 <a class="relative flex items-center w-full p-2 space-x-2 cursor-pointer hover:bg-gray-100
                     {{ (route('admin.homeslider.index') == substr(url()->current(), 0, strlen(route('admin.homeslider.index')) )) ? 'bg-gray-100' : '' }}
-                    {{ (route('admin.homeslider.index') == substr(url()->current(), 0, strlen(route('admin.homeslider.index')) )) ? 'bg-gray-100' : '' }}
+                    {{ (route('admin.product.index') == substr(url()->current(), 0, strlen(route('admin.product.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('admin.homeslider.index') == substr(url()->current(), 0, strlen(route('admin.homeslider.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('admin.homeslider.index') == substr(url()->current(), 0, strlen(route('admin.homeslider.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('admin.homeslider.index') == substr(url()->current(), 0, strlen(route('admin.homeslider.index')) )) ? 'bg-gray-100' : '' }}
@@ -109,8 +109,8 @@
                     @can('product-show')
                     <li title="Product">
                         <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
-                        {{ (route('admin.homeslider.index') == substr(url()->current(), 0, strlen(route('admin.homeslider.index')) )) ? 'bg-gray-100' : '' }}
-                        " :class="{'justify-center': !isSidebarOpen}" href="{{ route('admin.homeslider.index') }}">
+                        {{ (route('admin.product.index') == substr(url()->current(), 0, strlen(route('admin.product.index')) )) ? 'bg-gray-100' : '' }}
+                        " :class="{'justify-center': !isSidebarOpen}" href="{{ route('admin.product.index') }}">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
                                     fill="currentColor">

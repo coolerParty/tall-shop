@@ -3,6 +3,9 @@
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Livewire\Admin\AdminDashboardComponent;
+use App\Http\Livewire\Admin\AdminProductAddComponent;
+use App\Http\Livewire\Admin\AdminProductComponent;
+use App\Http\Livewire\Admin\AdminProductEditComponent;
 use App\Http\Livewire\Admin\HomeSlider\HomeSliderAddComponent;
 use App\Http\Livewire\Admin\Homeslider\HomeSliderComponent;
 use App\Http\Livewire\Admin\HomeSlider\HomeSliderEditComponent;
@@ -44,5 +47,9 @@ Route::middleware([
     Route::get('/users', UserComponent::class)->name('users.index');
     Route::get('/users/create', UserAddComponent::class)->name('users.create');
     Route::get('/users/{user_id}/edit', UserEditComponent::class)->name('users.edit');
+
+    Route::get('/products', AdminProductComponent::class)->name('product.index');
+    Route::get('/products/create', AdminProductAddComponent::class)->name('product.create');
+    Route::get('/products/{product_id}/edit', AdminProductEditComponent::class)->name('product.edit');
 
 });
