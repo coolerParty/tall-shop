@@ -41,8 +41,8 @@ class HomeSliderEditComponent extends Component
     public function updated($fields)
     {
         $this->validateOnly($fields, [
-            'title'     => ['required', 'min:3', 'max:10', 'string'],
-            'sub_title' => ['required', 'min:3', 'max:10', 'string'],
+            'title'     => ['required', 'min:3', 'max:30', 'string'],
+            'sub_title' => ['required', 'min:3', 'max:30', 'string'],
             'link'      => ['required', 'url'],
             'active'    => ['required', 'boolean'],
         ]);
@@ -57,8 +57,8 @@ class HomeSliderEditComponent extends Component
         $this->confirmation();
 
         $this->validate([
-            'title'     => ['required', 'min:3', 'max:10', 'string'],
-            'sub_title' => ['required', 'min:3', 'max:10', 'string'],
+            'title'     => ['required', 'min:3', 'max:30', 'string'],
+            'sub_title' => ['required', 'min:3', 'max:30', 'string'],
             'link'      => ['required', 'url'],
             'active'    => ['required', 'boolean'],
         ]);

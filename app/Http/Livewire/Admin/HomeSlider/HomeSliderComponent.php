@@ -27,8 +27,20 @@ class HomeSliderComponent extends Component
             ->with('delete-success', 'Slide has been deleted successfully.');
     }
 
+    public function updateSliderActive($homeslider_id,$status,$url)
+    {
+        $this->authorize('slider-edit');
+
+        $slider = HomeSlider::where('id',$homeslider_id)->first();
+        $slider->active = $status;
+        $slider->save();
+        return redirect()->to($url);
+    }
+
     public function render()
     {
+        $this->authorize('slider-show');
+
         $sliders = HomeSlider::select('id', 'title', 'sub_title', 'link', 'image', 'active', 'created_at')->orderBy('created_at', 'DESC')->paginate(10);
 
         return view('livewire.admin.home-slider.home-slider-component', ['sliders' => $sliders])->layout('layouts.base');

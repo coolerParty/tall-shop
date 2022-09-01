@@ -89,21 +89,24 @@
                     x-transition:leave="transition ease-in duration-300"
                     x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
                     :id="$id('dropdown-button')" style="display: none;">
-                    @can('dashboard-access')
-                    <li title="Gallery">
-                        <a class="flex items-center p-2 space-x-2 text-sm border-t border-b hover:bg-gray-100
+                    @can('slider-show')
+                    <li title="Home Slider">
+                        <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
                         {{ (route('admin.homeslider.index') == substr(url()->current(), 0, strlen(route('admin.homeslider.index')) )) ? 'bg-gray-100' : '' }}
                         " :class="{'justify-center': !isSidebarOpen}" href="{{ route('admin.homeslider.index') }}">
                             <span>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z" />
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
+                                    fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M3 5a2 2 0 012-2h10a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5zm11 1H6v8l4-2 4 2V6z"
+                                        clip-rule="evenodd" />
                                 </svg>
                             </span>
-                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Gallery</span>
+                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Home Slider</span>
                         </a>
                     </li>
                     @endcan
-                    @can('dashboard-access')
+                    @can('product-show')
                     <li title="Product">
                         <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
                         {{ (route('admin.homeslider.index') == substr(url()->current(), 0, strlen(route('admin.homeslider.index')) )) ? 'bg-gray-100' : '' }}
@@ -119,6 +122,20 @@
                                 </svg>
                             </span>
                             <span :class="{ 'lg:hidden': !isSidebarOpen }">Product</span>
+                        </a>
+                    </li>
+                    @endcan
+                    @can('dashboard-access')
+                    <li title="Gallery">
+                        <a class="flex items-center p-2 space-x-2 text-sm border-t border-b hover:bg-gray-100
+                        {{ (route('admin.homeslider.index') == substr(url()->current(), 0, strlen(route('admin.homeslider.index')) )) ? 'bg-gray-100' : '' }}
+                        " :class="{'justify-center': !isSidebarOpen}" href="{{ route('admin.homeslider.index') }}">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z" />
+                                </svg>
+                            </span>
+                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Gallery</span>
                         </a>
                     </li>
                     @endcan
@@ -173,23 +190,6 @@
                                 </svg>
                             </span>
                             <span :class="{ 'lg:hidden': !isSidebarOpen }">Contacts</span>
-                        </a>
-                    </li>
-                    @endcan
-                    @can('dashboard-access')
-                    <li title="Home Slider">
-                        <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
-                        {{ (route('admin.homeslider.index') == substr(url()->current(), 0, strlen(route('admin.homeslider.index')) )) ? 'bg-gray-100' : '' }}
-                        " :class="{'justify-center': !isSidebarOpen}" href="{{ route('admin.homeslider.index') }}">
-                            <span>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
-                                    fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M3 5a2 2 0 012-2h10a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5zm11 1H6v8l4-2 4 2V6z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                            </span>
-                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Home Slider</span>
                         </a>
                     </li>
                     @endcan

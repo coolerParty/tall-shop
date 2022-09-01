@@ -42,5 +42,5 @@ Route::middleware([
     Route::get('/users', UserComponent::class)->name('users.index');
     Route::get('/users/create', UserAddComponent::class)->name('users.create');
     Route::get('/users/{user_id}/edit', UserEditComponent::class)->name('users.edit');
-    
+
 });
