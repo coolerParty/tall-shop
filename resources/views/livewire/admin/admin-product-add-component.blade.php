@@ -100,27 +100,10 @@
 
                 <div class="mt-4">
                     <div>
-                        <label class="text-gray-700 dark:text-gray-200" for="image">Image</label>
-                        <input id="image" type="file" name="image" wire:model="image" autocomplete="image"
-                            class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
-                        <div class="block w-full px-4 py-2 m-1 text-white bg-emerald-500 " wire:loading wire:target="image">
-                            Uploading...
-                        </div>
-                        @if ($image)
-                        <img class="object-cover rounded place-content-center w-30 h-30"
-                            src="{{ $image->temporaryUrl() }}" alt="">
-                        <x-link-danger type="button" wire:click="removeImage"
-                            class="block w-full cursor-pointer">Remove Selected Image</x-link-danger>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="mt-4">
-                    <div>
                         <label for="category_id" class="text-gray-700 dark:text-gray-200">Category</label>
                         <select id="category_id" name="category_id" wire:model="category_id"
                             class="block w-full px-4 py-2 mt-2 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:outline-none focus:ring focus:border-blue-400 dark:focus:border-blue-300 sm:text-sm">
-                            <option value="0">Don't Show</option>
+                            <option value="">Select Categories</option>
                             @foreach($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
@@ -136,6 +119,23 @@
                             <option value="0">Don't Show</option>
                             <option value="1">Show</option>
                         </select>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <div>
+                        <label class="text-gray-700 dark:text-gray-200" for="image">Image</label>
+                        <input id="image" type="file" name="image" wire:model="image" autocomplete="image"
+                            class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                        <div class="block w-full px-4 py-2 m-1 text-white bg-emerald-500 " wire:loading wire:target="image">
+                            Uploading...
+                        </div>
+                        @if ($image)
+                        <img class="object-cover rounded place-content-center w-30 h-30"
+                            src="{{ $image->temporaryUrl() }}" alt="">
+                        <x-link-danger type="button" wire:click="removeImage"
+                            class="block w-full cursor-pointer">Remove Selected Image</x-link-danger>
+                        @endif
                     </div>
                 </div>
 

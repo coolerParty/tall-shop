@@ -73,7 +73,9 @@ class AdminProductComponent extends Component
     public function render()
     {
         $this->authorize('product-show');
-        $products = Product::with('category')->select('id', 'name', 'image', 'regular_price', 'short_description', 'featured', 'stock_status', 'quantity', 'active', 'category_id')->orderBy('name', 'ASC')->paginate(10);
+        $products = Product::with('category')
+                ->select('id', 'name', 'image', 'regular_price', 'short_description', 'featured', 'stock_status', 'quantity', 'active', 'category_id')
+                ->orderBy('created_at', 'DESC')->paginate(10);
         return view('livewire.admin.admin-product-component', ['products' => $products])->layout('layouts.base');
     }
 }
