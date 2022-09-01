@@ -31,6 +31,10 @@ class PermissionSeeder extends Seeder
 				'slider-edit',
 				'slider-show',
 				'slider-delete',
+                'product-create',
+				'product-edit',
+				'product-show',
+				'product-delete',
 
 			];
 
@@ -62,6 +66,10 @@ class PermissionSeeder extends Seeder
 				'slider-edit',
 				'slider-show',
 				'slider-delete',
+                'product-create',
+				'product-edit',
+				'product-show',
+				'product-delete',
 			];
 
 			foreach($adminPermissions as $permission){

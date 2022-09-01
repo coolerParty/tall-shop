@@ -38,7 +38,7 @@ class PermissionController extends Controller
 
         Permission::create(['guard_name' => 'web', 'name' => $request->input('name')]);
 
-        return redirect()->route('permissions.index')
+        return redirect()->route('admin.permissions.index')
             ->with('create-success', 'Permission "' . $request->input('name') . '" has been created successfully.');
     }
 
@@ -63,7 +63,7 @@ class PermissionController extends Controller
         $permission->name = $request->input('name');
         $permission->save();
 
-        return redirect()->route('permissions.index')
+        return redirect()->route('admin.permissions.index')
             ->with('update-success', 'Permission "' . $request->input('name') . '" has been updated successfully.');
     }
 
@@ -73,7 +73,7 @@ class PermissionController extends Controller
 
         Permission::find($id)->delete();
 
-        return redirect()->route('permissions.index')
+        return redirect()->route('admin.permissions.index')
             ->with('delete-success', 'Permission deleted successfully');
     }
 }

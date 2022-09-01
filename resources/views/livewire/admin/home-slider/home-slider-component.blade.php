@@ -43,8 +43,8 @@
                                     Link
                                 </th>
                                 <th scope="col"
-                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    Active
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-center text-gray-500 uppercase">
+                                    Status
                                 </th>
                                 <th scope="col" class="relative px-6 py-3">
                                     Action
@@ -156,13 +156,17 @@
                                     <div class="text-sm font-semibold text-gray-900">{{ $slider->title }}</div>
                                 </td>
                                 <td class="px-6 py-4 text-gray-900 dark:text-white">
-                                    <div class="text-sm font-medium text-gray-900">{{ $slider->sub_title }}</div>
+                                    <div class="text-sm text-gray-900">{{ $slider->sub_title }}</div>
                                 </td>
                                 <td class="px-6 py-4 text-gray-900 dark:text-white whitespace-nowrap">
                                     <div class="text-sm text-indigo-600 hover:text-indigo-900"><a href="{{ $slider->link }}" target="_blank">{{ $slider->link }}</a></div>
                                 </td>
-                                <td class="px-6 py-4 text-gray-900 dark:text-white">
-                                    <div class="text-sm font-medium text-gray-900">{{ $slider->active }}</div>
+                                <td class="flex justify-center px-6 py-4 text-center text-gray-900 dark:text-white">
+                                    @can('slider-edit')
+                                        <input class="float-left h-5 align-top bg-white bg-gray-300 bg-no-repeat bg-contain rounded-full shadow-sm appearance-none cursor-pointer form-check-input w-9 focus:outline-none" type="checkbox" role="switch" id="flexSwitchCheckChecked" {{ ($slider->active == 1)? 'checked' : '' }} wire:click.prevent="updateSliderActive({{ $slider->id }},{{ ($slider->active == 1)? 0 : 1 }},'{{ url()->full() }}')">
+                                    @else
+                                        <div class="text-sm py-1 px-3 rounded-full text-gray-800 {{ ($slider->active == 1) ? 'bg-green-200' : 'bg-gray-200' }}">{{ ($slider->active == 1) ? 'Active' : 'Inactive' }}</div>
+                                    @endcan
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                                     @can('slider-edit')
