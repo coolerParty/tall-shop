@@ -10,6 +10,7 @@ use Livewire\WithPagination;
 class HomeSliderComponent extends Component
 {
     use AuthorizesRequests;
+    use WithPagination;
 
     public function destroy($homeslider_id)
     {
@@ -27,14 +28,13 @@ class HomeSliderComponent extends Component
             ->with('delete-success', 'Slide has been deleted successfully.');
     }
 
-    public function updateSliderActive($homeslider_id,$status,$url)
+    public function updateActive($homeslider_id,$status)
     {
         $this->authorize('slider-edit');
 
         $slider = HomeSlider::where('id',$homeslider_id)->first();
-        $slider->active = $status;
+        $slider->active = ($status == 1 ) ? 0 : 1;
         $slider->save();
-        return redirect()->to($url);
     }
 
     public function render()
