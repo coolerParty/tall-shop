@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             AdminUserSeeder::class,
             HomeSliderSeeder::class,
             CategorySeeder::class,
+            ProductSeeder::class
         ]);
     }
 }

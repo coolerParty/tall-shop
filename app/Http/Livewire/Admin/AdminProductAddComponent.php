@@ -42,7 +42,7 @@ class AdminProductAddComponent extends Component
             'stock_status'      => ['required', Rule::in(['instock', 'outofstock'])],
             'featured'          => ['required', 'boolean'],
             'quantity'          => ['required', 'integer'],
-            'image'             => ['required', 'image', 'max:2048'],
+            'image'             => ['required', 'image'],
             'active'            => ['required', 'boolean'],
             'category_id'       => ['required', 'integer'],
         ]);
@@ -61,7 +61,7 @@ class AdminProductAddComponent extends Component
             'stock_status'      => ['required', Rule::in(['instock', 'outofstock'])],
             'featured'          => ['required', 'boolean'],
             'quantity'          => ['required', 'integer'],
-            'image'             => ['required', 'image', 'max:2048'],
+            'image'             => ['required', 'image'],
             'active'            => ['required', 'boolean'],
             'category_id'       => ['required', 'integer'],
         ]);
