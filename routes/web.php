@@ -10,9 +10,11 @@ use App\Http\Livewire\Admin\Users\UserAddComponent;
 use App\Http\Livewire\Admin\Users\UserComponent;
 use App\Http\Livewire\Admin\Users\UserEditComponent;
 use App\Http\Livewire\HomeComponent;
+use App\Http\Livewire\MenuComponent;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeComponent::class)->name('home');
+Route::get('/menu', MenuComponent::class)->name('menu');
 
 
 Route::middleware([
