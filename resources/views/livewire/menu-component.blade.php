@@ -28,10 +28,8 @@
 
                     <button @click="msg = '' "
                         class="p-1 transition-colors duration-200 transform rounded-md hover:bg-opacity-25 hover:bg-gray-600 focus:outline-none">
-                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M6 18L18 6M6 6L18 18" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round"
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 18L18 6M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" />
                         </svg>
                     </button>
@@ -40,11 +38,25 @@
         </template>
     </div>
     @endif
+
+    <div wire:loading.delay>
+            <div class="flex w-screen h-screen overflow-y-hidden bg-white" x-data="setup()"
+                x-init="$refs.loading.classList.add('hidden')">
+                <!-- Loading screen -->
+                <div  show="true"
+                    class="fixed inset-0 z-[200] flex items-center justify-center text-white bg-black bg-opacity-50 text-3xl">
+                    <!-- style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)"> -->
+                    Loading.....
+                </div>
+            </div>
+    </div>
+
     <div class="container mx-auto md:p-5">
 
         <div class="relative z-0 w-full pt-10 pb-10">
             <h3 class="p-1 mt-10 text-3xl font-semibold capitalize md:p-0">Popular Dishes</h3>
-            <h1 class="p-1 text-5xl font-bold tracking-tighter text-orange-500 capitalize md:p-0">Our Delicious Food</h1>
+            <h1 class="p-1 text-5xl font-bold tracking-tighter text-orange-500 capitalize md:p-0">Our Delicious Food
+            </h1>
             <div class="w-full p-1 mt-10 md:p-0">
                 <div
                     class="grid gap-1 sm:grid-cols-2 md:gap-1 md:grid-cols-2 lg:gap-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-3">
@@ -67,17 +79,27 @@
 
                         <div class="absolute flex justify-center gap-1 text-center bottom-2 left-2">
                             @if ($witems->contains($product->id))
-                            <a
-                                class="px-2 py-1 text-base text-gray-500 capitalize bg-gray-300 border border-gray-500 shadow md:px-4 md:py-2 ">Added
-                                to Wishlist</a>
-								@else
-                                <a href="#" wire:click.prevent="addToWishlist({{ $product->id }}, '{{ $product->name }}',{{ $product->regular_price }})"
+                            <a href="#"
+                                class="px-2 py-1 text-base text-gray-500 capitalize bg-gray-300 border border-gray-500 shadow hover:bg-gray-400 md:px-4 md:py-2 "
+                                wire:click.prevent="removeFromWishlist({{ $product->id }})">Remove Wishlist</a>
+                            @else
+                            <a href="#"
+                                wire:click.prevent="addToWishlist({{ $product->id }}, '{{ $product->name }}',{{ $product->regular_price }})"
                                 class="px-2 py-1 text-base text-indigo-500 capitalize border border-indigo-500 shadow md:px-4 md:py-2 hover:text-white hover:bg-indigo-500 ">Add
                                 to Wishlist</a>
-                                @endif
-                            <a href="#" wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}',{{ $product->regular_price }})"
+                            @endif
+                            @if ($citems->contains($product->id))
+                            <a href="#"
+                                class="px-2 py-1 text-base text-gray-500 capitalize bg-gray-300 border border-gray-500 shadow hover:bg-gray-400 md:px-4 md:py-2 "
+                                wire:click.prevent="removeFromCart({{ $product->id }})">Remove Cart</a>
+                            @else
+                            <a href="#"
+                                wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}',{{ $product->regular_price }})"
                                 class="px-2 py-1 text-base text-orange-500 capitalize border border-orange-500 shadow md:px-4 md:py-2 hover:text-white hover:bg-orange-500 ">Add
                                 to Cart</a>
+                            @endif
+
+
                         </div>
                     </div>
                     @endforeach
