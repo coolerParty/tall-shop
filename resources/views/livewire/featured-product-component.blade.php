@@ -47,7 +47,15 @@
                         </div>
                     </div>
                     <h1 class="text-xl font-bold tracking-tighter capitalize ">{{ $product->name }}</h1>
-                    <p class="text-xl text-orange-500 font-semitbold">${{ $product->regular_price }}</p>
+                    <div class="flex items-end justify-center gap-2">
+                        @if($product->sale_price > 0)
+                        <div class="text-base text-gray-500 line-through font-semitbold">${{ $product->regular_price }}
+                        </div>
+                        <div class="text-xl text-orange-500 font-semitbold">${{ $product->sale_price }}</div>
+                        @else
+                        <div class="text-xl text-orange-500 font-semitbold">${{ $product->regular_price }}</div>
+                        @endif
+                    </div>
                 </div>
                 @if ($witems->contains($product->id))
                 <a href="#" wire:click.prevent="removeFromWishlist({{ $product->id }})"
@@ -100,11 +108,11 @@
 
     <div wire:loading.delay.long>
 
-            <!-- Loading screen -->
-            <div show="true"
-                class="fixed inset-0 z-[200] flex items-center justify-center text-white bg-black bg-opacity-10 text-3xl">
-                <!-- style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)"> -->
-                Loading.....
-            </div>
+        <!-- Loading screen -->
+        <div show="true"
+            class="fixed inset-0 z-[200] flex items-center justify-center text-white bg-black bg-opacity-10 text-3xl">
+            <!-- style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)"> -->
+            Loading.....
+        </div>
     </div>
 </div>
