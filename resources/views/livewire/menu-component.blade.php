@@ -39,17 +39,7 @@
     </div>
     @endif
 
-    <div wire:loading.delay>
-            <div class="flex w-screen h-screen overflow-y-hidden bg-white" x-data="setup()"
-                x-init="$refs.loading.classList.add('hidden')">
-                <!-- Loading screen -->
-                <div  show="true"
-                    class="fixed inset-0 z-[200] flex items-center justify-center text-white bg-black bg-opacity-50 text-3xl">
-                    <!-- style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)"> -->
-                    Loading.....
-                </div>
-            </div>
-    </div>
+
 
     <div class="container mx-auto md:p-5">
 
@@ -112,5 +102,13 @@
     </div>
 
 
+    <div wire:loading.delay.long>
+            <!-- Loading screen -->
+            <div  show="true"
+                class="fixed inset-0 z-[200] flex items-center justify-center text-white bg-black bg-opacity-10 text-3xl">
+                <!-- style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)"> -->
+                Loading.....
+            </div>
+    </div>
 
 </div>
