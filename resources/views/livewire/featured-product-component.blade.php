@@ -1,16 +1,5 @@
 <div class="relative z-0 w-full pt-10 pb-10 bg-orange-200">
 
-    <div wire:loading.delay>
-        <div class="flex w-screen h-screen overflow-y-hidden bg-white" x-data="setup()"
-            x-init="$refs.loading.classList.add('hidden')">
-            <!-- Loading screen -->
-            <div show="true"
-                class="fixed inset-0 z-[200] flex items-center justify-center text-white bg-black bg-opacity-50 text-3xl">
-                <!-- style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)"> -->
-                Loading.....
-            </div>
-        </div>
-    </div>
 
     <div class="container mx-auto">
         <h3 class="mt-10 text-3xl font-semibold text-center capitalize">Popular Dishes</h3>
@@ -107,5 +96,15 @@
             @endforeach
 
         </div>
+    </div>
+
+    <div wire:loading.delay.long>
+
+            <!-- Loading screen -->
+            <div show="true"
+                class="fixed inset-0 z-[200] flex items-center justify-center text-white bg-black bg-opacity-10 text-3xl">
+                <!-- style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)"> -->
+                Loading.....
+            </div>
     </div>
 </div>

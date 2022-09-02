@@ -283,5 +283,12 @@
         </div>
         @endif
     </div>
-
+    <div wire:loading.delay.long>
+        <!-- Loading screen -->
+        <div  show="true"
+            class="fixed inset-0 z-[200] flex items-center justify-center text-white bg-black bg-opacity-10 text-3xl">
+            <!-- style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)"> -->
+            Loading.....
+        </div>
+</div>
 </div>
