@@ -1,5 +1,5 @@
 <a class="relative p-2 ml-2 text-sm font-semibold bg-gray-100 rounded-full md:mt-0 hover:bg-orange-500 hover:text-white"
-    href="#">
+    href="{{ route('wishlist.index') }}">
     @if($wishlistCount > 0)
     <span class="absolute text-xs font-semibold text-gray-800 -top-1 -right-1">{{ $wishlistCount }}</span>
     @endif
