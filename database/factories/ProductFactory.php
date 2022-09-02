@@ -17,13 +17,13 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
-        $name = $this->faker->unique()->name;
+        $name = $this->faker->unique()->streetName;
         $price =$this->faker->numberBetween(100.00,500.99);
         return [
             'name'              => $name,
             'slug'              => Str::slug($name),
-            'short_description' => $this->faker->text,  
-            'description'       => $this->faker->text, 
+            'short_description' => $this->faker->text,
+            'description'       => $this->faker->text,
             'regular_price'     => $price,
             'sale_price'        => $price * .10,                                 // discount 10%
             'stock_status'      => $this->faker->randomElement(['instock','outofstock']),
