@@ -25,7 +25,7 @@ class ProductFactory extends Factory
             'short_description' => $this->faker->text,
             'description'       => $this->faker->text,
             'regular_price'     => $price,
-            'sale_price'        => $price * .10,                                 // discount 10%
+            'sale_price'        => $price - ($price * .10),                                 // discount 10%
             'stock_status'      => $this->faker->randomElement(['instock','outofstock']),
             'featured'          => 1,
             'quantity'          => $this->faker->numberBetween(8,500),

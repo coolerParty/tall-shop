@@ -467,7 +467,7 @@
     <div class="container mx-auto mt-5">
         <div class="w-full pr-5 text-right">
             <x-link-danger href="#" wire:click.prevent="destroyAllSavedForLater()" class="btn btn-delete" title="">
-                <span>Clear Shopping Cart</span>
+                <span>Clear Save for Later</span>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </x-link-danger>
         </div>

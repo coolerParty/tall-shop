@@ -48,45 +48,110 @@
             <h1 class="p-1 text-5xl font-bold tracking-tighter text-orange-500 capitalize md:p-0">Our Delicious Food
             </h1>
             <div class="w-full p-1 mt-10 md:p-0">
-                <div
-                    class="grid gap-1 sm:grid-cols-2 md:gap-1 md:grid-cols-2 lg:gap-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-3">
+                <div class="grid gap-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 
                     @foreach($products as $product)
-                    <div class="relative w-full p-2 bg-white border rounded md:m-0 md:border-0">
+                    <div class="relative w-full p-1 bg-white border rounded-lg md:m-0 md:border-0">
                         <div class="relative w-full">
                             <img src="{{ asset('storage/assets/product/medium') }}/{{ $product->image }}" alt=""
-                                class="object-cover w-full aspect-video">
-                            <span
-                                class="absolute px-3 py-1 text-lg font-semibold text-white bg-orange-500 shadow-lg top-2 left-2 md:text-xl lg:text-2xl">${{
-                                $product->sale_price }}</span>
+                                class="object-cover w-full rounded-lg aspect-square">
+                            <div class="absolute top-2 right-2">
+                                @if($product->sale_price > 0)
+                                <span class="px-2 py-1 text-base font-semibold text-white bg-orange-500 shadow-lg">${{
+                                    $product->sale_price }}</span>
+                                <span
+                                    class="px-2 py-1 text-xs font-semibold line-through bg-gray-400 shadow-lg text-black-100">${{
+                                    $product->regular_price }}</span>
+                                @else
+                                <span class="px-2 py-1 text-base font-semibold text-white bg-orange-500 shadow-lg">${{
+                                    $product->regular_price }}</span>
+                                @endif
+                            </div>
                         </div>
                         <div class="p-2 mb-9 md:mb-6">
                             <h1
-                                class="mt-3 mb-3 text-lg font-bold leading-none tracking-tighter text-gray-800 capitalize">
+                                class="mt-2 mb-2 text-2xl font-semibold leading-none tracking-tighter text-gray-800 capitalize">
                                 {{ $product->name }}</h1>
-                            <p class="mb-5 leading-5 text-gray-600">{{ $product->short_description }}</p>
+                            <div class="flex justify-start">
+                                <div class="flex space-x-0.5">
+                                    <svg class="w-5 h-5 text-yellow-300" fill="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path
+                                            d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z">
+                                        </path>
+                                    </svg>
+                                    <svg class="w-5 h-5 text-yellow-300" fill="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path
+                                            d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z">
+                                        </path>
+                                    </svg>
+                                    <svg class="w-5 h-5 text-yellow-300" fill="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path
+                                            d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z">
+                                        </path>
+                                    </svg>
+                                    <svg class="w-5 h-5 text-yellow-300" fill="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path
+                                            d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z">
+                                        </path>
+                                    </svg>
+                                    <svg class="w-5 h-5 text-yellow-300" fill="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path
+                                            d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <p class="mt-2 mb-5 leading-5 text-gray-600">{{ $product->short_description }}</p>
                         </div>
 
                         <div class="absolute flex justify-center gap-1 text-center bottom-2 left-2">
                             @if ($witems->contains($product->id))
                             <a href="#"
                                 class="px-2 py-1 text-base text-gray-500 capitalize bg-gray-300 border border-gray-500 shadow hover:bg-gray-400 md:px-4 md:py-2 "
-                                wire:click.prevent="removeFromWishlist({{ $product->id }})">Remove Wishlist</a>
+                                wire:click.prevent="removeFromWishlist({{ $product->id }})">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                    <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+                                  </svg>
+
+                            </a>
                             @else
                             <a href="#"
                                 wire:click.prevent="addToWishlist({{ $product->id }}, '{{ $product->name }}',{{ $product->regular_price }})"
-                                class="px-2 py-1 text-base text-indigo-500 capitalize border border-indigo-500 shadow md:px-4 md:py-2 hover:text-white hover:bg-indigo-500 ">Add
-                                to Wishlist</a>
+                                class="px-2 py-1 text-base text-indigo-500 capitalize border border-indigo-500 shadow md:px-4 md:py-2 hover:text-white hover:bg-indigo-500 ">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                    <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+                                  </svg>
+
+                            </a>
                             @endif
                             @if ($citems->contains($product->id))
                             <a href="#"
                                 class="px-2 py-1 text-base text-gray-500 capitalize bg-gray-300 border border-gray-500 shadow hover:bg-gray-400 md:px-4 md:py-2 "
-                                wire:click.prevent="removeFromCart({{ $product->id }})">Remove Cart</a>
+                                wire:click.prevent="removeFromCart({{ $product->id }})">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                    <path d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
+                                  </svg>
+
+                            </a>
                             @else
                             <a href="#"
                                 wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}',{{ $product->regular_price }})"
-                                class="px-2 py-1 text-base text-orange-500 capitalize border border-orange-500 shadow md:px-4 md:py-2 hover:text-white hover:bg-orange-500 ">Add
-                                to Cart</a>
+                                class="px-2 py-1 text-base text-orange-500 capitalize border border-orange-500 shadow md:px-4 md:py-2 hover:text-white hover:bg-orange-500 ">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                    <path d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
+                                  </svg>
+
+                            </a>
                             @endif
 
 
@@ -103,12 +168,12 @@
 
 
     <div wire:loading.delay.long>
-            <!-- Loading screen -->
-            <div  show="true"
-                class="fixed inset-0 z-[200] flex items-center justify-center text-white bg-black bg-opacity-10 text-3xl">
-                <!-- style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)"> -->
-                Loading.....
-            </div>
+        <!-- Loading screen -->
+        <div show="true"
+            class="fixed inset-0 z-[200] flex items-center justify-center text-white bg-black bg-opacity-10 text-3xl">
+            <!-- style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)"> -->
+            Loading.....
+        </div>
     </div>
 
 </div>
