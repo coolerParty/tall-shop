@@ -11,7 +11,35 @@
             </ol>
         </nav>
     </div>
+    @if(Session::has('cart_message'))
+    <div x-data="{ msg:'true'}">
+        <template x-if="msg">
+            <div class="w-full text-white bg-blue-500">
+                <div class="container flex items-center justify-between px-6 py-4 mx-auto">
+                    <div class="flex">
+                        <svg viewBox="0 0 40 40" class="w-6 h-6 fill-current">
+                            <path
+                                d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM21.6667 28.3333H18.3334V25H21.6667V28.3333ZM21.6667 21.6666H18.3334V11.6666H21.6667V21.6666Z">
+                            </path>
+                        </svg>
 
+                        <p class="mx-3">{{ Session::get('cart_message') }}</p>
+                    </div>
+
+                    <button @click="msg = '' "
+                        class="p-1 transition-colors duration-200 transform rounded-md hover:bg-opacity-25 hover:bg-gray-600 focus:outline-none">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 18L18 6M6 6L18 18" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </template>
+    </div>
+    @endif
     <div class="container mx-auto md:p-5">
 
         <div class="relative z-0 w-full pt-10 pb-10">
@@ -38,10 +66,16 @@
                         </div>
 
                         <div class="absolute flex justify-center gap-1 text-center bottom-2 left-2">
-                            <a href="#"
+                            @if ($witems->contains($product->id))
+                            <a
+                                class="px-2 py-1 text-base text-gray-500 capitalize bg-gray-300 border border-gray-500 shadow md:px-4 md:py-2 ">Added
+                                to Wishlist</a>
+								@else
+                                <a href="#" wire:click.prevent="addToWishlist({{ $product->id }}, '{{ $product->name }}',{{ $product->regular_price }})"
                                 class="px-2 py-1 text-base text-indigo-500 capitalize border border-indigo-500 shadow md:px-4 md:py-2 hover:text-white hover:bg-indigo-500 ">Add
                                 to Wishlist</a>
-                            <a href="#"
+                                @endif
+                            <a href="#" wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}',{{ $product->regular_price }})"
                                 class="px-2 py-1 text-base text-orange-500 capitalize border border-orange-500 shadow md:px-4 md:py-2 hover:text-white hover:bg-orange-500 ">Add
                                 to Cart</a>
                         </div>
