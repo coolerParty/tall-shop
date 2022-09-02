@@ -1,4 +1,5 @@
 <div class="w-full bg-orange-200">
+    @section('title', 'Menu')
     <div class="w-full bg-white">
         <nav class="container p-2 mx-auto ">
             <ol class="flex list-reset">
