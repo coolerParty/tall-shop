@@ -1,5 +1,5 @@
 <div class="w-full">
-    @section('title', 'Food')
+    @section('title', 'Fruidy')
     @livewire('slider-component')
     @livewire('home-about-component')
     @livewire('featured-product-component')

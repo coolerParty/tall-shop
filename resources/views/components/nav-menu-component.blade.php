@@ -4,8 +4,9 @@
         class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
         <div class="flex flex-row items-center justify-between p-4">
             <a href="#"
-                class="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">Flowtrail
-                UI</a>
+                class="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">
+                Fruidy
+            </a>
 
             <div class="flex">
                 <button class="rounded-lg md:hidden focus:outline-none focus:shadow-outline" @click="open = !open">
@@ -22,7 +23,9 @@
                     <div class="flex text-right">
                         <a class="relative p-2 ml-2 text-sm font-semibold bg-gray-100 rounded-full md:mt-0 hover:bg-orange-500 hover:text-white"
                             href="#">
-                            <span class="absolute text-xs font-semibold text-gray-800 -top-1 -right-1">20</span>
+                            @if(Cart::instance('wishlist')->count() > 0)
+                            <span class="absolute text-xs font-semibold text-gray-800 -top-1 -right-1">{{ Cart::instance('wishlist')->count() }}</span>
+                            @endif
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-5 h-5 font-bold text-gray-800">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -31,8 +34,10 @@
 
                         </a>
                         <a class="relative p-2 ml-2 text-sm font-semibold bg-gray-100 rounded-full md:mt-0 hover:bg-orange-500 hover:text-white"
-                            href="#">
-                            <span class="absolute text-xs font-semibold text-gray-800 -top-1 -right-1">20</span>
+                            href="{{ route('cart.index') }}">
+                            @if(Cart::instance('cart')->count() > 0)
+                            <span class="absolute text-xs font-semibold text-gray-800 -top-1 -right-1">{{  Cart::instance('cart')->count()  }}</span>
+                            @endif
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-5 h-5 font-bold text-gray-800">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -46,20 +51,20 @@
         <nav :class="{'flex': open, 'hidden': !open}"
             class="z-50 flex-col flex-grow hidden pb-4 md:pb-0 md:flex md:justify-end md:flex-row">
 
-            <a class="z-50 px-4 py-2 mt-2 text-sm font-semibold  
-            dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 
-            dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 
+            <a class="z-50 px-4 py-2 mt-2 text-sm font-semibold
+            dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600
+            dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0
         hover:bg-orange-500 hover:text-white focus:bg-orange-600 focus:outline-none focus:shadow-outline
             @if(route('home') == url()->current())
-            focus:text-gray-100  focus:bg-orange-500 text-white bg-orange-500 
+            focus:text-gray-100  focus:bg-orange-500 text-white bg-orange-500
             @else hover:bg-gray-200 @endif"
                 href="{{ route('home') }}">Home</a>
-            <a class="z-50 px-4 py-2 mt-2 text-sm font-semibold  
-                        dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 
-                        dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 
+            <a class="z-50 px-4 py-2 mt-2 text-sm font-semibold
+                        dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600
+                        dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0
                     hover:bg-orange-500 hover:text-white focus:bg-orange-600 focus:outline-none focus:shadow-outline
                         @if(route('menu') == url()->current())
-                        focus:text-gray-100  focus:bg-orange-500 text-white bg-orange-500 
+                        focus:text-gray-100  focus:bg-orange-500 text-white bg-orange-500
                         @else hover:bg-gray-200 @endif"
                 href="{{ route('menu') }}">Menu</a>
             <a class="z-50 px-4 py-2 mt-2 text-sm font-semibold bg-transparent dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
@@ -94,7 +99,7 @@
                         <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
                             href="#">Profile</a>
                         <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-                            href="#">Orders History</a>
+                            href="#">Order History</a>
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}" x-data>
                             @csrf
@@ -116,7 +121,9 @@
             <div class="flex flex-grow pb-4 text-right md:pb-0 md:flex md:justify-end md:flex-row">
                 <a class="relative p-2 mt-2 ml-2 text-sm font-semibold bg-gray-100 rounded-full md:mt-0 hover:bg-orange-500 hover:text-white"
                     href="#">
-                    <span class="absolute text-xs font-semibold text-gray-800 -top-1 -right-1">20</span>
+                    @if(Cart::instance('wishlist')->count() > 0)
+                    <span class="absolute text-xs font-semibold text-gray-800 -top-1 -right-1">{{ Cart::instance('wishlist')->count() }}</span>
+                    @endif
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-5 h-5 font-bold text-gray-800 ">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -126,8 +133,10 @@
                 </a>
 
                 <a class="relative p-2 mt-2 ml-2 text-sm font-semibold bg-gray-100 rounded-full md:mt-0 hover:bg-orange-500 hover:text-white"
-                    href="#">
-                    <span class="absolute text-xs font-semibold text-gray-800 -top-1 -right-1">20</span>
+                    href="{{ route('cart.index') }}">
+                    @if(Cart::instance('cart')->count() > 0)
+                    <span class="absolute text-xs font-semibold text-gray-800 -top-1 -right-1">{{  Cart::instance('cart')->count()  }}</span>
+                    @endif
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-5 h-5 font-bold text-gray-800">
                         <path stroke-linecap="round" stroke-linejoin="round"
