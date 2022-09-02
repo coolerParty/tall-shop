@@ -1,4 +1,4 @@
-<div class="w-full bg-orange-200">
+<div class="w-full pb-10 bg-orange-200">
     @section('title', 'Cart')
     <div class="w-full bg-white">
         <nav class="container p-2 mx-auto ">
@@ -12,6 +12,7 @@
         </nav>
     </div>
 
+    <!-- Cart START -->
     <div class="container flex flex-col mx-auto mt-10">
         <h3 class="p-1 mt-10 text-3xl font-semibold capitalize md:p-0">Popular Dishes</h3>
         <h1 class="p-1 text-5xl font-bold tracking-tighter text-orange-500 capitalize md:p-0">Our Delicious Food</h1>
@@ -136,14 +137,14 @@
                             <!-- flash message End -->
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            @forelse($carts->content() as $item)
+                            @forelse(Cart::instance('cart')->content() as $cart)
                             <tr class="transition-all hover:bg-gray-100 ">
                                 <td class="p-1 md:px-3 md:py-2 whitespace-nowrap">
-                                    @if($item->model->image)
-                                    <a href="{{ asset('storage/assets/product/large') }}/{{ $item->model->image }}"
+                                    @if($cart->model->image)
+                                    <a href="{{ asset('storage/assets/product/large') }}/{{ $cart->model->image }}"
                                         target="_blank"><img
                                             class="object-cover w-20 h-20 rounded-md cursor-pointer hover:shadow-lg"
-                                            src="{{ asset('storage/assets/product/thumbnail') }}/{{ $item->model->image }}" /></a>
+                                            src="{{ asset('storage/assets/product/thumbnail') }}/{{ $cart->model->image }}" /></a>
                                     @else
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
                                         fill="currentColor">
@@ -154,17 +155,17 @@
                                     @endif
                                 </td>
                                 <td class="p-1 md:px-6 md:py-4">
-                                    <div class="text-sm font-semibold text-orange-600">{{ $item->model->name }}</div>
+                                    <div class="text-sm font-semibold text-orange-600">{{ $cart->model->name }}</div>
                                 </td>
                                 <td class="p-1 md:px-6 md:py-4">
                                     <div class="text-sm font-semibold text-right text-gray-900">${{
-                                        $item->model->regular_price}}</div>
+                                        $cart->model->regular_price}}</div>
                                 </td>
                                 <td class="p-1 md:px-6 md:py-4">
                                     <div class="flex content-center justify-center gap-1 p-1 text-center">
                                         <a href="#"
                                             class="px-1 py-2 md:px-3 text-xs col-span-1 max-w-[60px] bg-gray-300 hover:bg-gray-400"
-                                            wire:click.prevent="decreaseQuantity('{{ $item->rowId }}')"
+                                            wire:click.prevent="decreaseQuantity('{{ $cart->rowId }}')"
                                             title="Descrease Quantiry">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -173,12 +174,12 @@
                                         </a>
                                         <div class="col-span-3  max-w-[100px]">
                                             <input type="text" name="product-quantity" class="w-full"
-                                                value="{{ $item->qty }}" data-max="120" pattern="[0-9]*" disabled>
+                                                value="{{ $cart->qty }}" data-max="120" pattern="[0-9]*" disabled>
                                         </div>
 
                                         <a href="#"
                                             class="px-1 py-2 md:px-3 text-xs col-span-1 max-w-[60px] bg-gray-300 hover:bg-gray-400"
-                                            wire:click.prevent="increaseQuantity('{{ $item->rowId }}')"
+                                            wire:click.prevent="increaseQuantity('{{ $cart->rowId }}')"
                                             title="Increase Quantity">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -189,11 +190,11 @@
                                     </div>
                                 </td>
                                 <td class="p-1 text-right md:px-6 md:py-4">
-                                    <div class="text-sm font-semibold text-gray-900">${{ $item->subtotal }}</div>
+                                    <div class="text-sm font-semibold text-gray-900">${{ $cart->subtotal }}</div>
                                 </td>
                                 <td class="p-1 text-sm font-medium text-right md:px-6 md:py-4">
                                     <x-link-success href="#" class="text-xs xs:p-1"
-                                        wire:click.prevent="switchToSaveForLater('1')" title="Save for later.">
+                                    wire:click.prevent="switchToSaveForLater('{{ $cart->rowId }}')" title="Save for later.">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                             class="w-6 h-6">
                                             <path fill-rule="evenodd"
@@ -204,7 +205,7 @@
 
                                     </x-link-success>
                                     <x-link-danger href="#" class="text-xs xs:p-1"
-                                        wire:click.prevent="destroy('{{ $item->rowId }}')" title="Remove from cart.">
+                                        wire:click.prevent="destroy('{{ $cart->rowId }}')" title="Remove from cart.">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                             class="w-6 h-6">
                                             <path fill-rule="evenodd"
@@ -227,13 +228,13 @@
                 </div>
             </div>
         </div>
-
-
     </div>
+    <!-- Cart END -->
 
-    <div class="container mx-auto mb-10">
-        @if($carts->count() > 0)
-        <div class="w-full pr-5 m-5 text-right">
+    <!-- Cart Summary START -->
+    <div class="container mx-auto mt-5">
+        @if(Cart::instance('cart')->count() > 0)
+        <div class="w-full pr-5 text-right">
             <x-link-danger href="#" wire:click.prevent="destroyAll()" class="btn btn-delete" title="">
                 <span>Clear Shopping Cart</span>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
@@ -257,7 +258,7 @@
                         </td>
                         <td class="px-6 py-4">
                             <div class="text-sm font-semibold text-right text-gray-900">${{
-                               $carts->subtotal() }}</div>
+                               Cart::instance('cart')->subtotal() }}</div>
                         </td>
                     </tr>
                     <tr>
@@ -266,7 +267,7 @@
                         </td>
                         <td class="px-6 py-4">
                             <div class="text-sm font-semibold text-right text-gray-900">${{
-                                $carts->tax() }}</div>
+                                Cart::instance('cart')->tax() }}</div>
                         </td>
                     </tr>
                     <tr>
@@ -275,7 +276,7 @@
                         </td>
                         <td class="px-6 py-4">
                             <div class="text-sm font-semibold text-right text-gray-900">${{
-                                $carts->total() }}</div>
+                                Cart::instance('cart')->total() }}</div>
                         </td>
                     </tr>
                 </tbody>
@@ -283,6 +284,198 @@
         </div>
         @endif
     </div>
+    <!-- Cart Summary END -->
+
+    <!-- Save for Later START -->
+    <div class="container flex flex-col mx-auto">
+        <h3 class="p-1 text-3xl font-semibold capitalize md:p-0">Save for later</h3>
+        <div class="overflow-x-auto mt-5-my-2 sm:-mx-6 lg:-mx-8">
+            <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                <div class="overflow-hidden border-b border-gray-200 rounded-md shadow-md">
+                    <table class="w-full overflow-x-scroll divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col"
+                                    class="p-1 text-xs text-left text-gray-500 uppercase md:tracking-wider md:px-6 md:py-3 md:font-medium">
+                                    Image
+                                </th>
+                                <th scope="col"
+                                    class="p-1 text-xs text-left text-gray-500 uppercase md:font-medium md:tracking-wider md:px-6 md:py-3">
+                                    Name
+                                </th>
+                                <th scope="col"
+                                    class="p-1 text-xs text-right text-gray-500 uppercase md:font-medium md:tracking-wider md:px-6 md:py-3">
+                                    Price
+                                </th>
+                                <th scope="col" class="p-1 md:px-6 md:py-3">
+                                    Action
+                                </th>
+                            </tr>
+                            <!-- flash message Start -->
+                            @if(Session::has('create-success'))
+                            <div x-data="{ msg:'true'}">
+                                <template x-if="msg">
+                                    <div class="w-full text-white bg-blue-500">
+                                        <div class="container flex items-center justify-between px-6 py-4 mx-auto">
+                                            <div class="flex">
+                                                <svg viewBox="0 0 40 40" class="w-6 h-6 fill-current">
+                                                    <path
+                                                        d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM21.6667 28.3333H18.3334V25H21.6667V28.3333ZM21.6667 21.6666H18.3334V11.6666H21.6667V21.6666Z">
+                                                    </path>
+                                                </svg>
+
+                                                <p class="mx-3">{{ Session::get('create-success') }}</p>
+                                            </div>
+
+                                            <button @click="msg = '' "
+                                                class="p-1 transition-colors duration-200 transform rounded-md hover:bg-opacity-25 hover:bg-gray-600 focus:outline-none">
+                                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M6 18L18 6M6 6L18 18" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                            @endif
+                            @if(Session::has('update-success'))
+                            <div x-data="{ msg:'true'}">
+                                <template x-if="msg">
+                                    <div class="w-full text-white bg-emerald-500">
+                                        <div class="container flex items-center justify-between px-6 py-4 mx-auto">
+                                            <div class="flex">
+                                                <svg viewBox="0 0 40 40" class="w-6 h-6 fill-current">
+                                                    <path
+                                                        d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z">
+                                                    </path>
+                                                </svg>
+
+                                                <p class="mx-3">{{ Session::get('update-success') }}</p>
+                                            </div>
+
+                                            <button @click="msg = '' "
+                                                class="p-1 transition-colors duration-200 transform rounded-md hover:bg-opacity-25 hover:bg-gray-600 focus:outline-none">
+                                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M6 18L18 6M6 6L18 18" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                            @endif
+                            @if(Session::has('delete-success'))
+                            <div x-data="{ msg:'true'}">
+                                <template x-if="msg">
+                                    <div class="w-full text-white bg-red-500">
+                                        <div class="container flex items-center justify-between px-6 py-4 mx-auto">
+                                            <div class="flex">
+                                                <svg viewBox="0 0 40 40" class="w-6 h-6 fill-current">
+                                                    <path
+                                                        d="M20 3.36667C10.8167 3.36667 3.3667 10.8167 3.3667 20C3.3667 29.1833 10.8167 36.6333 20 36.6333C29.1834 36.6333 36.6334 29.1833 36.6334 20C36.6334 10.8167 29.1834 3.36667 20 3.36667ZM19.1334 33.3333V22.9H13.3334L21.6667 6.66667V17.1H27.25L19.1334 33.3333Z">
+                                                    </path>
+                                                </svg>
+
+                                                <p class="mx-3">{{ Session::get('delete-success') }}</p>
+                                            </div>
+
+                                            <button @click="msg = '' "
+                                                class="p-1 transition-colors duration-200 transform rounded-md hover:bg-opacity-25 hover:bg-gray-600 focus:outline-none">
+                                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M6 18L18 6M6 6L18 18" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                            @endif
+                            <!-- flash message End -->
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            @forelse(Cart::instance('saveForLater')->content() as $saveLater)
+                            <tr class="transition-all hover:bg-gray-100 ">
+                                <td class="p-1 md:px-3 md:py-2 whitespace-nowrap">
+                                    @if($saveLater->model->image)
+                                    <a href="{{ asset('storage/assets/product/large') }}/{{ $saveLater->model->image }}"
+                                        target="_blank"><img
+                                            class="object-cover w-20 h-20 rounded-md cursor-pointer hover:shadow-lg"
+                                            src="{{ asset('storage/assets/product/thumbnail') }}/{{ $saveLater->model->image }}" /></a>
+                                    @else
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
+                                        fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                            d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    @endif
+                                </td>
+                                <td class="p-1 md:px-6 md:py-4">
+                                    <div class="text-sm font-semibold text-orange-600">{{ $saveLater->model->name }}</div>
+                                </td>
+                                <td class="p-1 md:px-6 md:py-4">
+                                    <div class="text-sm font-semibold text-right text-gray-900">${{
+                                        $saveLater->model->regular_price}}</div>
+                                </td>
+                                <td class="p-1 text-sm font-medium text-right md:px-6 md:py-4">
+                                    <x-link-success href="#" class="text-xs xs:p-1"
+                                    wire:click.prevent="switchToCart('{{ $saveLater->rowId }}')" title="Move to Cart">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                        <path d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
+                                      </svg>
+
+
+
+                                    </x-link-success>
+                                    <x-link-danger href="#" class="text-xs xs:p-1"
+                                    wire:click.prevent="destroySaveForLater('{{ $saveLater->rowId }}')" title="Remove Item">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                            class="w-6 h-6">
+                                            <path fill-rule="evenodd"
+                                                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+
+                                    </x-link-danger>
+                                </td>
+                            </tr>
+                            @empty
+                            <tr class="transition-all hover:bg-gray-100 hover:shadow-lg">
+                                <td class="px-6 py-4 text-center whitespace-nowrap" colspan="4">
+                                    <div class="text-sm font-medium text-gray-900">No saved item found</div>
+                                </td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Cart Summary START -->
+
+    @if(Cart::instance('saveForLater')->count() > 0)
+    <div class="container mx-auto mt-5">
+        <div class="w-full pr-5 text-right">
+            <x-link-danger href="#" wire:click.prevent="destroyAllSavedForLater()" class="btn btn-delete" title="">
+                <span>Clear Shopping Cart</span>
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+            </x-link-danger>
+        </div>
+    </div>
+
+    @endif
+    <!-- Save for Later END -->
+
     <div wire:loading.delay.long>
         <!-- Loading screen -->
         <div  show="true"
