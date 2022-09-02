@@ -18,8 +18,8 @@ Install Nodejs
 Terminal
 
     cd "directory file"
-    git clone https://github.com/coolerParty/pizza-Online-System.git
-    cd pizza-Online-System
+    git clone https://github.com/coolerParty/tall-shop.git
+    cd tall-shop
     composer install
 
 Rename ".env.example" file to ".env" then Edit 
