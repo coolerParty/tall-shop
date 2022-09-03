@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Admin\Coupon;
 
-use App\Models\Coupon;
 use Livewire\Component;
+use App\Models\Coupon;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\WithPagination;
 
@@ -29,7 +29,7 @@ class AdminCouponComponent extends Component
     {
         $this->authorize('coupon-show');
 
-        $coupons = Coupon::select('id', 'code', 'type', 'value', 'cart_value', 'created_at')
+        $coupons = Coupon::select('id', 'code', 'type', 'value', 'cart_value', 'expiry_date', 'created_at')
             ->orderBy('created_at', 'DESC')->paginate(10);
 
         return view('livewire.admin.coupon.admin-coupon-component', ['coupons' => $coupons])->layout('layouts.base');

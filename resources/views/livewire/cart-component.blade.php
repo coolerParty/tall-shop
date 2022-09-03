@@ -281,7 +281,7 @@
                                     @endif
                                     <div class="flex">
                                         <input type="text" placeholder="coupon code" name="couponCode"
-                                            wire:model="couponCode">
+                                            wire:model.lazy="couponCode">
                                         <button type="submit"
                                             class="px-3 py-2 text-white bg-gray-700 hover:bg-gray-800">Apply</button>
                                     </div>

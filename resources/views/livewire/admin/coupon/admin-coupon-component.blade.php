@@ -14,7 +14,7 @@
                         d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
             </span>
-        <span>Add New</span>
+            <span>Add New</span>
         </a>
         @endcan
     </div>
@@ -40,6 +40,10 @@
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
                                     Cart Value
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
+                                    Expiry Date
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
@@ -151,64 +155,68 @@
                                 <td class="px-6 py-4 text-gray-900 dark:text-white">
                                     <div class="text-sm text-gray-900">
                                         @if ($coupon->type == 'fixed')
-                                ${{ $coupon->value }}
-                                @else
-                                {{ $coupon->value }} %
-                                @endif
-                </div>
-                </td>
-                <td class="px-6 py-4">
-                    <div class="text-sm text-gray-900">{{ $coupon->cart_value }}</div>
-                </td>
-                <td class="px-6 py-4">
-                    <div class="text-sm text-gray-900">{{ $coupon->created_at }}</div>
-                </td>
-                <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                    @can('slider-edit')
-                    <x-link-success href="{{ route('admin.coupon.edit', ['coupon_id' => $coupon->id]) }}"> Edit
-                    </x-link-success>
-                    @can('slider-delete')
-                    @endcan
-                    <x-link-danger href="#" class="btn btn-danger btn-sm text-light"
-                        onclick="confirm('Are you sure, You want to delete this country?') || event.stopImmediatePropagation()"
-                        wire:click.prevent="destroy({{ $coupon->id }})">
-                        Delete
-                    </x-link-danger>
-                    @endcan
-                </td>
-                </tr>
-                @empty
-                <tr class="transition-all hover:bg-gray-100 hover:shadow-lg">
-                    <td class="px-6 py-4 text-center whitespace-nowrap" colspan="6">
-                        <div class="text-sm font-medium text-gray-900">No Coupon Found</div>
-                    </td>
-                </tr>
-                @endforelse
-                </tbody>
-                </table>
-                <div class="p-4">
-                    {!! $coupons->links() !!}
+                                        ${{ $coupon->value }}
+                                        @else
+                                        {{ $coupon->value }} %
+                                        @endif
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="text-sm text-gray-900">{{ $coupon->cart_value }}</div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="text-sm text-gray-900">{{ $coupon->expiry_date }}</div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="text-sm text-gray-900">{{ $coupon->created_at }}</div>
+                                </td>
+                                <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+                                    @can('slider-edit')
+                                    <x-link-success
+                                        href="{{ route('admin.coupon.edit', ['coupon_id' => $coupon->id]) }}"> Edit
+                                    </x-link-success>
+                                    @can('slider-delete')
+                                    @endcan
+                                    <x-link-danger href="#" class="btn btn-danger btn-sm text-light"
+                                        onclick="confirm('Are you sure, You want to delete this country?') || event.stopImmediatePropagation()"
+                                        wire:click.prevent="destroy({{ $coupon->id }})">
+                                        Delete
+                                    </x-link-danger>
+                                    @endcan
+                                </td>
+                            </tr>
+                            @empty
+                            <tr class="transition-all hover:bg-gray-100 hover:shadow-lg">
+                                <td class="px-6 py-4 text-center whitespace-nowrap" colspan="6">
+                                    <div class="text-sm font-medium text-gray-900">No Coupon Found</div>
+                                </td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                    <div class="p-4">
+                        {!! $coupons->links() !!}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div wire:loading.delay.long>
-    <!-- Loading screen -->
-    <div show="true"
-        class="fixed inset-0 z-[200] flex items-center justify-center text-white bg-black bg-opacity-10 text-3xl">
-        <!-- By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL -->
-        <svg width="60" height="60" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff">
-            <g fill="none" fill-rule="evenodd">
-                <g transform="translate(1 1)" stroke-width="2">
-                    <circle stroke-opacity=".5" cx="18" cy="18" r="18" />
-                    <path d="M36 18c0-9.94-8.06-18-18-18">
-                        <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="1s"
-                            repeatCount="indefinite" />
-                    </path>
+    <div wire:loading.delay.long>
+        <!-- Loading screen -->
+        <div show="true"
+            class="fixed inset-0 z-[200] flex items-center justify-center text-white bg-black bg-opacity-10 text-3xl">
+            <!-- By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL -->
+            <svg width="60" height="60" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff">
+                <g fill="none" fill-rule="evenodd">
+                    <g transform="translate(1 1)" stroke-width="2">
+                        <circle stroke-opacity=".5" cx="18" cy="18" r="18" />
+                        <path d="M36 18c0-9.94-8.06-18-18-18">
+                            <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18"
+                                dur="1s" repeatCount="indefinite" />
+                        </path>
+                    </g>
                 </g>
-            </g>
-        </svg>
+            </svg>
+        </div>
     </div>
-</div>
 </div>
