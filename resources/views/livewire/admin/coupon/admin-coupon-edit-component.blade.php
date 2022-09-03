@@ -3,8 +3,8 @@
     <!-- Main content header -->
     <div
         class="flex flex-col items-start justify-between pb-6 mb-2 space-y-4 border-b lg:items-center lg:space-y-0 lg:flex-row">
-        <h1 class="text-lg font-semibold whitespace-nowrap">Coupon <span class="text-base text-gray-400">/</span> {{ $code }} <span class="text-base text-gray-400">/</span> <span
-                class="text-2xl">Create</span></h1>
+        <h1 class="text-lg font-semibold whitespace-nowrap">Coupon <span class="text-base text-gray-400">/</span> {{
+            $code }} <span class="text-base text-gray-400">/</span> <span class="text-2xl">Create</span></h1>
         <a href="{{ route('admin.coupon.index') }}"
             class="inline-flex items-center px-6 py-2 space-x-1 text-white bg-purple-600 rounded-md shadow hover:bg-opacity-95">
             <span>
@@ -25,20 +25,24 @@
                 <div class="mt-4">
                     <div>
                         <label class="text-gray-700 dark:text-gray-200" for="code">code</label>
-                        <input id="code" type="text" name="code" value="{{ old('code') }}" wire:model="code" required
+                        <input id="code" type="text" name="code" value="{{ old('code') }}" wire:model.lazy="code" required
                             autofocus autocomplete="code"
-                            class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                            class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring
+                            @error('code') border-red-500 @enderror">
+                            @error('code')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                     </div>
                 </div>
 
                 <div class="mt-4">
                     <div>
                         <label for="type" class="text-gray-700 dark:text-gray-200">Type</label>
-                        <select id="type" name="type" autocomplete="type" wire:model="type"
-                            class="block w-full px-4 py-2 mt-2 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:outline-none focus:ring focus:border-blue-400 dark:focus:border-blue-300 sm:text-sm">
+                        <select id="type" name="type" autocomplete="type" wire:model.lazy="type"
+                            class="block w-full px-4 py-2 mt-2 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:outline-none focus:ring focus:border-blue-400 dark:focus:border-blue-300 sm:text-sm
+                            @error('type') border-red-500 @enderror">
                             <option value="">Select Type</option>
                             <option value="fixed">Fixed</option>
                             <option value="percent">Percent</option>
+                            @error('type')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                         </select>
                     </div>
                 </div>
@@ -46,18 +50,35 @@
                 <div class="mt-4">
                     <div>
                         <label class="text-gray-700 dark:text-gray-200" for="value">Value</label>
-                        <input id="value" type="number" step="any" name="value" value="{{ old('value') }}" wire:model="value"
-                            required autofocus autocomplete="value"
-                            class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                        <input id="value" type="number" step="any" name="value" value="{{ old('value') }}"
+                            wire:model.lazy="value" required autofocus autocomplete="value"
+                            class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring
+                            @error('value') border-red-500 @enderror">
+                            @error('value')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                     </div>
                 </div>
 
                 <div class="mt-4">
                     <div>
                         <label class="text-gray-700 dark:text-gray-200" for="cart_value">cart_value</label>
-                        <input id="cart_value" type="number" step="any" name="cart_value" cart_value="{{ old('cart_value') }}" wire:model="cart_value"
-                            required autofocus autocomplete="cart_value"
-                            class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                        <input id="cart_value" type="number" step="any" name="cart_value"
+                            value="{{ old('cart_value') }}" wire:model.lazy="cart_value" required autofocus
+                            autocomplete="cart_value"
+                            class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring
+                            @error('cart_value') border-red-500 @enderror">
+                            @error('cart_value')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <div>
+                        <label class="text-gray-700 dark:text-gray-200" for="expiry_date">Expiry Date</label>
+                        <input id="expiry_date" type="date" step="any" name="expiry_date"
+                            value="{{ old('expiry_date') }}" wire:model.lazy="expiry_date" required autofocus
+                            autocomplete="expiry_date"
+                            class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring
+                            @error('expiry_date') border-red-500 @enderror">
+                            @error('expiry_date')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                     </div>
                 </div>
 
