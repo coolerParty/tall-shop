@@ -3,6 +3,9 @@
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Livewire\Admin\AdminDashboardComponent;
+use App\Http\Livewire\Admin\Category\AdminCategoryAddComponent;
+use App\Http\Livewire\Admin\Category\AdminCategoryComponent;
+use App\Http\Livewire\Admin\Category\AdminCategoryEditComponent;
 use App\Http\Livewire\Admin\Coupon\AdminCouponAddComponent;
 use App\Http\Livewire\Admin\Coupon\AdminCouponComponent;
 use App\Http\Livewire\Admin\Coupon\AdminCouponEditComponent;
@@ -64,5 +67,9 @@ Route::middleware([
     Route::get('/coupons', AdminCouponComponent::class)->name('coupon.index');
     Route::get('/coupons/create', AdminCouponAddComponent::class)->name('coupon.create');
     Route::get('/coupons/{coupon_id}/edit', AdminCouponEditComponent::class)->name('coupon.edit');
+
+    Route::get('/categories', AdminCategoryComponent::class)->name('category.index');
+    Route::get('/categories/create', AdminCategoryAddComponent::class)->name('category.create');
+    Route::get('/categories/{category_id}/edit', AdminCategoryEditComponent::class)->name('category.edit');
 
 });

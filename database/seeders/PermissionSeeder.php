@@ -35,6 +35,14 @@ class PermissionSeeder extends Seeder
 				'product-edit',
 				'product-show',
 				'product-delete',
+                'coupon-create',
+				'coupon-edit',
+				'coupon-show',
+				'coupon-delete',
+                'category-create',
+				'category-edit',
+				'category-show',
+				'category-delete',
 
 			];
 
@@ -70,6 +78,14 @@ class PermissionSeeder extends Seeder
 				'product-edit',
 				'product-show',
 				'product-delete',
+                'coupon-create',
+				'coupon-edit',
+				'coupon-show',
+				'coupon-delete',
+                'category-create',
+				'category-edit',
+				'category-show',
+				'category-delete',
 			];
 
 			foreach($adminPermissions as $permission){
