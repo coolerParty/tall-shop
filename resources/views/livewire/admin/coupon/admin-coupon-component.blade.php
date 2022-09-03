@@ -151,9 +151,9 @@
                                 <td class="px-6 py-4 text-gray-900 dark:text-white">
                                     <div class="text-sm text-gray-900">
                                         @if ($coupon->type == 'fixed')
-                                <td>${{ $coupon->value }}</td>
+                                ${{ $coupon->value }}
                                 @else
-                                <td>{{ $coupon->value }} %</td>
+                                {{ $coupon->value }} %
                                 @endif
                 </div>
                 </td>
