@@ -66,7 +66,7 @@ class HomeSliderAddComponent extends Component
 
 
         return redirect()->route('admin.homeslider.index')
-            ->with('create-success', 'User "' . $this->title . '" created successfully.');
+            ->with('success', 'User "' . $this->title . '" created successfully.');
     }
 
     public function confirmation()

@@ -3,9 +3,12 @@
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Livewire\Admin\AdminDashboardComponent;
-use App\Http\Livewire\Admin\AdminProductAddComponent;
-use App\Http\Livewire\Admin\AdminProductComponent;
-use App\Http\Livewire\Admin\AdminProductEditComponent;
+use App\Http\Livewire\Admin\Coupon\AdminCouponAddComponent;
+use App\Http\Livewire\Admin\Coupon\AdminCouponComponent;
+use App\Http\Livewire\Admin\Coupon\AdminCouponEditComponent;
+use App\Http\Livewire\Admin\Product\AdminProductAddComponent;
+use App\Http\Livewire\Admin\Product\AdminProductComponent;
+use App\Http\Livewire\Admin\Product\AdminProductEditComponent;
 use App\Http\Livewire\Admin\HomeSlider\HomeSliderAddComponent;
 use App\Http\Livewire\Admin\Homeslider\HomeSliderComponent;
 use App\Http\Livewire\Admin\HomeSlider\HomeSliderEditComponent;
@@ -57,5 +60,9 @@ Route::middleware([
     Route::get('/products', AdminProductComponent::class)->name('product.index');
     Route::get('/products/create', AdminProductAddComponent::class)->name('product.create');
     Route::get('/products/{product_id}/edit', AdminProductEditComponent::class)->name('product.edit');
+
+    Route::get('/coupons', AdminCouponComponent::class)->name('coupon.index');
+    Route::get('/coupons/create', AdminCouponAddComponent::class)->name('coupon.create');
+    Route::get('/coupons/{coupon_id}/edit', AdminCouponEditComponent::class)->name('coupon.edit');
 
 });

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Admin;
+namespace App\Http\Livewire\Admin\Product;
 
 use App\Models\Category;
 use App\Models\Product;
@@ -125,12 +125,12 @@ class AdminProductEditComponent extends Component
                 unlink('storage/assets/product/thumbnail' . '/' . $product->image); // Deleting Image
             }
 
-            if (!empty($product->image) && file_exists('storage/assets/product/medium' . '/' . $product->image)) 
+            if (!empty($product->image) && file_exists('storage/assets/product/medium' . '/' . $product->image))
             {
                 unlink('storage/assets/product/medium' . '/' . $product->image); // Deleting Image
             }
 
-            if ( !empty($product->image) && file_exists('storage/assets/product/large' . '/' . $product->image)) 
+            if ( !empty($product->image) && file_exists('storage/assets/product/large' . '/' . $product->image))
             {
                 unlink('storage/assets/product/large' . '/' . $product->image); // Deleting Image
             }
@@ -164,7 +164,7 @@ class AdminProductEditComponent extends Component
 
     public function removeImage()
     {
-        $this->image = null;
+        $this->new_image = null;
     }
 
     public function render()
@@ -172,6 +172,6 @@ class AdminProductEditComponent extends Component
         $this->confirmation();
 
         $categories = Category::select('id', 'name')->orderBy('name', 'ASC')->get();
-        return view('livewire.admin.admin-product-edit-component', ['categories' => $categories])->layout('layouts.base');
+        return view('livewire.admin.product.admin-product-edit-component', ['categories' => $categories])->layout('layouts.base');
     }
 }
