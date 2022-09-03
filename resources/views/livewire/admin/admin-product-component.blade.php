@@ -35,10 +35,6 @@
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    Description
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                     category
                                 </th>
                                 <th scope="col"
@@ -167,14 +163,11 @@
                                     <div class="text-sm font-semibold text-gray-900">{{ $product->name }}</div>
                                 </td>
                                 <td class="px-6 py-4 text-gray-900 dark:text-white">
-                                    <div class="text-sm text-gray-900">{{ $product->short_description }}</div>
-                                </td>
-                                <td class="px-6 py-4 text-gray-900 dark:text-white">
                                     <div class="text-sm text-gray-900">{{ $product->category->name }}</div>
-                                </td>      
+                                </td>
                                 <td class="px-6 py-4">
                                     <div class="text-sm font-semibold text-gray-900">{{ $product->quantity }}</div>
-                                </td>                          
+                                </td>
                                 <td class="px-6 py-4 text-center text-gray-900 dark:text-white">
                                     @can('product-edit')
                                         <input class="float-left h-5 align-top bg-gray-300 bg-no-repeat bg-contain rounded-full shadow-sm appearance-none cursor-pointer form-check-input w-9 focus:outline-none" type="checkbox" role="switch" id="flexSwitchCheckChecked" {{ ($product->featured == 1)? 'checked' : '' }} wire:click.prevent="updateFeatured({{ $product->id }},{{ $product->featured }})">
@@ -188,7 +181,7 @@
                                     @else
                                         <div class="text-sm py-1 px-3 rounded-full text-gray-800 {{ ($product->stock_status == 'instock') ? 'bg-green-200' : 'bg-gray-200' }}">{{ ($product->stock_status == 'instock' ) ? 'Instock' : 'Out of Stock' }}</div>
                                     @endcan
-                                </td>  
+                                </td>
                                 <td class="px-6 py-4 text-center text-gray-900 dark:text-white">
                                     @can('product-edit')
                                         <input class="float-left h-5 align-top bg-gray-300 bg-no-repeat bg-contain rounded-full shadow-sm appearance-none cursor-pointer form-check-input w-9 focus:outline-none" type="checkbox" role="switch" id="flexSwitchCheckChecked" {{ ($product->active == 1)? 'checked' : '' }} wire:click.prevent="updateActive({{ $product->id }},{{ $product->active }})">
