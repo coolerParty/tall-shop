@@ -242,8 +242,8 @@
             </x-link-danger>
         </div>
 
-        <div class="flex justify-end w-full pb-10 mt-5">
-            <table class="w-full overflow-x-scroll divide-y divide-gray-200 rounded-md shadow-md md:w-1/2 lg:w-1/3">
+        <div class="flex justify-end w-full pb-10 mt-5 rounded-md">
+            <table class="w-full overflow-x-scroll divide-y divide-gray-200 rounded-md shadow-md lg:w-1/2">
                 <thead class="bg-gray-50">
                     <tr>
                         <th colspan="2"
@@ -258,27 +258,107 @@
                         </td>
                         <td class="px-6 py-4">
                             <div class="text-sm font-semibold text-right text-gray-900">${{
-                                Cart::instance('cart')->subtotal() }}</div>
+                                number_format(Cart::instance('cart')->subtotal(), 2) }}</div>
                         </td>
                     </tr>
+                    @if (!Session::has('coupon'))
+                    <tr>
+                        <td class="px-6 py-4">
+                            <div class="flex flex-wrap text-sm text-left text-gray-900 align-middle">
+                                <input class="frm-input " name="have-code" id="have-code" value="1" type="checkbox"
+                                    wire:model="haveCouponCode">
+                                <label for="have-code" class="ml-2 text-xs font-thin">Has coupon code</label>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            @if ($haveCouponCode == 1)
+                            <form wire:submit.prevent="applyCouponCode">
+                                <div class="float-right">
+                                    @if (Session::has('coupon_message'))
+                                    <div class="text-xs italic text-red-500" role="danger">{{
+                                        Session::get('coupon_message')
+                                        }}</div>
+                                    @endif
+                                    <div class="flex">
+                                        <input type="text" placeholder="coupon code" name="couponCode"
+                                            wire:model="couponCode">
+                                        <button type="submit"
+                                            class="px-3 py-2 text-white bg-gray-700 hover:bg-gray-800">Apply</button>
+                                    </div>
+                                </div>
+                            </form>
+                            @endif
+                        </td>
+                    </tr>
+                    @endif
+                    @if(Session::has('coupon'))
+                    <tr>
+                        <td class="px-6 py-4">
+                            <div class="flex text-sm text-left text-gray-900">Discount
+                                ({{Session::get('coupon')['code']}})
+                                <a href="#" wire:click.prevent="removeCoupon"
+                                    class="ml-2 text-white bg-red-500 rounded-full hover:bg-red-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                        class="w-5 h-5">
+                                        <path
+                                            d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="text-sm font-semibold text-right text-gray-900">-${{number_format($discount,2)}}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4">
+                            <div class="text-sm text-left text-gray-900">Subtotal with Discount ({{ config('cart.tax')
+                                }}%)</div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="text-sm font-semibold text-right text-gray-900">
+                                ${{number_format($subtotalAfterDiscount,2)}}</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4">
+                            <div class="text-sm text-left text-gray-900">Tax ({{ config('cart.tax') }}%)</div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="text-sm font-semibold text-right text-gray-900">
+                                ${{number_format($taxAfterDiscount,2)}}</div>
+                        </td>
+                    </tr>
+                    <tr class="bg-gray-100">
+                        <td class="px-6 py-4">
+                            <div class="text-base font-bold text-left text-gray-900">Total</div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="text-base font-bold text-right text-gray-900">
+                                ${{number_format($totalAfterDiscount,2)}}</div>
+                        </td>
+                    </tr>
+                    @else
                     <tr>
                         <td class="px-6 py-4">
                             <div class="text-sm text-left text-gray-900">Tax</div>
                         </td>
                         <td class="px-6 py-4">
                             <div class="text-sm font-semibold text-right text-gray-900">${{
-                                Cart::instance('cart')->tax() }}</div>
+                                number_format(Cart::instance('cart')->tax(),2) }}</div>
                         </td>
                     </tr>
-                    <tr>
+                    <tr class="bg-gray-100">
                         <td class="px-6 py-4">
-                            <div class="text-sm text-left text-gray-900">Total</div>
+                            <div class="text-base font-bold text-left text-gray-900">Total</div>
                         </td>
                         <td class="px-6 py-4">
-                            <div class="text-sm font-semibold text-right text-gray-900">${{
-                                Cart::instance('cart')->total() }}</div>
+                            <div class="text-base font-bold text-right text-gray-900">${{
+                                number_format(Cart::instance('cart')->total(), 2) }}</div>
                         </td>
                     </tr>
+                    @endif
                 </tbody>
             </table>
         </div>
@@ -436,9 +516,6 @@
                                             <path
                                                 d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
                                         </svg>
-
-
-
                                     </x-link-success>
                                     <x-link-danger href="#" class="text-xs xs:p-1"
                                         wire:click.prevent="destroySaveForLater('{{ $saveLater->rowId }}')"
