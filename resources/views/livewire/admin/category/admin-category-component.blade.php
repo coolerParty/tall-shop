@@ -1,11 +1,11 @@
 <div>
-    @section('title', 'Admin / Coupon')
+    @section('title', 'Admin / Category')
     <!-- Main content header -->
     <div
         class="flex flex-col items-start justify-between pb-6 space-y-4 border-b lg:items-center lg:space-y-0 lg:flex-row">
-        <h1 class="text-2xl font-semibold whitespace-nowrap">Coupon</h1>
-        @can('coupon-create')
-        <a href="{{ route('admin.coupon.create') }}"
+        <h1 class="text-2xl font-semibold whitespace-nowrap">Category</h1>
+        @can('Coupon-create')
+        <a href="{{ route('admin.category.create') }}"
             class="inline-flex items-center px-6 py-2 space-x-1 text-white bg-purple-600 rounded-md shadow hover:bg-opacity-95">
             <span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
@@ -27,29 +27,9 @@
                             <tr>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    Code
+                                    Name
                                 </th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    Type
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    Value
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
-                                    Cart Value
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
-                                    Expiry Date
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
-                                    Date Created
-                                </th>
-                                <th scope="col" class="relative px-6 py-3">
+                                <th scope="col" class="px-6 py-3 text-right">
                                     Action
                                 </th>
                             </tr>
@@ -144,42 +124,22 @@
                             <!-- flash message End -->
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            @forelse($coupons as $coupon)
+                            @forelse($categories as $category)
                             <tr class="transition-all hover:bg-gray-100 ">
                                 <td class="px-6 py-4">
-                                    <div class="text-sm font-semibold text-gray-900">{{ $coupon->code }}</div>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div class="text-sm font-semibold text-gray-900">{{ $coupon->type }}</div>
-                                </td>
-                                <td class="px-6 py-4 text-gray-900 dark:text-white">
-                                    <div class="text-sm text-gray-900">
-                                        @if ($coupon->type == 'fixed')
-                                        ${{ $coupon->value }}
-                                        @else
-                                        {{ $coupon->value }} %
-                                        @endif
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div class="text-sm text-gray-900">{{ $coupon->cart_value }}</div>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div class="text-sm text-gray-900">{{ $coupon->expiry_date }}</div>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div class="text-sm text-gray-900">{{ $coupon->created_at }}</div>
+                                    <div class="text-sm font-semibold text-gray-900">{{ $category->name }}</div>
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                    @can('coupon-edit')
+                                    @can('category-edit')
                                     <x-link-success
-                                        href="{{ route('admin.coupon.edit', ['coupon_id' => $coupon->id]) }}"> Edit
+                                        href="{{ route('admin.category.edit', ['category_id' => $category->id]) }}">
+                                        Edit
                                     </x-link-success>
-                                    @can('coupon-delete')
+                                    @can('category-delete')
                                     @endcan
                                     <x-link-danger href="#" class="btn btn-danger btn-sm text-light"
                                         onclick="confirm('Are you sure, You want to delete this country?') || event.stopImmediatePropagation()"
-                                        wire:click.prevent="destroy({{ $coupon->id }})">
+                                        wire:click.prevent="destroy({{ $category->id }})">
                                         Delete
                                     </x-link-danger>
                                     @endcan
@@ -187,15 +147,15 @@
                             </tr>
                             @empty
                             <tr class="transition-all hover:bg-gray-100 hover:shadow-lg">
-                                <td class="px-6 py-4 text-center whitespace-nowrap" colspan="6">
-                                    <div class="text-sm font-medium text-gray-900">No Coupon Found</div>
+                                <td class="px-6 py-4 text-center whitespace-nowrap" colspan="2">
+                                    <div class="text-sm font-medium text-gray-900">No category Found</div>
                                 </td>
                             </tr>
                             @endforelse
                         </tbody>
                     </table>
                     <div class="p-4">
-                        {!! $coupons->links() !!}
+                        {!! $categories->links() !!}
                     </div>
                 </div>
             </div>

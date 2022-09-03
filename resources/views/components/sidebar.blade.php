@@ -76,7 +76,7 @@
                     {{ (route('admin.homeslider.index') == substr(url()->current(), 0, strlen(route('admin.homeslider.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('admin.product.index') == substr(url()->current(), 0, strlen(route('admin.product.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('admin.coupon.index') == substr(url()->current(), 0, strlen(route('admin.coupon.index')) )) ? 'bg-gray-100' : '' }}
-                    {{ (route('admin.homeslider.index') == substr(url()->current(), 0, strlen(route('admin.homeslider.index')) )) ? 'bg-gray-100' : '' }}
+                    {{ (route('admin.category.index') == substr(url()->current(), 0, strlen(route('admin.category.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('admin.homeslider.index') == substr(url()->current(), 0, strlen(route('admin.homeslider.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('admin.homeslider.index') == substr(url()->current(), 0, strlen(route('admin.homeslider.index')) )) ? 'bg-gray-100' : '' }}
                 " :class="{'justify-center': !isSidebarOpen}" x-ref="button" x-on:click="toggle()"
@@ -139,7 +139,7 @@
                     </li>
                     @endcan
                     @can('coupon-access')
-                    <li title="Gallery">
+                    <li title="Coupon">
                         <a class="flex items-center p-2 space-x-2 text-sm border-t border-b hover:bg-gray-100
                         {{ (route('admin.coupon.index') == substr(url()->current(), 0, strlen(route('admin.coupon.index')) )) ? 'bg-gray-100' : '' }}
                         " :class="{'justify-center': !isSidebarOpen}" href="{{ route('admin.coupon.index') }}">
@@ -149,6 +149,20 @@
                                 </svg>
                             </span>
                             <span :class="{ 'lg:hidden': !isSidebarOpen }">Coupon</span>
+                        </a>
+                    </li>
+                    @endcan
+                    @can('dashboard-access')
+                    <li title="Category">
+                        <a class="flex items-center p-2 space-x-2 text-sm border-t border-b hover:bg-gray-100
+                        {{ (route('admin.category.index') == substr(url()->current(), 0, strlen(route('admin.category.index')) )) ? 'bg-gray-100' : '' }}
+                        " :class="{'justify-center': !isSidebarOpen}" href="{{ route('admin.category.index') }}">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z" />
+                                </svg>
+                            </span>
+                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Category</span>
                         </a>
                     </li>
                     @endcan
