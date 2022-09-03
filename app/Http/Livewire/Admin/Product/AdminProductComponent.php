@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Admin;
+namespace App\Http\Livewire\Admin\Product;
 
 use App\Models\Product;
 use Livewire\Component;
@@ -76,6 +76,6 @@ class AdminProductComponent extends Component
         $products = Product::with('category')
                 ->select('id', 'name', 'image', 'regular_price', 'featured', 'stock_status', 'quantity', 'active', 'category_id')
                 ->orderBy('created_at', 'DESC')->paginate(10);
-        return view('livewire.admin.admin-product-component', ['products' => $products])->layout('layouts.base');
+        return view('livewire.admin.product.admin-product-component', ['products' => $products])->layout('layouts.base');
     }
 }

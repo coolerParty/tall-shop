@@ -18,14 +18,19 @@ class HomeSliderComponent extends Component
         $this->authorize('slider-delete');
 
         $slider = HomeSlider::find($homeslider_id);
+
+        if(empty($slider))
+        {
+            return session()->flash('error', 'No item was found!');
+        }
+
         if ($slider->image) {
             unlink('storage/assets/homeslider/large' . '/' . $slider->image); // Deleting Image
             unlink('storage/assets/homeslider/thumbnail' . '/' . $slider->image); // Deleting Image
         }
         $slider->delete();
 
-        return redirect()->route('admin.homeslider.index')
-            ->with('delete-success', 'Slide has been deleted successfully.');
+        return session()->flash('success', 'Slide has been deleted successfully.');
     }
 
     public function updateActive($homeslider_id,$status)
@@ -33,6 +38,11 @@ class HomeSliderComponent extends Component
         $this->authorize('slider-edit');
 
         $slider = HomeSlider::where('id',$homeslider_id)->first();
+        if(empty($slider))
+        {
+            return redirect()->route('admin.homeslider.index')
+            ->with('error', 'Slide has been deleted successfully.');
+        }
         $slider->active = ($status == 1 ) ? 0 : 1;
         $slider->save();
     }

@@ -1,11 +1,11 @@
 <div>
-    @section('title', 'Admin / Product')
+    @section('title', 'Admin / Coupon')
     <!-- Main content header -->
     <div
         class="flex flex-col items-start justify-between pb-6 space-y-4 border-b lg:items-center lg:space-y-0 lg:flex-row">
-        <h1 class="text-2xl font-semibold whitespace-nowrap">Product</h1>
-        @can('product-create')
-        <a href="{{ route('admin.product.create') }}"
+        <h1 class="text-2xl font-semibold whitespace-nowrap">Coupon</h1>
+        @can('Coupon-create')
+        <a href="{{ route('admin.coupon.create') }}"
             class="inline-flex items-center px-6 py-2 space-x-1 text-white bg-purple-600 rounded-md shadow hover:bg-opacity-95">
             <span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
@@ -14,7 +14,7 @@
                         d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
             </span>
-            <span>Add New</span>
+        <span>Add New</span>
         </a>
         @endcan
     </div>
@@ -27,38 +27,30 @@
                             <tr>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    Image
+                                    Code
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    Name
+                                    Type
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    category
+                                    Value
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
-                                    quantity
+                                    Cart Value
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
-                                    featured
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
-                                    stock_status
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
-                                    active
+                                    Date Created
                                 </th>
                                 <th scope="col" class="relative px-6 py-3">
                                     Action
                                 </th>
                             </tr>
                             <!-- flash message Start -->
-                            @if(Session::has('create-success'))
+                            @if(Session::has('success'))
                             <div x-data="{ msg:'true'}">
                                 <template x-if="msg">
                                     <div class="w-full text-white bg-blue-500">
@@ -70,7 +62,7 @@
                                                     </path>
                                                 </svg>
 
-                                                <p class="mx-3">{{ Session::get('create-success') }}</p>
+                                                <p class="mx-3">{{ Session::get('success') }}</p>
                                             </div>
 
                                             <button @click="msg = '' "
@@ -116,7 +108,7 @@
                                 </template>
                             </div>
                             @endif
-                            @if(Session::has('delete-success'))
+                            @if(Session::has('error'))
                             <div x-data="{ msg:'true'}">
                                 <template x-if="msg">
                                     <div class="w-full text-white bg-red-500">
@@ -128,7 +120,7 @@
                                                     </path>
                                                 </svg>
 
-                                                <p class="mx-3">{{ Session::get('delete-success') }}</p>
+                                                <p class="mx-3">{{ Session::get('error') }}</p>
                                             </div>
 
                                             <button @click="msg = '' "
@@ -148,76 +140,75 @@
                             <!-- flash message End -->
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            @forelse($products as $product)
+                            @forelse($coupons as $coupon)
                             <tr class="transition-all hover:bg-gray-100 ">
-                                <td class="px-3 py-2 whitespace-nowrap">
-                                    @if($product->image)
-                                    <a href="{{ asset('storage/assets/product/large') }}/{{ $product->image }}" target="_blank"><img class="object-cover w-10 h-10 rounded-md cursor-pointer hover:shadow-lg" src="{{ asset('storage/assets/product/thumbnail') }}/{{ $product->image }}" /></a>
-                                    @else
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
-                                    </svg>
-                                    @endif
+                                <td class="px-6 py-4">
+                                    <div class="text-sm font-semibold text-gray-900">{{ $coupon->code }}</div>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="text-sm font-semibold text-gray-900">{{ $product->name }}</div>
+                                    <div class="text-sm font-semibold text-gray-900">{{ $coupon->type }}</div>
                                 </td>
                                 <td class="px-6 py-4 text-gray-900 dark:text-white">
-                                    <div class="text-sm text-gray-900">{{ $product->category->name }}</div>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div class="text-sm font-semibold text-gray-900">{{ $product->quantity }}</div>
-                                </td>
-                                <td class="px-6 py-4 text-center text-gray-900 dark:text-white">
-                                    @can('product-edit')
-                                        <input class="float-left h-5 align-top bg-gray-300 bg-no-repeat bg-contain rounded-full shadow-sm appearance-none cursor-pointer form-check-input w-9 focus:outline-none" type="checkbox" role="switch" id="flexSwitchCheckChecked" {{ ($product->featured == 1)? 'checked' : '' }} wire:click.prevent="updateFeatured({{ $product->id }},{{ $product->featured }})">
-                                    @else
-                                        <div class="text-sm py-1 px-3 rounded-full text-gray-800 {{ ($product->featured == 1) ? 'bg-green-200' : 'bg-gray-200' }}">{{ ($product->featured == 1) ? 'Active' : 'Inactive' }}</div>
-                                    @endcan
-                                </td>
-                                <td class="px-6 py-4 text-center text-gray-900 dark:text-white">
-                                    @can('product-edit')
-                                        <input class="float-left h-5 align-top bg-gray-300 bg-no-repeat bg-contain rounded-full shadow-sm appearance-none cursor-pointer form-check-input w-9 focus:outline-none" type="checkbox" role="switch" id="flexSwitchCheckChecked" {{ ($product->stock_status == 'instock')? 'checked' : '' }} wire:click.prevent="updateStocked({{ $product->id }},'{{ $product->stock_status }}')">
-                                    @else
-                                        <div class="text-sm py-1 px-3 rounded-full text-gray-800 {{ ($product->stock_status == 'instock') ? 'bg-green-200' : 'bg-gray-200' }}">{{ ($product->stock_status == 'instock' ) ? 'Instock' : 'Out of Stock' }}</div>
-                                    @endcan
-                                </td>
-                                <td class="px-6 py-4 text-center text-gray-900 dark:text-white">
-                                    @can('product-edit')
-                                        <input class="float-left h-5 align-top bg-gray-300 bg-no-repeat bg-contain rounded-full shadow-sm appearance-none cursor-pointer form-check-input w-9 focus:outline-none" type="checkbox" role="switch" id="flexSwitchCheckChecked" {{ ($product->active == 1)? 'checked' : '' }} wire:click.prevent="updateActive({{ $product->id }},{{ $product->active }})">
-                                    @else
-                                        <div class="text-sm py-1 px-3 rounded-full text-gray-800 {{ ($product->active == 1) ? 'bg-green-200' : 'bg-gray-200' }}">{{ ($product->active == 1) ? 'Active' : 'Inactive' }}</div>
-                                    @endcan
-                                </td>
-                                <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                    @can('slider-edit')
-                                    <x-link-success href="{{ route('admin.product.edit', ['product_id' => $product->id]) }}"> Edit
-                                    </x-link-success>
-                                    @can('slider-delete')
-                                    @endcan
-                                    <x-link-danger href="#" class="btn btn-danger btn-sm text-light"
-                                        onclick="confirm('Are you sure, You want to delete this country?') || event.stopImmediatePropagation()"
-                                        wire:click.prevent="destroy({{ $product->id }})">
-                                        Delete
-                                    </x-link-danger>
-                                    @endcan
-                                </td>
-                            </tr>
-                            @empty
-                            <tr class="transition-all hover:bg-gray-100 hover:shadow-lg">
-                                <td class="px-6 py-4 text-center whitespace-nowrap" colspan="9">
-                                    <div class="text-sm font-medium text-gray-900">No Product Found</div>
-                                </td>
-                            </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                    <div class="p-4">
-                        {!! $products->links() !!}
-                    </div>
+                                    <div class="text-sm text-gray-900">
+                                        @if ($coupon->type == 'fixed')
+                                <td>${{ $coupon->value }}</td>
+                                @else
+                                <td>{{ $coupon->value }} %</td>
+                                @endif
+                </div>
+                </td>
+                <td class="px-6 py-4">
+                    <div class="text-sm text-gray-900">{{ $coupon->cart_value }}</div>
+                </td>
+                <td class="px-6 py-4">
+                    <div class="text-sm text-gray-900">{{ $coupon->created_at }}</div>
+                </td>
+                <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+                    @can('slider-edit')
+                    <x-link-success href="{{ route('admin.coupon.edit', ['coupon_id' => $coupon->id]) }}"> Edit
+                    </x-link-success>
+                    @can('slider-delete')
+                    @endcan
+                    <x-link-danger href="#" class="btn btn-danger btn-sm text-light"
+                        onclick="confirm('Are you sure, You want to delete this country?') || event.stopImmediatePropagation()"
+                        wire:click.prevent="destroy({{ $coupon->id }})">
+                        Delete
+                    </x-link-danger>
+                    @endcan
+                </td>
+                </tr>
+                @empty
+                <tr class="transition-all hover:bg-gray-100 hover:shadow-lg">
+                    <td class="px-6 py-4 text-center whitespace-nowrap" colspan="6">
+                        <div class="text-sm font-medium text-gray-900">No Coupon Found</div>
+                    </td>
+                </tr>
+                @endforelse
+                </tbody>
+                </table>
+                <div class="p-4">
+                    {!! $coupons->links() !!}
                 </div>
             </div>
         </div>
     </div>
-
+</div>
+<div wire:loading.delay.long>
+    <!-- Loading screen -->
+    <div show="true"
+        class="fixed inset-0 z-[200] flex items-center justify-center text-white bg-black bg-opacity-10 text-3xl">
+        <!-- By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL -->
+        <svg width="60" height="60" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff">
+            <g fill="none" fill-rule="evenodd">
+                <g transform="translate(1 1)" stroke-width="2">
+                    <circle stroke-opacity=".5" cx="18" cy="18" r="18" />
+                    <path d="M36 18c0-9.94-8.06-18-18-18">
+                        <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="1s"
+                            repeatCount="indefinite" />
+                    </path>
+                </g>
+            </g>
+        </svg>
+    </div>
+</div>
 </div>

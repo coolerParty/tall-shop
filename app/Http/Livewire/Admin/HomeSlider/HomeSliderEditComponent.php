@@ -26,8 +26,11 @@ class HomeSliderEditComponent extends Component
     public function mount($homeslider_id)
     {
         $slider = HomeSlider::find($homeslider_id);
-        if (empty($slider)) {
-            abort(404);
+
+        if(empty($slider))
+        {
+            return redirect()->route('admin.homeslider.index')
+                ->with('error', 'Slider not found!');
         }
 
         $this->slide_id  = $slider->id;
@@ -104,7 +107,7 @@ class HomeSliderEditComponent extends Component
         $slider->save();
 
         return redirect()->route('admin.homeslider.index')
-            ->with('update-success', 'Slide "' . $this->title . '" updated successfully.');
+            ->with('success', 'Slide "' . $this->title . '" updated successfully.');
     }
 
     public function confirmation()

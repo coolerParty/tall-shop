@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Admin;
+namespace App\Http\Livewire\Admin\Product;
 
 use App\Models\Category;
 use App\Models\Product;
@@ -116,6 +116,6 @@ class AdminProductAddComponent extends Component
         $this->confirmation();
 
         $categories = Category::select('id', 'name')->orderBy('name', 'ASC')->get();
-        return view('livewire.admin.admin-product-add-component', ['categories' => $categories])->layout('layouts.base');
+        return view('livewire.admin.product.admin-product-add-component', ['categories' => $categories])->layout('layouts.base');
     }
 }

@@ -1,10 +1,10 @@
 <div>
-    @section('title', 'Product Update')
+    @section('title', 'Product Create')
     <!-- Main content header -->
     <div
         class="flex flex-col items-start justify-between pb-6 mb-2 space-y-4 border-b lg:items-center lg:space-y-0 lg:flex-row">
-        <h1 class="text-lg font-semibold whitespace-nowrap">Product <span class="text-base text-gray-400"> / </span> {{ $name }} <span class="text-base text-gray-400"> / </span> <span
-                class="text-2xl">Update</span></h1>
+        <h1 class="text-lg font-semibold whitespace-nowrap">Product <span class="text-base text-gray-400">/</span> <span
+                class="text-2xl">Create</span></h1>
         <a href="{{ route('admin.product.index') }}"
             class="inline-flex items-center px-6 py-2 space-x-1 text-white bg-purple-600 rounded-md shadow hover:bg-opacity-95">
             <span>
@@ -21,7 +21,7 @@
 
         <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
             <x-jet-validation-errors class="mb-4" />
-            <form wire:submit.prevent="update">
+            <form wire:submit.prevent="store">
                 <div class="mt-4">
                     <div>
                         <label class="text-gray-700 dark:text-gray-200" for="name">name</label>
@@ -103,7 +103,7 @@
                         <label for="category_id" class="text-gray-700 dark:text-gray-200">Category</label>
                         <select id="category_id" name="category_id" wire:model="category_id"
                             class="block w-full px-4 py-2 mt-2 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:outline-none focus:ring focus:border-blue-400 dark:focus:border-blue-300 sm:text-sm">
-                            <option value="">Select Category</option>
+                            <option value="">Select Categories</option>
                             @foreach($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
@@ -124,20 +124,17 @@
 
                 <div class="mt-4">
                     <div>
-                        <label class="text-gray-700 dark:text-gray-200" for="new_image">Image</label>
-                        <input id="new_image" type="file" name="new_image" wire:model="new_image" autocomplete="new_image"
+                        <label class="text-gray-700 dark:text-gray-200" for="image">Image</label>
+                        <input id="image" type="file" name="image" wire:model="image" autocomplete="image"
                             class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
-                        <div class="block w-full px-4 py-2 m-1 text-white bg-emerald-500 " wire:loading wire:target="new_image">
+                        <div class="block w-full px-4 py-2 m-1 text-white bg-emerald-500 " wire:loading wire:target="image">
                             Uploading...
                         </div>
-                        @if ($new_image)
+                        @if ($image)
                         <img class="object-cover rounded place-content-center w-30 h-30"
-                            src="{{ $new_image->temporaryUrl() }}" alt="">
+                            src="{{ $image->temporaryUrl() }}" alt="">
                         <x-link-danger type="button" wire:click="removeImage"
                             class="block w-full cursor-pointer">Remove Selected Image</x-link-danger>
-                        @elseif($image)
-                        <img class="object-cover rounded place-content-center w-30 h-30"
-                            src="{{ asset('storage/assets/product/medium') }}/{{ $image }}" alt="">
                         @endif
                     </div>
                 </div>
@@ -148,5 +145,23 @@
                 </div>
             </form>
         </section>
+    </div>
+    <div wire:loading.delay.long>
+        <!-- Loading screen -->
+        <div show="true"
+            class="fixed inset-0 z-[200] flex items-center justify-center text-white bg-black bg-opacity-10 text-3xl">
+            <!-- By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL -->
+            <svg width="60" height="60" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff">
+                <g fill="none" fill-rule="evenodd">
+                    <g transform="translate(1 1)" stroke-width="2">
+                        <circle stroke-opacity=".5" cx="18" cy="18" r="18" />
+                        <path d="M36 18c0-9.94-8.06-18-18-18">
+                            <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18"
+                                dur="1s" repeatCount="indefinite" />
+                        </path>
+                    </g>
+                </g>
+            </svg>
+        </div>
     </div>
 </div>
