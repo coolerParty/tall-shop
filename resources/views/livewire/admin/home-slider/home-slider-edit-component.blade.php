@@ -21,32 +21,37 @@
     <div class="max-w-full md:bg-gray-300 md:p-4">
 
         <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
-            <x-jet-validation-errors class="mb-4" />
             <form wire:submit.prevent="update">
                 <div class="mt-4">
                     <div>
                         <label class="text-gray-700 dark:text-gray-200" for="title">title</label>
-                        <input id="title" type="text" name="title" value="{{ old('title') }}" wire:model="title" required
+                        <input id="title" type="text" name="title" value="{{ old('title') }}" wire:model.lazy="title" required
                             autofocus autocomplete="title"
-                            class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                            class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring
+                            @error('title') border-red-500 @enderror">
+                            @error('title')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                     </div>
                 </div>
 
                 <div class="mt-4">
                     <div>
                         <label class="text-gray-700 dark:text-gray-200" for="sub_title">Subtitle</label>
-                        <input id="sub_title" type="text" name="sub_title" value="{{ old('sub_title') }}" wire:model="sub_title"
+                        <input id="sub_title" type="text" name="sub_title" value="{{ old('sub_title') }}" wire:model.lazy="sub_title"
                             required autofocus autocomplete="sub_title"
-                            class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                            class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring
+                            @error('sub_title') border-red-500 @enderror">
+                            @error('sub_title')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                     </div>
                 </div>
 
                 <div class="mt-4">
                     <div>
                         <label class="text-gray-700 dark:text-gray-200" for="link">Link Url</label>
-                        <input id="link" type="text" name="link" value="{{ old('link') }}" wire:model="link"
+                        <input id="link" type="text" name="link" value="{{ old('link') }}" wire:model.lazy="link"
                             required autofocus autocomplete="link"
-                            class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                            class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring
+                            @error('link') border-red-500 @enderror">
+                            @error('link')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                     </div>
                 </div>
 
@@ -54,7 +59,9 @@
                     <div>
                         <label class="text-gray-700 dark:text-gray-200" for="new_image">image</label>
                         <input id="new_image" type="file" name="new_image" wire:model="new_image" autocomplete="new_image"
-                            class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                            class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring
+                            @error('new_image') border-red-500 @enderror">
+                            @error('new_image')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                         <div class="block w-full px-4 py-2 m-1 text-white bg-emerald-500 " wire:loading wire:target="new_image">
                             Uploading...
                         </div>
@@ -73,11 +80,13 @@
                 <div class="mt-4">
                     <div>
                         <label for="active" class="text-gray-700 dark:text-gray-200">Active</label>
-                        <select id="active" name="active" autocomplete="type-name" wire:model="active"
-                            class="block w-full px-4 py-2 mt-2 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:outline-none focus:ring focus:border-blue-400 dark:focus:border-blue-300 sm:text-sm">
+                        <select id="active" name="active" autocomplete="type-name" wire:model.lazy="active"
+                            class="block w-full px-4 py-2 mt-2 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:outline-none focus:ring focus:border-blue-400 dark:focus:border-blue-300 sm:text-sm
+                            @error('active') border-red-500 @enderror">
                             <option value="0">Don't Show</option>
                             <option value="1">Show</option>
                         </select>
+                        @error('active')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                     </div>
                 </div>
 
