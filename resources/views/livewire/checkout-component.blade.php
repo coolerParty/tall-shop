@@ -284,6 +284,59 @@
                     </div>
                 </div>
             </div>
+            @if($paymentmode == 'card')
+            <div class="mt-2 bg-white rounded-md shadow-lg p-7">
+                <h1 class="mb-5 text-xl font-semibold text-orange-500">Payment Method By Card:</h1>
+                <div class="flex flex-wrap mb-6 -mx-3">
+                    <div class="w-full px-3 mb-6 md:w-1/2 md:mb-0">
+                        <label class="block mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase"
+                            for="card_no">
+                            Card Number
+                        </label>
+                        <input
+                            class="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200
+                            @error('card_no') border-red-500 @enderror rounded appearance-none focus:outline-none focus:bg-white"
+                            id="card_no" name="card_no" type="text" placeholder="Card Number" wire:model.lazy="card_no">
+                        @error('card_no') <p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
+                    </div>
+                    <div class="w-full px-3 md:w-1/2">
+                        <label class="block mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase"
+                            for="cvc">
+                            CVC
+                        </label>
+                        <input
+                            class="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200
+                            @error('cvc') border-red-500 @enderror rounded appearance-none focus:outline-none focus:bg-white"
+                            id="cvc" name="cvc" type="password" placeholder="CVC" wire:model.lazy="cvc">
+                        @error('cvc') <p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
+                    </div>
+                </div>
+                <div class="flex flex-wrap mb-6 -mx-3">
+                    <div class="w-full px-3 md:w-1/2">
+                        <label class="block mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase"
+                            for="exp_month">
+                            Expiry Month
+                        </label>
+                        <input
+                            class="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200
+                            @error('s_zipcode') border-red-500 @enderror rounded appearance-none focus:outline-none focus:bg-white"
+                            id="exp_month" name="exp_month" type="text" placeholder="MM" wire:model.lazy="exp_month">
+                        @error('exp_month') <p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
+                    </div>
+                    <div class="w-full px-3 mb-6 md:w-1/2 md:mb-0">
+                        <label class="block mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase"
+                            for="exp_year">
+                            Expiry Year
+                        </label>
+                        <input
+                            class="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200
+                            @error('exp_year') border-red-500 @enderror rounded appearance-none focus:outline-none focus:bg-white"
+                            id="exp_year" name="exp_year" type="text" placeholder="YYYY" wire:model.lazy="exp_year">
+                        @error('exp_year') <p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
+                    </div>
+                </div>
+            </div>
+            @endif
             <div class="mt-2 mb-2 bg-white rounded-md shadow-lg p-7">
                 <div class="flex justify-between w-full px-3 mb-6 text-base md:mb-0">
                     @if (Session::has('checkout'))
@@ -297,6 +350,11 @@
                 <div class="p-5" role="alert">
                     <p class="italic text-red-500"> {{ Session::get('checkout_message') }}</p>
                     <x-link-success href="{{ route('cart.index') }}">Back to Cart</x-link-success>
+                </div>
+            @endif
+            @if (Session::has('stripe_error'))
+                <div class="p-5" role="alert">
+                    <p class="italic text-red-500"> {{ Session::get('stripe_error') }}</p>
                 </div>
             @endif
         </form>
