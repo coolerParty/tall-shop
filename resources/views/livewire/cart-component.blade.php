@@ -230,15 +230,15 @@
     <div class="w-full mt-10 mb-10">
         <div class="px-6 py-4 text-center whitespace-nowrap">
             <h3 class="p-1 mt-10 text-3xl font-semibold capitalize md:p-0">No item found in cart.</h3>
-            <h1 class="p-1 text-5xl font-bold tracking-tighter text-orange-500 capitalize md:p-0">Add Dishes to it now</h1>
+            <h1 class="p-1 text-5xl font-bold tracking-tighter text-orange-500 capitalize md:p-0">Add Dishes to it now!</h1>
             <x-link-success href="{{ route('menu') }}" class="px-10 py-5 mt-5">Shop Now!</x-link-success>
         </div>
     </div>
     @endif
 
     <!-- Cart Summary START -->
+    @if(Cart::instance('cart')->count() > 0)
     <div class="container mx-auto mt-5">
-        @if(Cart::instance('cart')->count() > 0)
         <div class="w-full pr-5 text-right">
             <x-link-danger href="#" wire:click.prevent="destroyAll()" class="btn btn-delete" title="">
                 <span>Clear Shopping Cart</span>
@@ -383,12 +383,12 @@
             </table>
 
         </div>
-        @endif
     </div>
+    @endif
     <!-- Cart Summary END -->
 
-    @if(Cart::instance('saveForLater')->count() > 0)
     <!-- Save for Later START -->
+    @if(Cart::instance('saveForLater')->count() > 0)
     <div class="container flex flex-col mx-auto">
         <h3 class="p-1 text-3xl font-semibold capitalize md:p-0">Save for later</h3>
         <div class="overflow-x-auto mt-5-my-2 sm:-mx-6 lg:-mx-8">
@@ -559,7 +559,6 @@
             </div>
         </div>
     </div>
-    <!-- Cart Summary START -->
 
     <div class="container mx-auto mt-5">
         <div class="w-full pr-5 text-right">
@@ -569,7 +568,6 @@
             </x-link-danger>
         </div>
     </div>
-
     @endif
     <!-- Save for Later END -->
 

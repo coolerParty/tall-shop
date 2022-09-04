@@ -295,7 +295,8 @@
             <x-link-danger type="button" class="w-full px-5 py-5 cursor-pointer" wire:click.prevent="placeOrder">Place Order Now</x-link-danger>
             @if (Session::has('checkout_message'))
                 <div class="p-5" role="alert">
-                    <p class="italic text-red-500"><i class="icon fas fa-check"></i> {{ Session::get('checkout_message') }}</p>
+                    <p class="italic text-red-500"> {{ Session::get('checkout_message') }}</p>
+                    <x-link-success href="{{ route('cart.index') }}">Back to Cart</x-link-success>
                 </div>
             @endif
         </form>

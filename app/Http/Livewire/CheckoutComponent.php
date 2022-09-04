@@ -119,7 +119,6 @@ class CheckoutComponent extends Component
                 || (int)$productQuantitys[$cart->id] < $cart->qty
             ) {
                 return session()->flash('checkout_message', 'Product ' . $cart->name . ' does not have enough stock! Available Stock ' . $productQuantitys[$cart->id]);
-                // return redirect()->to(route('cart.index'));
             }
         }
 

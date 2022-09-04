@@ -1,10 +1,7 @@
 @extends('layouts.frontbase')
 
 @section('content')
-
 @section('title', 'Thank You')
-
-
     <!-- order section starts  -->
     <section class="container px-10 py-10 mx-auto mt-10 mb-10 text-center" id="order">
         <h3 class="p-1 mt-10 text-3xl font-semibold capitalize md:p-0">Thank You</h3>
