@@ -15,7 +15,7 @@ use Cart;
 class CheckoutComponent extends Component
 {
 
-    public $ship_to_different;
+    public $ship_to_different = false;
 
     public $firstname;
     public $lastname;
@@ -96,6 +96,21 @@ class CheckoutComponent extends Component
             'paymentmode' => 'required',
         ]);
 
+        if ($this->ship_to_different) {
+            $this->validate([
+                's_firstname' => 'required',
+                's_lastname'  => 'required',
+                's_email'     => 'required|email',
+                's_mobile'    => 'required|numeric',
+                's_line1'     => 'required',
+                's_line2'     => 'required',
+                's_city'      => 'required',
+                's_province'  => 'required',
+                's_country'   => 'required',
+                's_zipcode'   => 'required',
+            ]);
+        }
+
         $cartProducts = Cart::instance('cart')->content();
         $productQuantitys = Product::select('id', 'name', 'quantity')->whereIn('id', $cartProducts->pluck('id'))->pluck('quantity', 'id');
         foreach ($cartProducts as $cart) {
@@ -103,8 +118,8 @@ class CheckoutComponent extends Component
                 !isset($productQuantitys[$cart->id])
                 || (int)$productQuantitys[$cart->id] < $cart->qty
             ) {
-                session()->flash('checkout_message', 'Product ' . $cart->name . ' does not have enough stock! Available Stock ' . $productQuantitys[$cart->id]);
-                return redirect()->to(route('cart.index'));
+                return session()->flash('checkout_message', 'Product ' . $cart->name . ' does not have enough stock! Available Stock ' . $productQuantitys[$cart->id]);
+                // return redirect()->to(route('cart.index'));
             }
         }
 
@@ -141,18 +156,6 @@ class CheckoutComponent extends Component
                 }
 
                 if ($this->ship_to_different) {
-                    $this->validate([
-                        's_firstname' => 'required',
-                        's_lastname'  => 'required',
-                        's_email'     => 'required|email',
-                        's_mobile'    => 'required|numeric',
-                        's_line1'     => 'required',
-                        's_line2'     => 'required',
-                        's_city'      => 'required',
-                        's_province'  => 'required',
-                        's_country'   => 'required',
-                        's_zipcode'   => 'required',
-                    ]);
 
                     $shipping = new Shipping();
                     $shipping->order_id = $order->id;

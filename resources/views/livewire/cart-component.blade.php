@@ -12,6 +12,7 @@
         </nav>
     </div>
 
+    @if(Cart::instance('cart')->count() > 0)
     <!-- Cart START -->
     <div class="container flex flex-col mx-auto mt-10">
         <h3 class="p-1 mt-10 text-3xl font-semibold capitalize md:p-0">Popular Dishes</h3>
@@ -137,7 +138,7 @@
                             <!-- flash message End -->
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            @forelse(Cart::instance('cart')->content() as $cart)
+                            @foreach(Cart::instance('cart')->content() as $cart)
                             <tr class="transition-all hover:bg-gray-100 ">
                                 <td class="p-1 md:px-3 md:py-2 whitespace-nowrap">
                                     @if($cart->model->image)
@@ -217,15 +218,7 @@
                                     </x-link-danger>
                                 </td>
                             </tr>
-                            @empty
-                            <tr class="transition-all hover:bg-gray-100 hover:shadow-lg">
-                                <td class="px-6 py-4 text-center whitespace-nowrap" colspan="6">
-                                    <div class="mb-2 text-sm font-medium text-gray-900">No Item on your Cart</div>
-                                    <h1 class="p-1 mb-2 text-5xl font-bold tracking-tighter text-orange-500 capitalize md:p-0">Add Dishes to it now</h1>
-						            <x-link-success href="{{ route('menu') }}">Shop Now!</x-link-success>
-                                </td>
-                            </tr>
-                            @endforelse
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -233,6 +226,15 @@
         </div>
     </div>
     <!-- Cart END -->
+    @else
+    <div class="w-full mt-10 mb-10">
+        <div class="px-6 py-4 text-center whitespace-nowrap">
+            <h3 class="p-1 mt-10 text-3xl font-semibold capitalize md:p-0">No item found in cart.</h3>
+            <h1 class="p-1 text-5xl font-bold tracking-tighter text-orange-500 capitalize md:p-0">Add Dishes to it now</h1>
+            <x-link-success href="{{ route('menu') }}" class="px-10 py-5 mt-5">Shop Now!</x-link-success>
+        </div>
+    </div>
+    @endif
 
     <!-- Cart Summary START -->
     <div class="container mx-auto mt-5">
@@ -385,6 +387,7 @@
     </div>
     <!-- Cart Summary END -->
 
+    @if(Cart::instance('saveForLater')->count() > 0)
     <!-- Save for Later START -->
     <div class="container flex flex-col mx-auto">
         <h3 class="p-1 text-3xl font-semibold capitalize md:p-0">Save for later</h3>
@@ -501,7 +504,7 @@
                             <!-- flash message End -->
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            @forelse(Cart::instance('saveForLater')->content() as $saveLater)
+                            @foreach(Cart::instance('saveForLater')->content() as $saveLater)
                             <tr class="transition-all hover:bg-gray-100 ">
                                 <td class="p-1 md:px-3 md:py-2 whitespace-nowrap">
                                     @if($saveLater->model->image)
@@ -549,13 +552,7 @@
                                     </x-link-danger>
                                 </td>
                             </tr>
-                            @empty
-                            <tr class="transition-all hover:bg-gray-100 hover:shadow-lg">
-                                <td class="px-6 py-4 text-center whitespace-nowrap" colspan="4">
-                                    <div class="text-sm font-medium text-gray-900">No saved item found</div>
-                                </td>
-                            </tr>
-                            @endforelse
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -564,7 +561,6 @@
     </div>
     <!-- Cart Summary START -->
 
-    @if(Cart::instance('saveForLater')->count() > 0)
     <div class="container mx-auto mt-5">
         <div class="w-full pr-5 text-right">
             <x-link-danger href="#" wire:click.prevent="destroyAllSavedForLater()" class="btn btn-delete" title="">
