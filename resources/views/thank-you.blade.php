@@ -1,21 +1,9 @@
-@extends('layouts.user')
+@extends('layouts.frontbase')
 
 @section('content')
+
 @section('title', 'Thank You')
 
-<div class="w-full pb-10 bg-orange-200">
-    @section('title', 'Checkout')
-    <div class="w-full bg-white">
-        <nav class="container p-2 mx-auto ">
-            <ol class="flex list-reset">
-                <li><a href="#" class="text-blue-600 hover:text-blue-700">Home</a></li>
-                <li><span class="mx-2 text-gray-500">/</span></li>
-                <li><a href="#" class="text-blue-600 hover:text-blue-700">Library</a></li>
-                <li><span class="mx-2 text-gray-500">/</span></li>
-                <li class="text-gray-500">Data</li>
-            </ol>
-        </nav>
-    </div>
 
     <!-- order section starts  -->
     <section class="container px-10 py-10 mx-auto mt-10 mb-10 text-center" id="order">
@@ -43,4 +31,4 @@
             </svg>
         </div>
     </div>
-</div>
+

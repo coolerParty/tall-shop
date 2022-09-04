@@ -149,8 +149,9 @@
                             firstname
                         </label>
                         <input
-                            class="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 @error('s_firstname') border-red-500 @enderror rounded appearance-none focus:outline-none focus:bg-white"
-                            id="s_firstname" type="text" placeholder="Jane" wire:model.lazy="s_firstname">
+                            class="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200
+                            @error('s_firstname') border-red-500 @enderror rounded appearance-none focus:outline-none focus:bg-white"
+                            id="s_firstname" type="text" placeholder="firstname" wire:model.lazy="s_firstname">
                         @error('s_firstname') <p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                     </div>
                     <div class="w-full px-3 md:w-1/2">
@@ -159,8 +160,9 @@
                             lastname
                         </label>
                         <input
-                            class="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 @error('firstname') border-red-500 @enderror rounded appearance-none focus:outline-none focus:bg-white"
-                            id="s_lastname" type="text" placeholder="Doe" wire:model.lazy="s_lastname">
+                            class="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200
+                            @error('s_lastname') border-red-500 @enderror rounded appearance-none focus:outline-none focus:bg-white"
+                            id="s_lastname" type="text" placeholder="lastname" wire:model.lazy="s_lastname">
                         @error('s_lastname') <p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                     </div>
                 </div>
@@ -172,8 +174,9 @@
                             mobile
                         </label>
                         <input
-                            class="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 @error('s_mobile') border-red-500 @enderror rounded appearance-none focus:outline-none focus:bg-white"
-                            id="s_mobile" type="text" placeholder="Jane" wire:model.lazy="s_mobile">
+                            class="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200
+                            @error('s_mobile') border-red-500 @enderror rounded appearance-none focus:outline-none focus:bg-white"
+                            id="s_mobile" type="text" placeholder="mobile" wire:model.lazy="s_mobile">
                         @error('s_mobile') <p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                     </div>
                     <div class="w-full px-3 md:w-1/2">
@@ -181,8 +184,9 @@
                             email
                         </label>
                         <input
-                            class="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 @error('firstname') border-red-500 @enderror rounded appearance-none focus:outline-none focus:bg-white"
-                            id="s_email" type="email" placeholder="Doe" wire:model.lazy="s_email">
+                            class="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200
+                            @error('s_email') border-red-500 @enderror rounded appearance-none focus:outline-none focus:bg-white"
+                            id="s_email" type="email" placeholder="email" wire:model.lazy="s_email">
                         @error('s_email') <p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                     </div>
                 </div>
@@ -193,8 +197,9 @@
                             line1
                         </label>
                         <input
-                            class="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 @error('s_line1') border-red-500 @enderror rounded appearance-none focus:outline-none focus:bg-white"
-                            id="s_line1" type="text" placeholder="Jane" wire:model.lazy="s_line1">
+                            class="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200
+                            @error('s_line1') border-red-500 @enderror rounded appearance-none focus:outline-none focus:bg-white"
+                            id="s_line1" type="text" placeholder="line1" wire:model.lazy="s_line1">
                         @error('s_line1') <p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                     </div>
                     <div class="w-full px-3 md:w-1/2">
@@ -202,8 +207,9 @@
                             line2
                         </label>
                         <input
-                            class="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 @error('firstname') border-red-500 @enderror rounded appearance-none focus:outline-none focus:bg-white"
-                            id="s_line2" type="text" placeholder="Doe" wire:model.lazy="s_line2">
+                            class="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200
+                            @error('s_line2') border-red-500 @enderror rounded appearance-none focus:outline-none focus:bg-white"
+                            id="s_line2" type="text" placeholder="line2" wire:model.lazy="s_line2">
                         @error('s_line2') <p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                     </div>
                 </div>
@@ -214,8 +220,9 @@
                             city
                         </label>
                         <input
-                            class="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 @error('s_city') border-red-500 @enderror rounded appearance-none focus:outline-none focus:bg-white"
-                            id="s_city" type="text" placeholder="Jane" wire:model.lazy="s_city">
+                            class="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200
+                            @error('s_city') border-red-500 @enderror rounded appearance-none focus:outline-none focus:bg-white"
+                            id="s_city" type="text" placeholder="city" wire:model.lazy="s_city">
                         @error('s_city') <p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                     </div>
                     <div class="w-full px-3 md:w-1/2">
@@ -224,8 +231,9 @@
                             province
                         </label>
                         <input
-                            class="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 @error('firstname') border-red-500 @enderror rounded appearance-none focus:outline-none focus:bg-white"
-                            id="s_province" type="text" placeholder="Doe" wire:model.lazy="s_province">
+                            class="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200
+                            @error('s_province') border-red-500 @enderror rounded appearance-none focus:outline-none focus:bg-white"
+                            id="s_province" type="text" placeholder="province" wire:model.lazy="s_province">
                         @error('s_province') <p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                     </div>
                 </div>
@@ -237,8 +245,9 @@
                             country
                         </label>
                         <input
-                            class="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 @error('s_country') border-red-500 @enderror rounded appearance-none focus:outline-none focus:bg-white"
-                            id="s_country" type="text" placeholder="Jane" wire:model.lazy="s_country">
+                            class="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200
+                            @error('s_country') border-red-500 @enderror rounded appearance-none focus:outline-none focus:bg-white"
+                            id="s_country" type="text" placeholder="country" wire:model.lazy="s_country">
                         @error('s_country') <p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                     </div>
                     <div class="w-full px-3 md:w-1/2">
@@ -247,8 +256,9 @@
                             zipcode
                         </label>
                         <input
-                            class="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 @error('firstname') border-red-500 @enderror rounded appearance-none focus:outline-none focus:bg-white"
-                            id="s_zipcode" type="text" placeholder="Doe" wire:model.lazy="s_zipcode">
+                            class="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200
+                            @error('s_zipcode') border-red-500 @enderror rounded appearance-none focus:outline-none focus:bg-white"
+                            id="s_zipcode" type="text" placeholder="zipcode" wire:model.lazy="s_zipcode">
                         @error('s_zipcode') <p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                     </div>
                 </div>

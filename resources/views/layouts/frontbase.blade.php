@@ -18,10 +18,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
 </head>
 
-<body class="min-h-full antialiased">
+<body class="w-full antialiased">
     <!--Nav-->
     <x-nav-menu-component></x-nav-menu-component>
-
 
     <!-- Page Content -->
     <main>
