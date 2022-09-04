@@ -49,9 +49,9 @@
                     <h1 class="text-xl font-bold tracking-tighter capitalize ">{{ $product->name }}</h1>
                     <div class="flex items-end justify-center gap-2">
                         @if($product->sale_price > 0)
+                        <div class="text-xl text-orange-500 font-semitbold">${{ $product->sale_price }}</div>
                         <div class="text-base text-gray-500 line-through font-semitbold">${{ $product->regular_price }}
                         </div>
-                        <div class="text-xl text-orange-500 font-semitbold">${{ $product->sale_price }}</div>
                         @else
                         <div class="text-xl text-orange-500 font-semitbold">${{ $product->regular_price }}</div>
                         @endif
