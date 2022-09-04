@@ -220,7 +220,9 @@
                             @empty
                             <tr class="transition-all hover:bg-gray-100 hover:shadow-lg">
                                 <td class="px-6 py-4 text-center whitespace-nowrap" colspan="6">
-                                    <div class="text-sm font-medium text-gray-900">No Item on your Cart</div>
+                                    <div class="mb-2 text-sm font-medium text-gray-900">No Item on your Cart</div>
+                                    <h1 class="p-1 mb-2 text-5xl font-bold tracking-tighter text-orange-500 capitalize md:p-0">Add Dishes to it now</h1>
+						            <x-link-success href="{{ route('menu') }}">Shop Now!</x-link-success>
                                 </td>
                             </tr>
                             @endforelse
@@ -359,8 +361,25 @@
                         </td>
                     </tr>
                     @endif
+                    <tr>
+                        <td colspan="2 flex flex-col">
+                            <x-link-danger href="#" class="w-full px-3 py-3 space-x-2 rounded-none" title="" wire:click.prevent="checkout">
+                                <span>Checkout</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                                    <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z" clip-rule="evenodd" />
+                                </svg>
+                            </x-link-danger>
+                            @if (Session::has('checkout_message'))
+                                <div class="p-5" role="alert">
+                                    <p class="italic text-red-500"><i class="icon fas fa-check"></i> {{ Session::get('checkout_message') }}</p>
+                                </div>
+                            @endif
+                        </td>
+                    </tr>
                 </tbody>
+
             </table>
+
         </div>
         @endif
     </div>

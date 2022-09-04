@@ -28,8 +28,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', HomeComponent::class)->name('home');
 Route::get('/menu', MenuComponent::class)->name('menu');
 Route::get('/cart', CartComponent::class)->name('cart.index');
-Route::get('/checkout', CheckoutComponent::class)->name('checkout.index');
 Route::get('/wishlist', WishlistComponent::class)->name('wishlist.index');
+Route::get('/thank-you', function () { return view('thank-you');})->name('thankyou');
 
 
 Route::middleware([
@@ -37,9 +37,9 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', function () { return view('dashboard');})->name('dashboard');
+
+    Route::get('/checkout', CheckoutComponent::class)->name('checkout');
 });
 
 Route::middleware([
