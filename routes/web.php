@@ -15,6 +15,8 @@ use App\Http\Livewire\Admin\Product\AdminProductEditComponent;
 use App\Http\Livewire\Admin\HomeSlider\HomeSliderAddComponent;
 use App\Http\Livewire\Admin\Homeslider\HomeSliderComponent;
 use App\Http\Livewire\Admin\HomeSlider\HomeSliderEditComponent;
+use App\Http\Livewire\Admin\Order\AdminOrderComponent;
+use App\Http\Livewire\Admin\Order\AdminOrderDetailsComponent;
 use App\Http\Livewire\Admin\Users\UserAddComponent;
 use App\Http\Livewire\Admin\Users\UserComponent;
 use App\Http\Livewire\Admin\Users\UserEditComponent;
@@ -71,5 +73,8 @@ Route::middleware([
     Route::get('/categories', AdminCategoryComponent::class)->name('category.index');
     Route::get('/categories/create', AdminCategoryAddComponent::class)->name('category.create');
     Route::get('/categories/{category_id}/edit', AdminCategoryEditComponent::class)->name('category.edit');
+
+    Route::get('/orders', AdminOrderComponent::class)->name('order.index');
+    Route::get('/orders/{order_id}', AdminOrderDetailsComponent::class)->name('order.show');
 
 });
