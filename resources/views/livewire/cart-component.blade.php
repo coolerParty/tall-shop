@@ -317,8 +317,7 @@
                     </tr>
                     <tr>
                         <td class="px-6 py-4">
-                            <div class="text-sm text-left text-gray-900">Subtotal with Discount ({{ config('cart.tax')
-                                }}%)</div>
+                            <div class="text-sm text-left text-gray-900">Subtotal with Discount</div>
                         </td>
                         <td class="px-6 py-4">
                             <div class="text-sm font-semibold text-right text-gray-900">

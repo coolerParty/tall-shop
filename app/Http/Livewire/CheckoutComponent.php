@@ -180,6 +180,8 @@ class CheckoutComponent extends Component
                     $orderItem->price      = $item->price;
                     $orderItem->quantity   = $item->qty;
                     $orderItem->save();
+
+                    $this->decrementProductQuantity($item->id, $item->qty);
                 }
 
                 if ($this->ship_to_different) {
@@ -266,10 +268,23 @@ class CheckoutComponent extends Component
                     }
                 }
             });
+
+            return redirect()->route('thankyou');
         } catch (\Exception $exception) {
             session()->flash('checkout_message', 'Error occured! Please try again.');
             return;
         }
+    }
+
+    public function decrementProductQuantity($product_id, $qty)
+    {
+        $p_qty_decrement = Product::find($product_id);
+        if (($p_qty_decrement->quantity - $qty) <= 0) {
+            $p_qty_decrement->quantity = 0;
+        } else {
+            $p_qty_decrement->quantity = $p_qty_decrement->quantity - $qty;
+        }
+        $p_qty_decrement->save();
     }
 
     public function makeTransaction($order_id, $status)
