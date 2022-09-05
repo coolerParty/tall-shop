@@ -1,5 +1,5 @@
 <div class="w-full pb-10 bg-orange-200">
-    @section('title', 'Cart')
+    @section('title', 'Orders')
     <div class="w-full bg-white">
         <nav class="container p-2 mx-auto ">
             <ol class="flex list-reset">
@@ -11,7 +11,6 @@
             </ol>
         </nav>
     </div>
-
 
     <!-- Cart START -->
     <div class="container flex flex-col mx-auto mt-10">
@@ -173,13 +172,12 @@
                                 </td>
                                 <td class="p-1 text-sm font-medium text-right md:px-6 md:py-4">
                                     <x-link-success href="{{ route('user.order.show',['order_id'=> $order->id]) }}"
-                                        class="text-xs xs:p-1" title="Save for later.">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                            class="w-6 h-6">
-                                            <path fill-rule="evenodd"
-                                                d="M6.32 2.577a49.255 49.255 0 0111.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 01-1.085.67L12 18.089l-7.165 3.583A.75.75 0 013.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93z"
-                                                clip-rule="evenodd" />
-                                        </svg>
+                                        class="text-xs xs:p-1" title="Details">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                            <path fill-rule="evenodd" d="M4.125 3C3.089 3 2.25 3.84 2.25 4.875V18a3 3 0 003 3h15a3 3 0 01-3-3V4.875C17.25 3.839 16.41 3 15.375 3H4.125zM12 9.75a.75.75 0 000 1.5h1.5a.75.75 0 000-1.5H12zm-.75-2.25a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5H12a.75.75 0 01-.75-.75zM6 12.75a.75.75 0 000 1.5h7.5a.75.75 0 000-1.5H6zm-.75 3.75a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5H6a.75.75 0 01-.75-.75zM6 6.75a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h3a.75.75 0 00.75-.75v-3A.75.75 0 009 6.75H6z" clip-rule="evenodd" />
+                                            <path d="M18.75 6.75h1.875c.621 0 1.125.504 1.125 1.125V18a1.5 1.5 0 01-3 0V6.75z" />
+                                          </svg>
+
 
 
                                     </x-link-success>
