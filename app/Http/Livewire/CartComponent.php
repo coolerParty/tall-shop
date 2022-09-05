@@ -115,22 +115,20 @@ class CartComponent extends Component
 
     public function checkout()
     {
-        if (Auth::check()) {
-            $carts = Cart::instance('cart')->content();
-            $products = Product::select('id', 'name', 'quantity')->whereIn('id', $carts->pluck('id'))->pluck('quantity', 'id');
-            foreach ($carts as $cart) {
-                if (
-                    !isset($products[$cart->id])
-                    || (int)$products[$cart->id] < $cart->qty
-                ) {
-                    return session()->flash('checkout_message', 'Product ' . $cart->name . ' does not have enough stock! Available Stock ' . $products[$cart->id]);
 
-                }
+        $carts = Cart::instance('cart')->content();
+        $products = Product::select('id', 'name', 'quantity')->whereIn('id', $carts->pluck('id'))->pluck('quantity', 'id');
+        foreach ($carts as $cart) {
+            if (
+                !isset($products[$cart->id])
+                || (int)$products[$cart->id] < $cart->qty
+            ) {
+                return session()->flash('checkout_message', 'Product ' . $cart->name . ' does not have enough stock! Available Stock ' . $products[$cart->id]);
+
             }
-            return redirect()->route('checkout');
-        } else {
-            return redirect()->route('login');
         }
+        return redirect()->route('user.checkout');
+
     }
 
     public function setAmountForCheckout()
