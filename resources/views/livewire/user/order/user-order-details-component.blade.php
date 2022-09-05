@@ -14,7 +14,15 @@
     </div>
     <div class="container p-5 mx-auto ">
         <h3 class="p-1 mt-10 text-3xl font-semibold capitalize md:p-0">Popular Dishes</h3>
-        <h1 class="p-1 mb-10 text-5xl font-bold tracking-tighter text-orange-500 capitalize md:p-0">Our Delicious Food</h1>
+        <h1 class="p-1 text-5xl font-bold tracking-tighter text-orange-500 capitalize md:p-0">Our Delicious Food</h1>
+        <div class="mb-5 text-right">
+            <x-link-success href="{{ route('user.order.index') }}" >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                    <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-4.28 9.22a.75.75 0 000 1.06l3 3a.75.75 0 101.06-1.06l-1.72-1.72h5.69a.75.75 0 000-1.5h-5.69l1.72-1.72a.75.75 0 00-1.06-1.06l-3 3z" clip-rule="evenodd" />
+                  </svg>
+                  Back
+            </x-link-success>
+        </div>
         <!-- Order Items Start -->
         <div class="flex flex-col">
             <div class="-my-3 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -55,7 +63,7 @@
                                 <tr class="transition-all">
                                     <td class="px-3 py-2 whitespace-nowrap">
                                         @if($orderItem->product->image)
-                                        <img class="object-cover w-10 h-10 rounded-md cursor-pointer hover:shadow-lg"
+                                        <img class="object-cover w-10 h-10 rounded-md cursor-pointer md:w-15 md:h-15 lg:w-20 lg:h-20 hover:shadow-lg"
                                             src="{{ asset('storage/assets/product/thumbnail') }}/{{ $orderItem->product->image }}" />
                                         @else
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
@@ -67,7 +75,7 @@
                                         @endif
                                     </td>
                                     <td class="px-6 py-4">
-                                        <div class="text-sm font-semibold text-gray-900">{{ $orderItem->product->name }}
+                                        <div class="text-sm font-semibold text-orange-500">{{ $orderItem->product->name }}
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 text-gray-900 dark:text-white">

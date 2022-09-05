@@ -135,12 +135,12 @@
                         <tbody class="bg-white divide-y divide-gray-200">
                             @forelse($orders as $order)
                             <tr class="transition-all hover:shadow">
-                                <td class="flex flex-wrap gap-2 p-1 md:px-3 md:py-10">
+                                <td class="flex flex-wrap-reverse gap-2 p-1 md:px-3 md:py-10">
                                     @foreach($order->orderItems as $orderItem)
-                                    <div class="relative">
+                                    <div class="relative scale-125 border-2 border-white rounded-full shadow-2xl">
                                         <a href="{{ asset('storage/assets/product/large') }}/{{ $orderItem->product->image }}"
-                                            target="_blank"><img
-                                                class="object-cover w-10 h-10 rounded-full cursor-pointer md:w-15 md:h-15 lg:w-20 lg:h-20 xl:w-30 xl:h-30 hover:shadow-lg hover:scale-105"
+                                            target="_blank" class="bg-yellow-400 border-5 border-red"><img
+                                                class="object-cover w-10 h-10 rounded-full cursor-pointer md:w-15 md:h-15 lg:w-20 lg:h-20 xl:w-30 xl:h-30 hover:shadow-lg hover:scale-110"
                                                 src="{{ asset('storage/assets/product/thumbnail') }}/{{ $orderItem->product->image }}" /></a>
                                         <span
                                             class="absolute bottom-0 right-0 p-1 text-xs text-white bg-gray-700 rounded-lg md:px-2 md:py-1">{{
