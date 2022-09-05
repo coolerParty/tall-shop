@@ -34,18 +34,18 @@ Route::get('/menu', MenuComponent::class)->name('menu');
 Route::get('/cart', CartComponent::class)->name('cart.index');
 Route::get('/wishlist', WishlistComponent::class)->name('wishlist.index');
 Route::get('/thank-you', function () { return view('thank-you');})->name('thankyou');
-
+Route::get('/dashboard', function () { return view('dashboard');})->name('dashboard');
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
 ])->prefix('user')->name('user.')->group(function () {
-    Route::get('/dashboard', function () { return view('dashboard');})->name('dashboard');
 
     Route::get('/checkout', CheckoutComponent::class)->name('checkout');
     Route::get('/orders', UserOrderComponent::class)->name('order.index');
     Route::get('/orders/{order_id}/details', UserOrderDetailsComponent::class)->name('order.show');
+
 });
 
 Route::middleware([
