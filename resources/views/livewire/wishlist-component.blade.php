@@ -40,7 +40,7 @@
     @endif
 
 
-
+    @if(Cart::instance('wishlist')->count() > 0)
     <div class="container mx-auto md:p-5">
 
         <div class="relative z-0 w-full pt-10 pb-10">
@@ -51,7 +51,7 @@
                 <div
                     class="grid gap-1 sm:grid-cols-2 md:gap-1 md:grid-cols-2 lg:gap-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-3">
 
-                    @forelse($wishlists->content() as $item)
+                    @foreach($wishlists->content() as $item)
                     <div class="relative w-full p-2 bg-white border rounded md:m-0 md:border-0">
                         <div class="relative w-full">
                             <img src="{{ asset('storage/assets/product/medium') }}/{{ $item->model->image }}" alt=""
@@ -87,7 +87,15 @@
             </div>
         </div>
     </div>
-
+    @else
+    <div class="w-full pb-10 mt-10 mb-10 ">
+        <div class="px-6 py-4 text-center whitespace-nowrap">
+            <h3 class="p-1 mt-10 text-3xl font-semibold capitalize md:p-0">No item found in wishlist.</h3>
+            <h1 class="p-1 text-5xl font-bold tracking-tighter text-orange-500 capitalize md:p-0">Add Dishes to it now!</h1>
+            <x-link-success href="{{ route('menu') }}" class="px-10 py-5 mt-5">Shop Now!</x-link-success>
+        </div>
+    </div>
+    @endif
 
     <div wire:loading.delay.long>
             <!-- Loading screen -->
