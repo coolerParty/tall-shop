@@ -73,11 +73,11 @@
                 x-on:focusin.window="! $refs.panel.contains($event.target) && close()" x-id="['dropdown-button']">
 
                 <a class="relative flex items-center w-full p-2 space-x-2 cursor-pointer hover:bg-gray-100
+                    {{ (route('admin.order.index') == substr(url()->current(), 0, strlen(route('admin.order.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('admin.homeslider.index') == substr(url()->current(), 0, strlen(route('admin.homeslider.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('admin.product.index') == substr(url()->current(), 0, strlen(route('admin.product.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('admin.coupon.index') == substr(url()->current(), 0, strlen(route('admin.coupon.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('admin.category.index') == substr(url()->current(), 0, strlen(route('admin.category.index')) )) ? 'bg-gray-100' : '' }}
-                    {{ (route('admin.homeslider.index') == substr(url()->current(), 0, strlen(route('admin.homeslider.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('admin.homeslider.index') == substr(url()->current(), 0, strlen(route('admin.homeslider.index')) )) ? 'bg-gray-100' : '' }}
                 " :class="{'justify-center': !isSidebarOpen}" x-ref="button" x-on:click="toggle()"
                     :aria-expanded="open" :aria-controls="$id('dropdown-button')">
@@ -102,6 +102,25 @@
                     x-transition:leave="transition ease-in duration-300"
                     x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
                     :id="$id('dropdown-button')" style="display: none;">
+                    @can('order-access')
+                    <li title="Orders">
+                        <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
+                        {{ (route('admin.order.index') == substr(url()->current(), 0, strlen(route('admin.order.index')) )) ? 'bg-gray-100' : '' }}
+                        " :class="{'justify-center': !isSidebarOpen}"
+                            href="{{ route('admin.order.index') }}">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
+                                    fill="currentColor">
+                                    <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z" />
+                                    <path fill-rule="evenodd"
+                                        d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Orders</span>
+                        </a>
+                    </li>
+                    @endcan
                     @can('slider-show')
                     <li title="Home Slider">
                         <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
@@ -194,25 +213,6 @@
                                 </svg>
                             </span>
                             <span :class="{ 'lg:hidden': !isSidebarOpen }">Review</span>
-                        </a>
-                    </li>
-                    @endcan
-                    @can('dashboard-access')
-                    <li title="Orders">
-                        <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
-                        {{ (route('admin.homeslider.index') == substr(url()->current(), 0, strlen(route('admin.homeslider.index')) )) ? 'bg-gray-100' : '' }}
-                        " :class="{'justify-center': !isSidebarOpen}"
-                            href="{{ route('admin.homeslider.index') }}">
-                            <span>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
-                                    fill="currentColor">
-                                    <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z" />
-                                    <path fill-rule="evenodd"
-                                        d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                            </span>
-                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Orders</span>
                         </a>
                     </li>
                     @endcan

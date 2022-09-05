@@ -43,6 +43,7 @@ class PermissionSeeder extends Seeder
 				'category-edit',
 				'category-show',
 				'category-delete',
+                'order-show',
 
 			];
 

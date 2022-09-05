@@ -14,6 +14,8 @@ class AdminOrderComponent extends Component
 
     public function render()
     {
+        $this->authorize('order-show');
+
         $orders = Order::with('user')
                 ->select('id','user_id','total','status','created_at')
                 ->orderBy('created_at', 'DESC')->paginate(10);
