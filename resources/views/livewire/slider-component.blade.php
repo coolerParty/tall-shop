@@ -1,9 +1,11 @@
 <div class="z-0 w-full">
     <style>
+
         .swiper {
             width: 100%;
             height: auto;
         }
+
     </style>
 
 
@@ -19,7 +21,11 @@
                     <div class="text-center">
                         <span class="text-2xl font-semibold text-gray-400 capitalize md:text-4xl">{{ $slider->sub_title }}</span>
                         <h3
-                            class="max-w-2xl mb-5 font-bold leading-none tracking-tighter text-center uppercase text-7xl md:text-9xl md:mb-10">
+                            class="max-w-2xl mb-5 font-bold leading-none tracking-tighter text-center uppercase text-7xl md:text-9xl md:mb-10"
+                            data-swiper-parallax-scale=".50"
+                            data-swiper-parallax-opacity="0.90"
+                            data-swiper-parallax-duration="1000"
+                            >
                             {{ $slider->title }}</h3>
                         <a href="{{ $slider->link }}" class="px-4 py-2 m-5 capitalize bg-orange-500 shadow hover:bg-orange-600 md:text-xl md:py-3 md:px-5 hover:tracking-wider">get started</a>
                     </div>
@@ -39,5 +45,7 @@
     </div>
 
 </div>
+@push('scripts')
 
+@endpush
 

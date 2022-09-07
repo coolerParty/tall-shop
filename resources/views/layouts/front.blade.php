@@ -36,6 +36,8 @@
     <script>
         const swiper = new Swiper('.swiper', {
             // Optional parameters
+            speed: 600,
+            parallax: true,
             direction: 'horizontal',
             loop: true,
             // If we need pagination

@@ -82,16 +82,59 @@
                                 </td>
                                 <td class="px-6 py-4 text-center text-gray-900 dark:text-white">
                                     <div class="text-gray-900 ">
-                                        @if($order->status == 'ordered')
-                                        <span
-                                            class="px-2 py-1 text-sm capitalize bg-indigo-300 rounded-full">ordered</span>
-                                        @elseif($order->status == 'delivered')
-                                        <span
-                                            class="px-3 py-1 text-sm capitalize bg-green-300 rounded-full">delivered</span>
-                                        @elseif($order->status == 'canceled')
-                                        <span
-                                            class="px-3 py-1 text-sm capitalize bg-gray-300 rounded-full">canceled</span>
-                                        @endif
+                                        <div class="relative" x-data="{ isOpen: false }">
+                                            <button @click="isOpen = !isOpen" class="px-4 py-2 rounded-md text-sm text-white  focus:outline-none focus:ring flex items-center space-x-1 capitalize
+                                                @if($order->status == 'ordered')
+                                                bg-indigo-700 hover:bg-indigo-600
+                                                @elseif($order->status == 'delivered')
+                                                bg-green-700 hover:bg-green-600
+                                                @elseif($order->status == 'canceled')
+                                                bg-gray-700 hover:bg-gray-600
+                                                @endif
+                                                ">
+                                                <span>
+                                                    @if($order->status == 'ordered')
+                                                    ordered
+                                                    @elseif($order->status == 'delivered')
+                                                    delivered
+                                                    @elseif($order->status == 'canceled')
+                                                    canceled
+                                                    @endif
+                                                </span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                    fill="currentColor" class="w-4 h-4">
+                                                    <path fill-rule="evenodd"
+                                                        d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                            </button>
+
+                                            <div @click.away="isOpen = false" x-show.transition.opacity="isOpen"
+                                                class="absolute z-50 max-w-md text-white transform bg-white shadow-lg w-36 -translate-x-1/4 min-w-max">
+                                                <ul class="flex flex-col">
+                                                    @if($order->status == 'ordered')
+                                                    <li><a class="block px-3 py-2 transition bg-green-700 hover:bg-green-600"
+                                                            href="#"
+                                                            wire:click.prevent="updateOrderStatus({{ $order->id }},'delivered')">Delivered</a>
+                                                    </li>
+                                                    <li><a class="block px-3 py-2 transition bg-gray-700 hover:bg-gray-600"
+                                                            href="#"
+                                                            wire:click.prevent="updateOrderStatus({{ $order->id }},'canceled')">Canceled</a>
+                                                    </li>
+                                                    @elseif($order->status == 'delivered')
+                                                    <li><a class="block px-3 py-2 transition bg-gray-700 hover:bg-gray-600"
+                                                            href="#"
+                                                            wire:click.prevent="updateOrderStatus({{ $order->id }},'canceled')">Canceled</a>
+                                                    </li>
+                                                    @elseif($order->status == 'canceled')
+                                                    <li><a class="block px-3 py-2 transition bg-green-700 hover:bg-green-600"
+                                                            href="#"
+                                                            wire:click.prevent="updateOrderStatus({{ $order->id }},'delivered')">Delivered</a>
+                                                    </li>
+                                                    @endif
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4">
