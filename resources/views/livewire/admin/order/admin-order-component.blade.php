@@ -98,7 +98,7 @@
                                                     @elseif($order->status == 'delivered')
                                                     delivered
                                                     @elseif($order->status == 'canceled')
-                                                    canceled
+                                                    cancelled
                                                     @endif
                                                 </span>
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
