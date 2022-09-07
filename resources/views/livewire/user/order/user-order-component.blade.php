@@ -135,7 +135,7 @@
                         <tbody class="bg-white divide-y divide-gray-200">
                             @forelse($orders as $order)
                             <tr class="transition-all hover:shadow">
-                                <td class="flex flex-wrap-reverse gap-2 p-1 md:px-3 md:py-10">
+                                <td class="flex flex-wrap gap-2 p-1 md:px-3 md:py-10">
                                     @foreach($order->orderItems as $orderItem)
                                     <div class="relative scale-125 border-2 border-white rounded-full shadow-2xl">
                                         <a href="{{ asset('storage/assets/product/large') }}/{{ $orderItem->product->image }}"
