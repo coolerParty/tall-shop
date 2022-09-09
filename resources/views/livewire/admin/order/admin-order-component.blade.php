@@ -1,22 +1,9 @@
 <div>
-    @section('title', 'Admin / Product')
+    @section('title', 'Admin / Orders')
     <!-- Main content header -->
     <div
         class="flex flex-col items-start justify-between pb-6 space-y-4 border-b lg:items-center lg:space-y-0 lg:flex-row">
-        <h1 class="text-2xl font-semibold whitespace-nowrap">Product</h1>
-        @can('product-create')
-        <a href="{{ route('admin.product.create') }}"
-            class="inline-flex items-center px-6 py-2 space-x-1 text-white bg-purple-600 rounded-md shadow hover:bg-opacity-95">
-            <span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-            </span>
-            <span>Add New</span>
-        </a>
-        @endcan
+        <h1 class="text-2xl font-semibold whitespace-nowrap">Orders</h1>
     </div>
     <div class="flex flex-col mt-6">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">

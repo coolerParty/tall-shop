@@ -17,7 +17,11 @@
         <h3 class="p-1 mt-10 text-3xl font-semibold text-center capitalize md:p-0">order now</h3>
         <h1 class="p-1 text-5xl font-bold tracking-tighter text-center text-orange-500 capitalize md:p-0">free and fast
         </h1>
-        <form class="w-full max-w-2xl mx-auto mt-10">
+
+        <form class="w-full mx-auto mt-10">
+            <div class="grid w-full grid-cols-1 gap-2 pb-10 mt-5 md:grid-cols-2">
+                <div>
+            <!-- Billing Address Start -->
             <div class="bg-white rounded-md shadow-lg p-7">
                 <h1 class="mb-5 text-xl font-semibold text-orange-500">Billing Address</h1>
                 <div class="flex flex-wrap mb-6 -mx-3">
@@ -128,7 +132,9 @@
                     </div>
                 </div>
             </div>
+            <!-- Billing Address End -->
 
+            <!-- Shipping Address Start -->
             <div class="w-full px-3 mt-5 mb-5 md:w-1/2">
                 <input
                     class="float-left w-4 h-4 mt-1 mr-2 align-top transition duration-200 bg-white bg-center bg-no-repeat bg-contain border border-gray-300 rounded-sm appearance-none cursor-pointer form-check-input checked:bg-blue-600 checked:border-blue-600 focus:outline-none"
@@ -264,6 +270,10 @@
                 </div>
             </div>
             @endif
+            <!-- Shipping Address End -->
+            </div>
+            <div>
+            <!-- Payment Mode Start -->
             <div class="bg-white rounded-md shadow-lg p-7">
                 <h1 class="mb-5 text-xl font-semibold text-orange-500">Payment Method</h1>
                 @error('paymentmode')<p class="italic text-red-500">{{ $message }}</p> @enderror
@@ -337,6 +347,8 @@
                 </div>
             </div>
             @endif
+            <!-- Payment Mode End -->
+            <!-- Total checkout Start -->
             <div class="mt-2 mb-2 bg-white rounded-md shadow-lg p-7">
                 <div class="flex justify-between w-full px-3 mb-6 text-base md:mb-0">
                     @if (Session::has('checkout'))
@@ -357,6 +369,9 @@
                     <p class="italic text-red-500"> {{ Session::get('stripe_error') }}</p>
                 </div>
             @endif
+            <!-- Total checkout Start -->
+        </div>
+        </div>
         </form>
     </section>
     <!-- order section ends -->
