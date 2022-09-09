@@ -4,8 +4,8 @@
     <div
         class="flex flex-col items-start justify-between pb-6 space-y-4 border-b lg:items-center lg:space-y-0 lg:flex-row">
         <h1 class="text-2xl font-semibold whitespace-nowrap">Category</h1>
-        @can('Coupon-create')
-        <a href="{{ route('admin.category.create') }}"
+        @can('category-create')
+        <a href="#" wire:click="showAddModal()"
             class="inline-flex items-center px-6 py-2 space-x-1 text-white bg-purple-600 rounded-md shadow hover:bg-opacity-95">
             <span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
@@ -131,10 +131,9 @@
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                                     @can('category-edit')
-                                    <x-link-success
-                                        href="{{ route('admin.category.edit', ['category_id' => $category->id]) }}">
-                                        Edit
-                                    </x-link-success>
+                                    <x-link-success wire:click="showEditModal({{ $category->id }})"
+                                        class="text-xs text-white bg-green-600 hover:bg-green-500">
+                                        Edit</x-link-success>
                                     @can('category-delete')
                                     @endcan
                                     <x-link-danger href="#" class="btn btn-danger btn-sm text-light"
@@ -179,4 +178,41 @@
             </svg>
         </div>
     </div>
+
+    {{-- Show-MovieDetail-Modal Start --}}
+    <x-jet-dialog-modal wire:model="showCategoryModal">
+        <x-slot name="title">
+            @if($modalType == 1)
+            Category Create
+            @elseif($modalType == 2)
+            Category Edit
+            @endif
+        </x-slot>
+        <x-slot name="content" class="w-full">
+            <div class="w-full mt-10">
+
+                    <div class="w-full mt-4">
+                        <label class="text-gray-700 dark:text-gray-200" for="name">name</label>
+                        <input id="name" type="text" name="name" value="{{ old('name') }}" wire:model.lazy="name"
+                            required autofocus autocomplete="name" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring
+                        @error('name') border-red-500 @enderror">
+                        @error('name')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
+                    </div>
+            </div>
+        </x-slot>
+        <x-slot name="footer">
+            @if($modalType == 1)
+            <button type="button" wire:click.prevent="store"
+                class="px-6 py-2 mr-2 leading-5 text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-gray-600">
+                Create</button>
+            @elseif($modalType == 2)
+            <button type="button" wire:click.prevent="update"
+                class="px-6 py-2 mr-2 leading-5 text-white transition-colors duration-200 transform bg-green-700 rounded-md hover:bg-green-600 focus:outline-none focus:bg-gray-600">
+                Update</button>
+            @endif
+            <x-link-danger type="button" wire:click.prevent="closeCategoryModal"
+                class="text-white bg-gray-600 hover:bg-gray-800">Close</x-link-danger>
+        </x-slot>
+    </x-jet-dialog-modal>
+    {{-- Show-MovieDetail-Modal End --}}
 </div>

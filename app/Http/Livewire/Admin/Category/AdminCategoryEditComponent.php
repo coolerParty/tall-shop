@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Category;
 
+use App\Http\Requests\Category\CategoryEditRequest;
 use Livewire\Component;
 use App\Models\Category;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -15,6 +16,11 @@ class AdminCategoryEditComponent extends Component
     public $name;
     public $category_id;
 
+    public function rules(): array
+    {
+        return (new CategoryEditRequest())->rules($this->category_id);
+    }
+
     public function mount($category_id)
     {
         $category          = Category::find($category_id);
@@ -24,18 +30,13 @@ class AdminCategoryEditComponent extends Component
 
     public function updated($fields)
     {
-        $this->validateOnly($fields, [
-            'name' => ['required', 'min:3', 'max:30', 'string', Rule::unique('categories')->ignore($this->category_id)],
-        ]);
+        $this->validateOnly($fields);
     }
 
     public function update()
     {
         $this->confirmation();
-
-        $this->validate([
-            'name' => ['required', 'min:3', 'max:30', 'string', Rule::unique('categories')->ignore($this->category_id)],
-        ]);
+        $this->validate();
 
         $category       = Category::find($this->category_id);
         $category->name = $this->name;
