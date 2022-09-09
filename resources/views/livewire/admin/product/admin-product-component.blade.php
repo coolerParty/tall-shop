@@ -5,7 +5,7 @@
         class="flex flex-col items-start justify-between pb-6 space-y-4 border-b lg:items-center lg:space-y-0 lg:flex-row">
         <h1 class="text-2xl font-semibold whitespace-nowrap">Product</h1>
         @can('product-create')
-        <a href="{{ route('admin.product.create') }}"
+        <a href="#" wire:click="showAddModal()"
             class="inline-flex items-center px-6 py-2 space-x-1 text-white bg-purple-600 rounded-md shadow hover:bg-opacity-95">
             <span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
@@ -152,10 +152,16 @@
                             <tr class="transition-all hover:bg-gray-100 ">
                                 <td class="px-3 py-2 whitespace-nowrap">
                                     @if($product->image)
-                                    <a href="{{ asset('storage/assets/product/large') }}/{{ $product->image }}" target="_blank"><img class="object-cover w-10 h-10 rounded-md cursor-pointer hover:shadow-lg" src="{{ asset('storage/assets/product/thumbnail') }}/{{ $product->image }}" /></a>
+                                    <a href="{{ asset('storage/assets/product/large') }}/{{ $product->image }}"
+                                        target="_blank"><img
+                                            class="object-cover w-10 h-10 rounded-md cursor-pointer hover:shadow-lg"
+                                            src="{{ asset('storage/assets/product/thumbnail') }}/{{ $product->image }}" /></a>
                                     @else
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
+                                        fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                            d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                            clip-rule="evenodd" />
                                     </svg>
                                     @endif
                                 </td>
@@ -170,33 +176,53 @@
                                 </td>
                                 <td class="px-6 py-4 text-center text-gray-900 dark:text-white">
                                     @can('product-edit')
-                                        <input class="float-left h-5 align-top bg-gray-300 bg-no-repeat bg-contain rounded-full shadow-sm appearance-none cursor-pointer form-check-input w-9 focus:outline-none" type="checkbox" role="switch" id="flexSwitchCheckChecked" {{ ($product->featured == 1)? 'checked' : '' }} wire:click.prevent="updateFeatured({{ $product->id }},{{ $product->featured }})">
+                                    <input
+                                        class="float-left h-5 align-top bg-gray-300 bg-no-repeat bg-contain rounded-full shadow-sm appearance-none cursor-pointer form-check-input w-9 focus:outline-none"
+                                        type="checkbox" role="switch" id="flexSwitchCheckChecked" {{ ($product->featured
+                                    == 1)? 'checked' : '' }} wire:click.prevent="updateFeatured({{ $product->id }},{{
+                                    $product->featured }})">
                                     @else
-                                        <div class="text-sm py-1 px-3 rounded-full text-gray-800 {{ ($product->featured == 1) ? 'bg-green-200' : 'bg-gray-200' }}">{{ ($product->featured == 1) ? 'Active' : 'Inactive' }}</div>
+                                    <div
+                                        class="text-sm py-1 px-3 rounded-full text-gray-800 {{ ($product->featured == 1) ? 'bg-green-200' : 'bg-gray-200' }}">
+                                        {{ ($product->featured == 1) ? 'Active' : 'Inactive' }}</div>
                                     @endcan
                                 </td>
                                 <td class="px-6 py-4 text-center text-gray-900 dark:text-white">
                                     @can('product-edit')
-                                        <input class="float-left h-5 align-top bg-gray-300 bg-no-repeat bg-contain rounded-full shadow-sm appearance-none cursor-pointer form-check-input w-9 focus:outline-none" type="checkbox" role="switch" id="flexSwitchCheckChecked" {{ ($product->stock_status == 'instock')? 'checked' : '' }} wire:click.prevent="updateStocked({{ $product->id }},'{{ $product->stock_status }}')">
+                                    <input
+                                        class="float-left h-5 align-top bg-gray-300 bg-no-repeat bg-contain rounded-full shadow-sm appearance-none cursor-pointer form-check-input w-9 focus:outline-none"
+                                        type="checkbox" role="switch" id="flexSwitchCheckChecked" {{
+                                        ($product->stock_status == 'instock')? 'checked' : '' }}
+                                    wire:click.prevent="updateStocked({{ $product->id }},'{{ $product->stock_status
+                                    }}')">
                                     @else
-                                        <div class="text-sm py-1 px-3 rounded-full text-gray-800 {{ ($product->stock_status == 'instock') ? 'bg-green-200' : 'bg-gray-200' }}">{{ ($product->stock_status == 'instock' ) ? 'Instock' : 'Out of Stock' }}</div>
+                                    <div
+                                        class="text-sm py-1 px-3 rounded-full text-gray-800 {{ ($product->stock_status == 'instock') ? 'bg-green-200' : 'bg-gray-200' }}">
+                                        {{ ($product->stock_status == 'instock' ) ? 'Instock' : 'Out of Stock' }}</div>
                                     @endcan
                                 </td>
                                 <td class="px-6 py-4 text-center text-gray-900 dark:text-white">
                                     @can('product-edit')
-                                        <input class="float-left h-5 align-top bg-gray-300 bg-no-repeat bg-contain rounded-full shadow-sm appearance-none cursor-pointer form-check-input w-9 focus:outline-none" type="checkbox" role="switch" id="flexSwitchCheckChecked" {{ ($product->active == 1)? 'checked' : '' }} wire:click.prevent="updateActive({{ $product->id }},{{ $product->active }})">
+                                    <input
+                                        class="float-left h-5 align-top bg-gray-300 bg-no-repeat bg-contain rounded-full shadow-sm appearance-none cursor-pointer form-check-input w-9 focus:outline-none"
+                                        type="checkbox" role="switch" id="flexSwitchCheckChecked" {{ ($product->active
+                                    == 1)? 'checked' : '' }} wire:click.prevent="updateActive({{ $product->id }},{{
+                                    $product->active }})">
                                     @else
-                                        <div class="text-sm py-1 px-3 rounded-full text-gray-800 {{ ($product->active == 1) ? 'bg-green-200' : 'bg-gray-200' }}">{{ ($product->active == 1) ? 'Active' : 'Inactive' }}</div>
+                                    <div
+                                        class="text-sm py-1 px-3 rounded-full text-gray-800 {{ ($product->active == 1) ? 'bg-green-200' : 'bg-gray-200' }}">
+                                        {{ ($product->active == 1) ? 'Active' : 'Inactive' }}</div>
                                     @endcan
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                                     @can('slider-edit')
-                                    <x-link-success href="{{ route('admin.product.edit', ['product_id' => $product->id]) }}"> Edit
+                                    <x-link-success wire:click="showEditModal({{ $product->id }})" href="#"> Edit
                                     </x-link-success>
+
                                     @can('slider-delete')
                                     @endcan
                                     <x-link-danger href="#" class="btn btn-danger btn-sm text-light"
-                                        onclick="confirm('Are you sure, You want to delete this country?') || event.stopImmediatePropagation()"
+                                        onclick="confirm('Are you sure, You want to delete this product?') || event.stopImmediatePropagation()"
                                         wire:click.prevent="destroy({{ $product->id }})">
                                         Delete
                                     </x-link-danger>
@@ -237,4 +263,199 @@
             </svg>
         </div>
     </div>
+    {{-- Show-Product-Modal Start --}}
+    <x-jet-dialog-modal wire:model="showModal">
+        <x-slot name="title">
+            @if($modalType == 1)
+            Product Create
+            @elseif($modalType == 2)
+            Product Edit
+            @endif
+        </x-slot>
+        <x-slot name="content" class="w-full">
+            <div class="w-full mt-10">
+                <!-- <x-jet-validation-errors class="mb-4" /> -->
+                <section class="max-w-4xl mx-auto dark:bg-gray-800">
+                    @if($modalType == 1)
+                    <form wire:submit.prevent="store">
+                        @elseif($modalType == 2)
+                        <form wire:submit.prevent="update">
+                            @endif
+                            <div class="px-2 mt-4 ">
+                                <label class="text-gray-700 dark:text-gray-200" for="name">name</label>
+                                <input id="name" type="text" name="name" value="{{ old('name') }}"
+                                    wire:model.lazy="name" required autofocus autocomplete="name" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring
+                                        @error('name') border-red-500 @enderror">
+                                @error('name')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
+                            </div>
+
+                            <div class="px-2 mt-4">
+                                <label class="text-gray-700 dark:text-gray-200" for="short_description">Short
+                                    Description</label>
+                                <textarea id="short_description" type="text" name="short_description"
+                                    value="{{ old('short_description') }}" wire:model.lazy="short_description" required
+                                    autofocus autocomplete="short_description"
+                                    class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring @error('short_description') border-red-500 @enderror"
+                                    rows="6"></textarea>
+                                @error('short_description')<p class="text-xs italic text-red-500">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div class="px-2 mt-4">
+                                <label class="text-gray-700 dark:text-gray-200" for="description">Description</label>
+                                <textarea id="description" type="text" name="description"
+                                    value="{{ old('description') }}" wire:model.lazy="description" required autofocus
+                                    autocomplete="description"
+                                    class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring @error('description') border-red-500 @enderror"
+                                    rows="6"></textarea>
+                                @error('description')<p class="text-xs italic text-red-500">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+
+                            <div class="flex flex-wrap mt-4">
+                                <div class="w-full px-2 md:w-1/2">
+                                    <label class="text-gray-700 dark:text-gray-200" for="regular_price">Regular
+                                        Price</label>
+                                    <input id="regular_price" type="number" step="any" name="regular_price"
+                                        value="{{ old('regular_price') }}" wire:model.lazy="regular_price" required
+                                        autofocus autocomplete="regular_price"
+                                        class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                        @error('regular_price') border-red-500 @enderror">
+                                    @error('regular_price')<p class="text-xs italic text-red-500">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="w-full px-2 md:w-1/2">
+                                    <label class="text-gray-700 dark:text-gray-200" for="sale_price">Sale Price</label>
+                                    <input id="sale_price" type="number" step="any" name="sale_price"
+                                        value="{{ old('sale_price') }}" wire:model.lazy="sale_price" required autofocus
+                                        autocomplete="sale_price" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring
+                                        @error('sale_price') border-red-500 @enderror">
+                                    @error('sale_price')<p class="text-xs italic text-red-500">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="flex flex-wrap mt-4">
+                                <div class="w-full px-2 md:w-1/2">
+                                    <label for="stock_status" class="text-gray-700 dark:text-gray-200">Stock
+                                        Status</label>
+                                    <select id="stock_status" name="stock_status" autocomplete="type-name"
+                                        wire:model.lazy="stock_status"
+                                        class="block w-full px-4 py-2 mt-2 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:outline-none focus:ring focus:border-blue-400 dark:focus:border-blue-300 sm:text-sm @error('stock_status') border-red-500 @enderror">
+                                        <option value="instock">Instock</option>
+                                        <option value="outofstock">Out of Stock</option>
+                                    </select>
+                                    @error('stock_status')<p class="text-xs italic text-red-500">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="w-full px-2 md:w-1/2">
+                                    <label for="featured" class="text-gray-700 dark:text-gray-200">Featured</label>
+                                    <select id="featured" name="featured" wire:model.lazy="featured"
+                                        class="block w-full px-4 py-2 mt-2 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:outline-none focus:ring focus:border-blue-400 dark:focus:border-blue-300 sm:text-sm @error('featured') border-red-500 @enderror">
+                                        <option value="0">Don't Show</option>
+                                        <option value="1">Show</option>
+                                    </select>
+                                    @error('featured')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
+                                </div>
+                            </div>
+
+                            <div class="flex flex-wrap mt-4">
+                                <div class="w-full px-2 md:w-1/2">
+                                    <label class="text-gray-700 dark:text-gray-200" for="quantity">Quantity</label>
+                                    <input id="quantity" type="number" name="quantity" value="{{ old('quantity') }}"
+                                        wire:model.lazy="quantity" required autofocus autocomplete="quantity" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring
+                                        @error('quantity') border-red-500 @enderror">
+                                    @error('quantity')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
+                                </div>
+                                <div class="w-full px-2 md:w-1/2">
+                                    <label for="category_id" class="text-gray-700 dark:text-gray-200">Category</label>
+                                    <select id="category_id" name="category_id" wire:model.lazy="category_id"
+                                        class="block w-full px-4 py-2 mt-2 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:outline-none focus:ring focus:border-blue-400 dark:focus:border-blue-300 sm:text-sm @error('category_id') border-red-500 @enderror">
+                                        <option value="">Select Categories</option>
+                                        @foreach($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('category_id')<p class="text-xs italic text-red-500">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="flex flex-wrap mt-4">
+                                <div class="w-full px-2 md:w-1/2">
+                                    <label for="active" class="text-gray-700 dark:text-gray-200">Active</label>
+                                    <select id="active" name="active" autocomplete="type-name" wire:model.lazy="active"
+                                        class="block w-full px-4 py-2 mt-2 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:outline-none focus:ring focus:border-blue-400 dark:focus:border-blue-300 sm:text-sm @error('active') border-red-500 @enderror">
+                                        <option value="0">Don't Show</option>
+                                        <option value="1">Show</option>
+                                    </select>
+                                    @error('active')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
+                                </div>
+                                <div class="w-full px-2 md:w-1/2">
+                                    @if($modalType == 1)
+                                    <label class="text-gray-700 dark:text-gray-200" for="image">Image</label>
+                                    <input id="image" type="file" name="image" wire:model="image" autocomplete="image"
+                                        class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring @error('image') border-red-500 @enderror">
+                                    @error('image')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
+                                    <div class="block w-full px-4 py-2 m-1 text-white bg-emerald-500 " wire:loading
+                                        wire:target="image">
+                                        Uploading...
+                                    </div>
+                                    @if ($image)
+                                    <img class="object-cover rounded place-content-center w-30 h-30"
+                                        src="{{ $image->temporaryUrl() }}" alt="">
+                                    <x-link-danger type="button" wire:click="removeImage"
+                                        class="block w-full cursor-pointer">Remove Selected Image</x-link-danger>
+                                    @endif
+                                    @elseif($modalType == 2)
+                                    <label class="text-gray-700 dark:text-gray-200" for="new_image">Image</label>
+                                    <input id="new_image" type="file" name="new_image" wire:model="new_image"
+                                        autocomplete="new_image"
+                                        class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring @error('new_image') border-red-500 @enderror">
+                                    @error('new_image')<p class="text-xs italic text-red-500">{{ $message }}</p>
+                                    @enderror
+                                    <div class="block w-full px-4 py-2 m-1 text-white bg-emerald-500 " wire:loading
+                                        wire:target="new_image">
+                                        Uploading...
+                                    </div>
+                                    @if ($new_image)
+                                    <img class="object-cover rounded place-content-center w-30 h-30"
+                                        src="{{ $new_image->temporaryUrl() }}" alt="">
+                                    <x-link-danger type="button" wire:click="removeImage"
+                                        class="block w-full cursor-pointer">Remove Selected Image</x-link-danger>
+                                    @elseif($image)
+                                    <img class="object-cover rounded place-content-center w-30 h-30"
+                                        src="{{ asset('storage/assets/product/medium') }}/{{ $image }}" alt="">
+                                    @endif
+                                    @endif
+                                </div>
+                            </div>
+                            <!-- <div class="flex justify-end mt-6">
+                                <button type="submit"
+                                    class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Save</button>
+                            </div> -->
+                        </form>
+                </section>
+            </div>
+        </x-slot>
+        <x-slot name="footer">
+            @if($modalType == 1)
+            <form wire:submit.prevent="store">
+                <button type="submit"
+                    class="px-6 py-2 mr-2 leading-5 text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-gray-600">
+                    Create</button>
+            </form>
+            @elseif($modalType == 2)
+            <form wire:submit.prevent="update">
+                <button type="submit"
+                    class="px-6 py-2 mr-2 leading-5 text-white transition-colors duration-200 transform bg-green-700 rounded-md hover:bg-green-600 focus:outline-none focus:bg-gray-600">
+                    Update</button>
+            </form>
+            @endif
+            <x-link-danger type="button" wire:click.prevent="closeModal"
+                class="text-white bg-gray-600 hover:bg-gray-800">Close</x-link-danger>
+        </x-slot>
+    </x-jet-dialog-modal>
+    {{-- Show-Product-Modal End --}}
 </div>

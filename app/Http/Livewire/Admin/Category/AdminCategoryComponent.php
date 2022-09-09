@@ -8,7 +8,6 @@ use App\Models\Category;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\WithPagination;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
 
 class AdminCategoryComponent extends Component
 {
@@ -82,7 +81,6 @@ class AdminCategoryComponent extends Component
         $category->save();
         $this->resetCategory();
         return session()->flash('success', 'Category updated successfully.');
-        $this->resetCategory();
     }
 
     public function closeCategoryModal()
