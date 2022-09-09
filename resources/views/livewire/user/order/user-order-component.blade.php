@@ -162,7 +162,7 @@
                                             class="px-3 py-1 text-sm capitalize bg-green-300 rounded-full">delivered</span>
                                         @elseif($order->status == 'canceled')
                                         <span
-                                            class="px-3 py-1 text-sm capitalize bg-gray-300 rounded-full">canceled</span>
+                                            class="px-3 py-1 text-sm capitalize bg-gray-300 rounded-full">cancelled</span>
                                         @endif
                                     </div>
                                 </td>
