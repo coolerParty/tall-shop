@@ -79,6 +79,7 @@
                     {{ (route('admin.coupon.index') == substr(url()->current(), 0, strlen(route('admin.coupon.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('admin.category.index') == substr(url()->current(), 0, strlen(route('admin.category.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('admin.homeslider.index') == substr(url()->current(), 0, strlen(route('admin.homeslider.index')) )) ? 'bg-gray-100' : '' }}
+                    {{ (route('admin.contact') == substr(url()->current(), 0, strlen(route('admin.contact')) )) ? 'bg-gray-100' : '' }}
                 " :class="{'justify-center': !isSidebarOpen}" x-ref="button" x-on:click="toggle()"
                     :aria-expanded="open" :aria-controls="$id('dropdown-button')">
                     <span>
@@ -216,12 +217,12 @@
                         </a>
                     </li>
                     @endcan
-                    @can('dashboard-access')
+                    @can('contact-show')
                     <li title="Contacts">
                         <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
                         {{ (route('admin.homeslider.index') == substr(url()->current(), 0, strlen(route('admin.homeslider.index')) )) ? 'bg-gray-100' : '' }}
                         " :class="{'justify-center': !isSidebarOpen}"
-                            href="{{ route('admin.homeslider.index') }}">
+                            href="{{ route('admin.contact') }}">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
                                     fill="currentColor">
