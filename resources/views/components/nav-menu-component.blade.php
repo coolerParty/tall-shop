@@ -31,16 +31,15 @@
             class="z-50 flex-col flex-grow hidden pb-4 md:pb-0 md:flex md:justify-end md:flex-row">
 
             <a class="px-4 py-2 mt-2 text-sm font-semibold  dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline
-                @if(route('home') == url()->current()) bg-gray-200 @else bg-transparent @endif" href="{{ route('home') }}">Home</a>
+                @if(route('home') == url()->current()) bg-gray-200 @else bg-transparent @endif"
+                href="{{ route('home') }}">Home</a>
             <a class="px-4 py-2 mt-2 text-sm font-semibold dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline
-                @if(route('menu') == url()->current()) bg-gray-200 @else bg-transparent @endif" " href="{{ route('menu') }}">Menu</a>
+                @if(route('menu') == url()->current()) bg-gray-200 @else bg-transparent @endif" " href=" {{
+                route('menu') }}">Menu</a>
             <a class="z-50 px-4 py-2 mt-2 text-sm font-semibold bg-transparent dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
                 href="#">Review</a>
 
-            @can('dashboard-access','admin')
-            <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-                href="{{ route('admin.dashboard')}}">Dashboard</a>
-            @endcan
+
 
             @Auth
 
@@ -63,8 +62,14 @@
                     x-transition:leave-end="transform opacity-0 scale-95"
                     class="absolute right-0 z-50 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
                     <div class="px-2 py-2 bg-white rounded-md shadow dark-mode:bg-gray-800">
+                        @can('dashboard-access','admin')
+                        <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                            href="{{ route('admin.dashboard')}}">Dashboard</a>
+                        @endcan
                         <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
                             href="#">Profile</a>
+                        <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                            href="{{ route('user.changepassword') }}">Password</a>
                         <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
                             href="{{ route('user.order.index') }}">Order History</a>
                         <!-- Authentication -->

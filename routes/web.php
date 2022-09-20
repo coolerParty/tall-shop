@@ -26,6 +26,7 @@ use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\MenuComponent;
 use App\Http\Livewire\User\Order\UserOrderComponent;
 use App\Http\Livewire\User\Order\UserOrderDetailsComponent;
+use App\Http\Livewire\User\Password\UserChangePasswordComponent;
 use App\Http\Livewire\WishlistComponent;
 use Illuminate\Support\Facades\Route;
 
@@ -33,8 +34,10 @@ Route::get('/', HomeComponent::class)->name('home');
 Route::get('/menu', MenuComponent::class)->name('menu');
 Route::get('/cart', CartComponent::class)->name('cart.index');
 Route::get('/wishlist', WishlistComponent::class)->name('wishlist.index');
-Route::get('/thank-you', function () { return view('thank-you');})->name('thankyou');
-Route::get('/dashboard', function () { return view('dashboard');})->name('dashboard');
+Route::get('/thank-you', function () {
+    return view('thank-you');
+})->name('thankyou');
+
 
 Route::middleware([
     'auth:sanctum',
@@ -45,13 +48,13 @@ Route::middleware([
     Route::get('/checkout', CheckoutComponent::class)->name('checkout');
     Route::get('/orders', UserOrderComponent::class)->name('order.index');
     Route::get('/orders/{order_id}/details', UserOrderDetailsComponent::class)->name('order.show');
-
+    Route::get('/user/change-password', UserChangePasswordComponent::class)->name('changepassword');
 });
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
-    'verified','role_or_permission:super-admin|dashboard-access|admin'
+    'verified', 'role_or_permission:super-admin|dashboard-access|admin'
 ])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', AdminDashboardComponent::class)->name('dashboard');
 
@@ -80,5 +83,4 @@ Route::middleware([
 
     Route::get('/orders', AdminOrderComponent::class)->name('order.index');
     Route::get('/orders/{order_id}', AdminOrderDetailsComponent::class)->name('order.show');
-
 });

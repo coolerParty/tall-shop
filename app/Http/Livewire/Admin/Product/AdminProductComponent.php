@@ -11,7 +11,6 @@ use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Carbon\Carbon;
 use Intervention\Image\Facades\Image;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 
 class AdminProductComponent extends Component
