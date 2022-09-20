@@ -376,7 +376,7 @@
     </section>
     <!-- order section ends -->
 
-    <div wire:loading.delay.long>
+    <div wire:loading.delay.long wire:target="placeOrder">
         <!-- Loading screen -->
         <div show="true"
             class="fixed inset-0 z-[200] flex items-center justify-center text-white bg-black bg-opacity-10 text-3xl">

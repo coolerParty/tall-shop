@@ -270,6 +270,7 @@ class CheckoutComponent extends Component
             });
 
             return redirect()->route('thankyou');
+
         } catch (\Exception $exception) {
             session()->flash('checkout_message', 'Error occured! Please try again.');
             return;
@@ -302,6 +303,7 @@ class CheckoutComponent extends Component
         $this->thankyou = 1;
         Cart::instance('cart')->destroy();
         session()->forget('checkout');
+        session()->forget('coupon');
     }
 
     public function verifyForCheckout()

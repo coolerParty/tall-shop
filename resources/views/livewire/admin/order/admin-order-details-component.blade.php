@@ -47,10 +47,6 @@
                                         class="px-6 py-3 text-xs font-medium tracking-wider text-center text-right text-gray-500 uppercase">
                                         quantity
                                     </th>
-                                    <th scope="col"
-                                        class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
-                                        rstatus
-                                    </th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
@@ -79,9 +75,6 @@
                                     <td class="px-6 py-4">
                                         <div class="text-sm font-semibold text-right text-gray-900">{{
                                             $orderItem->quantity }}</div>
-                                    </td>
-                                    <td class="px-6 py-4 text-center text-gray-900 dark:text-white">
-                                        <div class="text-gray-900 ">{{ $orderItem->rstatus}}</div>
                                     </td>
                                 </tr>
                                 @empty
