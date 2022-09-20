@@ -6,6 +6,7 @@ use App\Http\Livewire\Admin\AdminDashboardComponent;
 use App\Http\Livewire\Admin\Category\AdminCategoryAddComponent;
 use App\Http\Livewire\Admin\Category\AdminCategoryComponent;
 use App\Http\Livewire\Admin\Category\AdminCategoryEditComponent;
+use App\Http\Livewire\Admin\Contact\AdminContactComponent;
 use App\Http\Livewire\Admin\Coupon\AdminCouponAddComponent;
 use App\Http\Livewire\Admin\Coupon\AdminCouponComponent;
 use App\Http\Livewire\Admin\Coupon\AdminCouponEditComponent;
@@ -83,4 +84,6 @@ Route::middleware([
 
     Route::get('/orders', AdminOrderComponent::class)->name('order.index');
     Route::get('/orders/{order_id}', AdminOrderDetailsComponent::class)->name('order.show');
+
+    Route::get('/contact-us', AdminContactComponent::class)->name('contact');
 });
