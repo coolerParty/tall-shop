@@ -124,11 +124,9 @@ class CartComponent extends Component
                 || (int)$products[$cart->id] < $cart->qty
             ) {
                 return session()->flash('checkout_message', 'Product ' . $cart->name . ' does not have enough stock! Available Stock ' . $products[$cart->id]);
-
             }
         }
         return redirect()->route('user.checkout');
-
     }
 
     public function setAmountForCheckout()
@@ -152,6 +150,10 @@ class CartComponent extends Component
 
     public function render()
     {
+        if (Auth::check()) {
+            Cart::instance('cart')->store(Auth::user()->email); // save cart to database using user email;
+        }
+
         if (session()->has('coupon')) {
             if (cart::instance('cart')->subtotal() < session()->get('coupon')['cart_value']) {
                 session()->forget('coupon');
