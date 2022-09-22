@@ -1,7 +1,7 @@
-<div class="w-full pt-10">
+<div class="w-full pt-10 pb-10">
     <h3 class="mt-10 text-3xl font-semibold text-center capitalize">Our Gallery</h3>
     <h1 class="text-5xl font-bold tracking-tighter text-center text-orange-500 capitalize">Our Untold Stories</h1>
-    <section class="container mx-auto mt-10" x-data="{ tab: 'all' }">
+    <section class="container mx-auto mt-10 mb-10" x-data="{ tab: 'all' }">
         <div class="m-5">
           <ul class="flex justify-center p-2 space-x-2 text-xl font-semibold text-center">
             <li class="">

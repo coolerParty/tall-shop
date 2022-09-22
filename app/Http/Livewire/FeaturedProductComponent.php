@@ -48,7 +48,7 @@ class FeaturedProductComponent extends Component
 
     public function render()
     {
-        $products = Product::select('id', 'name', 'image', 'regular_price', 'sale_price')->where('active', 1)->where('featured', 1)->take(8)->get();
+        $products = Product::with('ratings')->select('id', 'name', 'image', 'regular_price', 'sale_price', 'slug')->where('active', 1)->where('featured', 1)->take(8)->get();
         $witems = Cart::instance('wishlist')->content()->pluck('id');
         $citems = Cart::instance('cart')->content()->pluck('id');
         return view('livewire.featured-product-component', ['products' => $products, 'citems' => $citems, 'witems' => $witems]);
