@@ -1,9 +1,9 @@
-<div class="w-full pt-10 mb-10">
+<div class="w-full pt-10 pb-10 mb-10">
     <div class="container mx-auto">
         <h3 class="text-3xl font-semibold text-center capitalize">Contact Us</h3>
         <h1 class="text-5xl font-bold tracking-tighter text-center text-orange-500 capitalize">We want to hear from you
         </h1>
-        <div class="grid grid-cols-1 mt-10 md:grid-cols-2">
+        <div class="grid grid-cols-1 mt-10 mb-10 md:grid-cols-2">
             <div class="mt-2 md:mr-4 dark:bg-gray-800 sm:rounded-lg">
                 <img src="{{ asset('assets/images/contact/order-img.jpg') }}" alt="" class="object-cover w-full">
             </div>

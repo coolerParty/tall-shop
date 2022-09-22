@@ -33,63 +33,61 @@
                 <!-- order details Start -->
                 <div class="overflow-hidden border-b border-gray-200 rounded-md ">
                     @if(Session::has('error_order_message'))
-                            <div x-data="{ msg:'true'}">
-                                <template x-if="msg">
-                                    <div class="w-full text-white bg-red-500">
-                                        <div class="container flex items-center justify-between px-6 py-4 mx-auto">
-                                            <div class="flex">
-                                                <svg viewBox="0 0 40 40" class="w-6 h-6 fill-current">
-                                                    <path
-                                                        d="M20 3.36667C10.8167 3.36667 3.3667 10.8167 3.3667 20C3.3667 29.1833 10.8167 36.6333 20 36.6333C29.1834 36.6333 36.6334 29.1833 36.6334 20C36.6334 10.8167 29.1834 3.36667 20 3.36667ZM19.1334 33.3333V22.9H13.3334L21.6667 6.66667V17.1H27.25L19.1334 33.3333Z">
-                                                    </path>
-                                                </svg>
+                    <div x-data="{ msg:'true'}">
+                        <template x-if="msg">
+                            <div class="w-full text-white bg-red-500">
+                                <div class="container flex items-center justify-between px-6 py-4 mx-auto">
+                                    <div class="flex">
+                                        <svg viewBox="0 0 40 40" class="w-6 h-6 fill-current">
+                                            <path
+                                                d="M20 3.36667C10.8167 3.36667 3.3667 10.8167 3.3667 20C3.3667 29.1833 10.8167 36.6333 20 36.6333C29.1834 36.6333 36.6334 29.1833 36.6334 20C36.6334 10.8167 29.1834 3.36667 20 3.36667ZM19.1334 33.3333V22.9H13.3334L21.6667 6.66667V17.1H27.25L19.1334 33.3333Z">
+                                            </path>
+                                        </svg>
 
-                                                <p class="mx-3">{{ Session::get('error_order_message') }}</p>
-                                            </div>
-
-                                            <button @click="msg = '' "
-                                                class="p-1 transition-colors duration-200 transform rounded-md hover:bg-opacity-25 hover:bg-gray-600 focus:outline-none">
-                                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M6 18L18 6M6 6L18 18" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                            </button>
-                                        </div>
+                                        <p class="mx-3">{{ Session::get('error_order_message') }}</p>
                                     </div>
-                                </template>
+
+                                    <button @click="msg = '' "
+                                        class="p-1 transition-colors duration-200 transform rounded-md hover:bg-opacity-25 hover:bg-gray-600 focus:outline-none">
+                                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6 18L18 6M6 6L18 18" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
-                            @endif
-                            @if(Session::has('success_order_message'))
-                            <div x-data="{ msg:'true'}">
-                                <template x-if="msg">
-                                    <div class="w-full text-white bg-blue-500">
-                                        <div class="container flex items-center justify-between px-6 py-4 mx-auto">
-                                            <div class="flex">
-                                                <svg viewBox="0 0 40 40" class="w-6 h-6 fill-current">
-                                                    <path
-                                                        d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM21.6667 28.3333H18.3334V25H21.6667V28.3333ZM21.6667 21.6666H18.3334V11.6666H21.6667V21.6666Z">
-                                                    </path>
-                                                </svg>
+                        </template>
+                    </div>
+                    @endif
+                    @if(Session::has('success_order_message'))
+                    <div x-data="{ msg:'true'}">
+                        <template x-if="msg">
+                            <div class="w-full text-white bg-blue-500">
+                                <div class="container flex items-center justify-between px-6 py-4 mx-auto">
+                                    <div class="flex">
+                                        <svg viewBox="0 0 40 40" class="w-6 h-6 fill-current">
+                                            <path
+                                                d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM21.6667 28.3333H18.3334V25H21.6667V28.3333ZM21.6667 21.6666H18.3334V11.6666H21.6667V21.6666Z">
+                                            </path>
+                                        </svg>
 
-                                                <p class="mx-3">{{ Session::get('success_order_message') }}</p>
-                                            </div>
-
-                                            <button @click="msg = '' "
-                                                class="p-1 transition-colors duration-200 transform rounded-md hover:bg-opacity-25 hover:bg-gray-600 focus:outline-none">
-                                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M6 18L18 6M6 6L18 18" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                            </button>
-                                        </div>
+                                        <p class="mx-3">{{ Session::get('success_order_message') }}</p>
                                     </div>
-                                </template>
+
+                                    <button @click="msg = '' "
+                                        class="p-1 transition-colors duration-200 transform rounded-md hover:bg-opacity-25 hover:bg-gray-600 focus:outline-none">
+                                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6 18L18 6M6 6L18 18" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
-                            @endif
+                        </template>
+                    </div>
+                    @endif
                     <table class="w-full overflow-x-scroll divide-y divide-gray-200 rounded-md ">
                         <thead class="bg-gray-50">
                             <tr>
@@ -156,9 +154,9 @@
                                                 class="absolute z-50 max-w-md text-white transform -translate-y-20 bg-white shadow-lg w-36 -translate-x-9 min-w-max">
                                                 <ul class="flex flex-col text-center">
                                                     @if($order->status == 'ordered')
-                                                    <li class="rounded-lg shadow-lg"><a class="block px-3 py-2 transition bg-gray-800 hover:bg-gray-700"
-                                                            href="#"
-                                                            wire:click.prevent="cancelOrder">Cancel Order</a>
+                                                    <li class="rounded-lg shadow-lg"><a
+                                                            class="block px-3 py-2 transition bg-gray-800 hover:bg-gray-700"
+                                                            href="#" wire:click.prevent="cancelOrder">Cancel Order</a>
                                                     </li>
                                                     @endif
                                                 </ul>
@@ -349,9 +347,15 @@
                                                 price
                                             </th>
                                             <th scope="col"
-                                                class="px-6 py-3 text-xs font-medium tracking-wider text-center text-right text-gray-500 uppercase">
+                                                class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                                 quantity
                                             </th>
+                                            @if($order->status == 'delivered')
+                                            <th scope="col"
+                                                class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
+                                                Review
+                                            </th>
+                                            @endif
                                         </tr>
                                     </thead>
                                     <tbody class="bg-white divide-y divide-gray-200">
@@ -359,8 +363,8 @@
                                         <tr class="transition-all">
                                             <td class="px-3 py-2 whitespace-nowrap">
                                                 @if($orderItem->product->image)
-                                                <img class="object-cover w-10 h-10 rounded-md cursor-pointer md:w-15 md:h-15 lg:w-20 lg:h-20 hover:shadow-lg"
-                                                    src="{{ asset('storage/assets/product/thumbnail') }}/{{ $orderItem->product->image }}" />
+                                                <a href="{{ route('product.details', ['slug' => $orderItem->product->slug ]) }}"><img class="object-cover w-10 h-10 rounded-md cursor-pointer md:w-15 md:h-15 lg:w-20 lg:h-20 hover:shadow-lg"
+                                                    src="{{ asset('storage/assets/product/thumbnail') }}/{{ $orderItem->product->image }}" /></a>
                                                 @else
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
                                                     viewBox="0 0 20 20" fill="currentColor">
@@ -371,8 +375,9 @@
                                                 @endif
                                             </td>
                                             <td class="px-6 py-4">
-                                                <div class="text-sm font-semibold text-orange-500">{{
-                                                    $orderItem->product->name }}
+                                                <div class="flex flex-wrap space-x-2">
+                                                    <h3 class="text-sm font-semibold text-orange-500 hover:border-b-2 hover:border-orange-500"><a href="{{ route('product.details', ['slug' => $orderItem->product->slug ]) }}">{{
+                                                        $orderItem->product->name }}</a></h3>
                                                 </div>
                                             </td>
                                             <td class="px-6 py-4 text-gray-900 dark:text-white">
@@ -382,6 +387,19 @@
                                                 <div class="text-sm font-semibold text-right text-gray-900">{{
                                                     $orderItem->quantity }}</div>
                                             </td>
+                                            @if($order->status == 'delivered')
+                                            <td class="px-6 py-4">
+                                                @if($orderItem->rstatus == false)
+                                                <a class="px-3 py-2 text-xs font-semibold text-gray-800 bg-yellow-300 rounded hover:shadow hover:bg-yellow-400 "
+                                                    href="#" wire:click="showAddModal({{ $orderItem->id }})">Write
+                                                    Review</a>
+                                                @elseif($orderItem->rstatus == true)
+                                                <a class="px-3 py-2 text-xs font-semibold text-gray-800 bg-yellow-300 rounded hover:shadow hover:bg-yellow-400"
+                                                    href="#" wire:click="showEditModal({{ $orderItem->id }})">Edit
+                                                    Review</a>
+                                                @endif
+                                            </td>
+                                            @endif
                                         </tr>
                                         @empty
                                         <tr class="transition-all hover:bg-gray-100 hover:shadow-lg">
@@ -617,4 +635,79 @@
             </svg>
         </div>
     </div>
+
+    {{-- Show-Product-Modal Start --}}
+    <x-jet-dialog-modal wire:model="showModal">
+        <x-slot name="title">
+            @if($modalType == 1)
+            Write Review
+            @elseif($modalType == 2)
+            Product Edit
+            @endif
+        </x-slot>
+        <x-slot name="content" class="w-full">
+            <div class="w-full mt-10">
+                <!-- <x-jet-validation-errors class="mb-4" /> -->
+                <section class="max-w-4xl mx-auto dark:bg-gray-800">
+                    @if($modalType == 1)
+                    <form wire:submit.prevent="store">
+                        @elseif($modalType == 2)
+                        <form wire:submit.prevent="update">
+                            @endif
+                            <div class="px-2 mt-4 ">
+                                <label class="text-gray-700 dark:text-gray-200" for="title">title</label>
+                                <input id="title" type="text" name="title" value="{{ old('title') }}"
+                                    wire:model.lazy="title" required autofocus autocomplete="title" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring
+                                        @error('title') border-red-500 @enderror">
+                                @error('title')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
+                            </div>
+
+                            <div class="px-2 mt-4">
+                                <span>Rate</span>
+                                <div class="stars">
+                                    <div class="flex flex-row space-x-1">
+                                        <span><input  class="{{ ( 1 <= $rating ) ? 'border-yellow-400 bg-yellow-400 focus:bg-yellow-500' : '' }}"  type="radio" id="rated-1" name="rating" value="1" wire:model="rating"></span>
+                                        <span><input  class="{{ ( 2 <= $rating ) ? 'border-yellow-400 bg-yellow-400 focus:bg-yellow-500' : '' }}"  type="radio" id="rated-2" name="rating" value="2" wire:model="rating"></span>
+                                        <span><input  class="{{ ( 3 <= $rating ) ? 'border-yellow-400 bg-yellow-400 focus:bg-yellow-500' : '' }}"  type="radio" id="rated-3" name="rating" value="3" wire:model="rating"></span>
+                                        <span><input  class="{{ ( 4 <= $rating ) ? 'border-yellow-400 bg-yellow-400 focus:bg-yellow-500' : '' }}"  type="radio" id="rated-4" name="rating" value="4" wire:model="rating"></span>
+                                        <span><input  class="{{ ( 5 <= $rating ) ? 'border-yellow-400 bg-yellow-400 focus:bg-yellow-500' : '' }}"  type="radio" id="rated-5" name="rating" value="5" checked="checked"
+                                                wire:model="rating"></span>
+                                    </div>
+                                </div>
+                                @error('rating')<div class="err_feedback">{{ $message }}</div>@enderror
+                            </div>
+
+                            <div class="px-2 mt-4">
+                                <label class="text-gray-700 dark:text-gray-200" for="comment">Comment</label>
+                                <textarea id="comment" type="text" name="comment"
+                                    value="{{ old('comment') }}" wire:model.lazy="comment" required
+                                    autofocus autocomplete="comment"
+                                    class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring @error('comment') border-red-500 @enderror"
+                                    rows="6"></textarea>
+                                @error('comment')<p class="text-xs italic text-red-500">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </form>
+                </section>
+            </div>
+        </x-slot>
+        <x-slot name="footer">
+            @if($modalType == 1)
+            <form wire:submit.prevent="store">
+                <button type="submit"
+                    class="px-6 py-2 mr-2 leading-5 text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-gray-600">
+                    Create</button>
+            </form>
+            @elseif($modalType == 2)
+            <form wire:submit.prevent="update">
+                <button type="submit"
+                    class="px-6 py-2 mr-2 leading-5 text-white transition-colors duration-200 transform bg-green-700 rounded-md hover:bg-green-600 focus:outline-none focus:bg-gray-600">
+                    Update</button>
+            </form>
+            @endif
+            <x-link-danger href="#" type="button" wire:click.prevent="closeModal"
+                class="text-white bg-gray-600 hover:bg-gray-800">Close</x-link-danger>
+        </x-slot>
+    </x-jet-dialog-modal>
+    {{-- Show-Product-Modal End --}}
 </div>

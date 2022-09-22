@@ -55,7 +55,7 @@ class MenuComponent extends Component
             Cart::instance('wishlist')->store(Auth::user()->email); // save wishlist to database using user email;
         }
 
-        $products = Product::select('id', 'name', 'regular_price', 'sale_price', 'short_description', 'image')
+        $products = Product::with('ratings')->select('id', 'name', 'regular_price', 'sale_price', 'short_description', 'image', 'slug')
             ->orderBy('name', 'ASC')->where('active', 1)->paginate(8);
         $witems = Cart::instance('wishlist')->content()->pluck('id');
         $citems = Cart::instance('cart')->content()->pluck('id');

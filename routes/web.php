@@ -25,9 +25,12 @@ use App\Http\Livewire\CartComponent;
 use App\Http\Livewire\CheckoutComponent;
 use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\MenuComponent;
+use App\Http\Livewire\Product\ProductDetailsComponent;
 use App\Http\Livewire\User\Order\UserOrderComponent;
 use App\Http\Livewire\User\Order\UserOrderDetailsComponent;
 use App\Http\Livewire\User\Password\UserChangePasswordComponent;
+use App\Http\Livewire\User\Review\UserReviewComponent;
+use App\Http\Livewire\User\Review\UserReviewEditComponent;
 use App\Http\Livewire\WishlistComponent;
 use Illuminate\Support\Facades\Route;
 
@@ -35,11 +38,13 @@ Route::get('/', HomeComponent::class)->name('home');
 Route::get('/menu', MenuComponent::class)->name('menu');
 Route::get('/cart', CartComponent::class)->name('cart.index');
 Route::get('/wishlist', WishlistComponent::class)->name('wishlist.index');
+Route::get('/product/{slug}', ProductDetailsComponent::class)->name('product.details');
 Route::get('/thank-you', function () {
     return view('thank-you');
 })->name('thankyou');
 
 
+// users
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -49,9 +54,12 @@ Route::middleware([
     Route::get('/checkout', CheckoutComponent::class)->name('checkout');
     Route::get('/orders', UserOrderComponent::class)->name('order.index');
     Route::get('/orders/{order_id}/details', UserOrderDetailsComponent::class)->name('order.show');
-    Route::get('/user/change-password', UserChangePasswordComponent::class)->name('changepassword');
+    Route::get('/change-password', UserChangePasswordComponent::class)->name('changepassword');
+    Route::get('/review/{order_item_id}', UserReviewComponent::class)->name('review');
+    Route::get('/review/edit/{order_item_id}', UserReviewEditComponent::class)->name('reviewedit');
 });
 
+// admin
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
