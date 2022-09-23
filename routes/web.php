@@ -29,6 +29,8 @@ use App\Http\Livewire\Product\ProductDetailsComponent;
 use App\Http\Livewire\User\Order\UserOrderComponent;
 use App\Http\Livewire\User\Order\UserOrderDetailsComponent;
 use App\Http\Livewire\User\Password\UserChangePasswordComponent;
+use App\Http\Livewire\User\UserProfileComponent;
+use App\Http\Livewire\User\UserProfileEditComponent;
 use App\Http\Livewire\WishlistComponent;
 use Illuminate\Support\Facades\Route;
 
@@ -53,6 +55,8 @@ Route::middleware([
     Route::get('/orders', UserOrderComponent::class)->name('order.index');
     Route::get('/orders/{order_id}/details', UserOrderDetailsComponent::class)->name('order.show');
     Route::get('/change-password', UserChangePasswordComponent::class)->name('changepassword');
+    Route::get('/profile', UserProfileComponent::class)->name('profile');
+	Route::get('/profile/edit', UserProfileEditComponent::class)->name('profile.edit');
 });
 
 // admin

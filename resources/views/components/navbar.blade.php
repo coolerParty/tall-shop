@@ -189,7 +189,7 @@
             <div class="relative" x-data="{ isOpen: false }">
                 <button @click="isOpen = !isOpen" class="p-1 bg-gray-200 rounded-full focus:outline-none focus:ring">
                     @if(auth()->user()->profile_photo_path)
-                        <img class="object-cover w-8 h-8 rounded-full" src="{{ asset('storage/assets/profile/small') }}/{{ auth()->user()->profile_photo_path }}"
+                        <img class="object-cover w-8 h-8 rounded-full" src="{{ asset('storage/assets/user/profile-photo/thumbnail') }}/{{ auth()->user()->profile_photo_path }}"
                         alt="" />
                     @else
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
