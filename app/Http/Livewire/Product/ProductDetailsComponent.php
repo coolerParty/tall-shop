@@ -6,6 +6,7 @@ use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\Review;
 use Livewire\Component;
+use Cart;
 
 class ProductDetailsComponent extends Component
 {
@@ -14,7 +15,7 @@ class ProductDetailsComponent extends Component
     public $slug;
     public $short_description;
     public $description;
-    public $regular_priced;
+    public $regular_price;
     public $sale_price;
     public $stock_status;
     public $quantity;
@@ -22,7 +23,6 @@ class ProductDetailsComponent extends Component
     public $image;
 
     public $qty = 1;
-
     public $product;
 
     public function mount($slug)
@@ -51,10 +51,69 @@ class ProductDetailsComponent extends Component
         $this->qty = $this->qty - 1;
     }
 
+    public function buy($product_id, $product_name, $product_price)
+    {
+        if ($this->qty == 0) {
+            return session()->flash('error', 'Error with quantity!');
+        }
+
+        foreach (Cart::instance('cart')->content() as $citem) {
+            if ($citem->id == $product_id) {
+                Cart::instance('cart')->remove($citem->rowId);
+                $this->emitTo('cart-count-component', 'refreshComponent'); // refresh cart count display top right menu
+            }
+        }
+
+        if ($this->qty > 0) {
+            Cart::instance('cart')->add($product_id, $product_name, $this->qty, $product_price)->associate('App\Models\Product');
+            $this->emitTo('cart-count-component', 'refreshComponent'); // refresh cart count display top right menu
+            return redirect()->to(route('cart.index'));
+        }
+    }
+
+    public function store($product_id, $product_name, $product_price)
+    {
+        Cart::instance('cart')->add($product_id, $product_name, 1, $product_price)->associate('App\Models\Product');
+        $this->emitTo('cart-count-component', 'refreshComponent'); // refresh cart count display top right menu
+        return session()->flash('success', "'" . $product_name . "' has been added to cart!");
+    }
+
+    public function addToWishlist($product_id, $product_name, $product_price)
+    {
+        Cart::instance('wishlist')->add($product_id, $product_name, 1, $product_price)->associate('App\Models\Product');
+        $this->emitTo('wishlist-count-component', 'refreshComponent'); // refresh wishlist count display top right menu
+        return;
+    }
+
+    public function removeFromWishlist($product_id)
+    {
+        foreach (Cart::instance('wishlist')->content() as $witem) {
+            if ($witem->id == $product_id) {
+                Cart::instance('wishlist')->remove($witem->rowId);
+                $this->emitTo('wishlist-count-component', 'refreshComponent'); // refresh wishlist count display top right menu
+                return;
+            }
+        }
+    }
+
+    public function removeFromCart($product_id)
+    {
+        foreach (Cart::instance('cart')->content() as $citem) {
+            if ($citem->id == $product_id) {
+                Cart::instance('cart')->remove($citem->rowId);
+                $this->emitTo('cart-count-component', 'refreshComponent'); // refresh cart count display top right menu
+                return;
+            }
+        }
+    }
+
     public function render()
     {
         $orderItems = OrderItem::where('product_id', $this->product_id)->where('rstatus', true)->pluck('id');
         $reviews = Review::with('orderItem')->whereIn('order_item_id', $orderItems)->get();
-        return view('livewire.product.product-details-component', ['reviews' => $reviews])->layout('layouts.front');
+
+        $witems = Cart::instance('wishlist')->content()->pluck('id');
+        $citems = Cart::instance('cart')->content()->pluck('id');
+        return view('livewire.product.product-details-component', ['reviews' => $reviews, 'witems' => $witems, 'citems' => $citems])->layout('layouts.front');
     }
 }

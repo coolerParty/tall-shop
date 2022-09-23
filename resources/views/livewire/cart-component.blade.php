@@ -142,8 +142,7 @@
                             <tr class="transition-all hover:bg-gray-100 ">
                                 <td class="p-1 md:px-3 md:py-2 whitespace-nowrap">
                                     @if($cart->model->image)
-                                    <a href="{{ asset('storage/assets/product/large') }}/{{ $cart->model->image }}"
-                                        target="_blank"><img
+                                    <a href="{{ route('product.details', ['slug' => $cart->model->slug ]) }}"><img
                                             class="object-cover w-20 h-20 rounded-md cursor-pointer hover:shadow-lg"
                                             src="{{ asset('storage/assets/product/thumbnail') }}/{{ $cart->model->image }}" /></a>
                                     @else
@@ -156,7 +155,7 @@
                                     @endif
                                 </td>
                                 <td class="p-1 md:px-6 md:py-4">
-                                    <div class="text-sm font-semibold text-orange-600">{{ $cart->model->name }}</div>
+                                    <div class="text-sm font-semibold text-orange-600"><a href="{{ route('product.details', ['slug' => $cart->model->slug ]) }}">{{ $cart->model->name }}</a></div>
                                 </td>
                                 <td class="p-1 md:px-6 md:py-4">
                                     <div class="text-sm font-semibold text-right text-gray-900">${{
