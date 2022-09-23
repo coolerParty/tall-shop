@@ -63,7 +63,7 @@ class UserOrderDetailsComponent extends Component
         $orderItem->save();
 
         $this->resetReview();
-        return session()->flash('success', 'Review written successfully.');
+        return session()->flash('success', $review->rating . ' review written successfully.');
     }
 
     public function loadReview()
@@ -89,7 +89,7 @@ class UserOrderDetailsComponent extends Component
         $review->save();
 
         $this->resetReview();
-        return session()->flash('success', 'Review updated successfully.');
+        return session()->flash('success', $review->title. ' review updated successfully.');
     }
 
     public function closeModal()

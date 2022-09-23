@@ -11,6 +11,33 @@
                 <li class="text-gray-500">Data</li>
             </ol>
         </nav>
+        @if(Session::has('success'))
+        <div x-data="{ msg:'true'}">
+            <template x-if="msg">
+                <div class="w-full text-white bg-emerald-500">
+                    <div class="container flex items-center justify-between px-6 py-4 mx-auto">
+                        <div class="flex">
+                            <svg viewBox="0 0 40 40" class="w-6 h-6 fill-current">
+                                <path
+                                    d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z">
+                                </path>
+                            </svg>
+
+                            <p class="mx-3">{{ Session::get('success') }}</p>
+                        </div>
+
+                        <button @click="msg = '' "
+                            class="p-1 transition-colors duration-200 transform rounded-md hover:bg-opacity-25 hover:bg-gray-600 focus:outline-none">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 18L18 6M6 6L18 18" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </template>
+        </div>
+        @endif
     </div>
     <div class="container p-5 mx-auto ">
         <h3 class="p-1 mt-10 text-3xl font-semibold capitalize md:p-0">Popular Dishes</h3>
@@ -363,8 +390,10 @@
                                         <tr class="transition-all">
                                             <td class="px-3 py-2 whitespace-nowrap">
                                                 @if($orderItem->product->image)
-                                                <a href="{{ route('product.details', ['slug' => $orderItem->product->slug ]) }}"><img class="object-cover w-10 h-10 rounded-md cursor-pointer md:w-15 md:h-15 lg:w-20 lg:h-20 hover:shadow-lg"
-                                                    src="{{ asset('storage/assets/product/thumbnail') }}/{{ $orderItem->product->image }}" /></a>
+                                                <a
+                                                    href="{{ route('product.details', ['slug' => $orderItem->product->slug ]) }}"><img
+                                                        class="object-cover w-10 h-10 rounded-md cursor-pointer md:w-15 md:h-15 lg:w-20 lg:h-20 hover:shadow-lg"
+                                                        src="{{ asset('storage/assets/product/thumbnail') }}/{{ $orderItem->product->image }}" /></a>
                                                 @else
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
                                                     viewBox="0 0 20 20" fill="currentColor">
@@ -376,8 +405,11 @@
                                             </td>
                                             <td class="px-6 py-4">
                                                 <div class="flex flex-wrap space-x-2">
-                                                    <h3 class="text-sm font-semibold text-orange-500 hover:border-b-2 hover:border-orange-500"><a href="{{ route('product.details', ['slug' => $orderItem->product->slug ]) }}">{{
-                                                        $orderItem->product->name }}</a></h3>
+                                                    <h3
+                                                        class="text-sm font-semibold text-orange-500 hover:border-b-2 hover:border-orange-500">
+                                                        <a
+                                                            href="{{ route('product.details', ['slug' => $orderItem->product->slug ]) }}">{{
+                                                            $orderItem->product->name }}</a></h3>
                                                 </div>
                                             </td>
                                             <td class="px-6 py-4 text-gray-900 dark:text-white">
@@ -666,11 +698,25 @@
                                 <span>Rate</span>
                                 <div class="stars">
                                     <div class="flex flex-row space-x-1">
-                                        <span><input  class="{{ ( 1 <= $rating ) ? 'border-yellow-400 bg-yellow-400 focus:bg-yellow-500' : '' }}"  type="radio" id="rated-1" name="rating" value="1" wire:model="rating"></span>
-                                        <span><input  class="{{ ( 2 <= $rating ) ? 'border-yellow-400 bg-yellow-400 focus:bg-yellow-500' : '' }}"  type="radio" id="rated-2" name="rating" value="2" wire:model="rating"></span>
-                                        <span><input  class="{{ ( 3 <= $rating ) ? 'border-yellow-400 bg-yellow-400 focus:bg-yellow-500' : '' }}"  type="radio" id="rated-3" name="rating" value="3" wire:model="rating"></span>
-                                        <span><input  class="{{ ( 4 <= $rating ) ? 'border-yellow-400 bg-yellow-400 focus:bg-yellow-500' : '' }}"  type="radio" id="rated-4" name="rating" value="4" wire:model="rating"></span>
-                                        <span><input  class="{{ ( 5 <= $rating ) ? 'border-yellow-400 bg-yellow-400 focus:bg-yellow-500' : '' }}"  type="radio" id="rated-5" name="rating" value="5" checked="checked"
+                                        <span><input
+                                                class="{{ ( 1 <= $rating ) ? 'border-yellow-400 bg-yellow-400 focus:bg-yellow-500' : '' }}"
+                                                type="radio" id="rated-1" name="rating" value="1"
+                                                wire:model="rating"></span>
+                                        <span><input
+                                                class="{{ ( 2 <= $rating ) ? 'border-yellow-400 bg-yellow-400 focus:bg-yellow-500' : '' }}"
+                                                type="radio" id="rated-2" name="rating" value="2"
+                                                wire:model="rating"></span>
+                                        <span><input
+                                                class="{{ ( 3 <= $rating ) ? 'border-yellow-400 bg-yellow-400 focus:bg-yellow-500' : '' }}"
+                                                type="radio" id="rated-3" name="rating" value="3"
+                                                wire:model="rating"></span>
+                                        <span><input
+                                                class="{{ ( 4 <= $rating ) ? 'border-yellow-400 bg-yellow-400 focus:bg-yellow-500' : '' }}"
+                                                type="radio" id="rated-4" name="rating" value="4"
+                                                wire:model="rating"></span>
+                                        <span><input
+                                                class="{{ ( 5 <= $rating ) ? 'border-yellow-400 bg-yellow-400 focus:bg-yellow-500' : '' }}"
+                                                type="radio" id="rated-5" name="rating" value="5" checked="checked"
                                                 wire:model="rating"></span>
                                     </div>
                                 </div>
@@ -679,9 +725,8 @@
 
                             <div class="px-2 mt-4">
                                 <label class="text-gray-700 dark:text-gray-200" for="comment">Comment</label>
-                                <textarea id="comment" type="text" name="comment"
-                                    value="{{ old('comment') }}" wire:model.lazy="comment" required
-                                    autofocus autocomplete="comment"
+                                <textarea id="comment" type="text" name="comment" value="{{ old('comment') }}"
+                                    wire:model.lazy="comment" required autofocus autocomplete="comment"
                                     class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring @error('comment') border-red-500 @enderror"
                                     rows="6"></textarea>
                                 @error('comment')<p class="text-xs italic text-red-500">{{ $message }}</p>
