@@ -61,7 +61,7 @@
                 <div class="flex items-center m-5 space-x-2">
                     @if($review->orderItem->order->user->profile_photo_path)
                     <img class="object-cover w-8 h-8 border-2 border-purple-900 rounded-full"
-                        src="{{ asset('storage/assets/profile/small') }}/{{ $review->orderItem->order->user->profile_photo_path }}"
+                        src="{{ asset('storage/assets/user/profile-photo/thumbnail') }}/{{ $review->orderItem->order->user->profile_photo_path }}"
                         alt="" />
                     @else
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 border-purple-900 rounded-full"

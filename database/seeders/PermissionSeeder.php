@@ -44,6 +44,7 @@ class PermissionSeeder extends Seeder
 				'category-show',
 				'category-delete',
                 'order-show',
+                'contact-show',
 
 			];
 
