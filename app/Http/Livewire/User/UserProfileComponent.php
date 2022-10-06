@@ -21,6 +21,7 @@ class UserProfileComponent extends Component
         }
         $user = User::select('name', 'lastname', 'email', 'profile_photo_path')->find(Auth::user()->id);
 
-        return view('livewire.user.user-profile-component', ['userProfile' => $userProfile, 'user' => $user])->layout('layouts.front');
+        return view('livewire.user.user-profile-component', ['userProfile' => $userProfile, 'user' => $user])
+                            ->layout('layouts.front');
     }
 }

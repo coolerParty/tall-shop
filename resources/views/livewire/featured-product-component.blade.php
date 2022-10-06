@@ -9,7 +9,7 @@
             @foreach($products as $product)
             <div class="relative pb-5 m-1 rounded md:m-0">
 
-                <img src="{{ asset('storage/assets/product/medium') }}/{{ $product->image }}" alt=""
+                <img loading="lazy" src="{{ asset('storage/assets/product/medium') }}/{{ $product->image }}" alt=""
                     class="w-full rounded-lg shadow-lg">
                 <div class="p-2 mx-2 text-center bg-white rounded-lg shadow-lg -mt-9 opacity-95">
                     <div class="flex justify-center">
