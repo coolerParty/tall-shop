@@ -138,8 +138,8 @@
                                 <td class="flex flex-wrap gap-2 p-1 md:px-3 md:py-10">
                                     @foreach($order->orderItems as $orderItem)
                                     <div class="relative scale-125 border-2 border-white rounded-full shadow-2xl">
-                                        <a href="{{ asset('storage/assets/product/large') }}/{{ $orderItem->product->image }}"
-                                            target="_blank" class="bg-yellow-400 border-5 border-red"><img
+                                        <a href="{{ route('product.details', ['slug' => $orderItem->product->slug ]) }}"
+                                            class="bg-yellow-400 border-5 border-red"><img
                                                 class="object-cover w-10 h-10 rounded-full cursor-pointer md:w-15 md:h-15 lg:w-20 lg:h-20 xl:w-30 xl:h-30 hover:shadow-lg hover:scale-110"
                                                 src="{{ asset('storage/assets/product/thumbnail') }}/{{ $orderItem->product->image }}" /></a>
                                         <span

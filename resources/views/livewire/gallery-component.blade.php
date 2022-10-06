@@ -16,12 +16,12 @@
           </ul>
         </div>
         <div class="grid grid-cols-2 gap-0 md:grid-cols-3">
-          <div class="object-cover max-w-md" x-show="tab === 'pizza' || tab === 'all'"><img src="{{ asset('assets/images/gallery/food-galler-img-1.jpg') }}" alt="Running Kitty" title="Running Kitty"></div>
-          <div class="object-cover max-w-md" x-show="tab === 'dessert' || tab === 'all'"><img src="{{ asset('assets/images/gallery/food-galler-img-2.jpg') }}" alt="Tiny puppy" title="Tiny puppy"></div>
-          <div class="object-cover max-w-md" x-show="tab === 'pizza' || tab === 'all'"><img src="{{ asset('assets/images/gallery/food-galler-img-3.jpg') }}" alt="Shocked Kitty" title="Shocked Kitty"></div>
-          <div class="object-cover max-w-md" x-show="tab === 'dessert' || tab === 'all'"><img src="{{ asset('assets/images/gallery/food-galler-img-4.jpg') }}" alt="Jumping puppy" title="Jumping puppy"></div>
-          <div class="object-cover max-w-md" x-show="tab === 'pizza' || tab === 'all'"><img src="{{ asset('assets/images/gallery/food-galler-img-5.jpg') }}" alt="Sleeping Kitty" title="Sleeping Kitty"></div>
-          <div class="object-cover max-w-md" x-show="tab === 'dessert' || tab === 'all'"><img src="{{ asset('assets/images/gallery/food-galler-img-6.jpg') }}" alt="Happy Puppy" title="Happy Puppy"></div>
+          <div class="object-cover max-w-md" x-show="tab === 'pizza' || tab === 'all'"><img loading="lazy" src="{{ asset('assets/images/gallery/food-galler-img-1.jpg') }}" alt="Running Kitty" title="Running Kitty"></div>
+          <div class="object-cover max-w-md" x-show="tab === 'dessert' || tab === 'all'"><img loading="lazy" src="{{ asset('assets/images/gallery/food-galler-img-2.jpg') }}" alt="Tiny puppy" title="Tiny puppy"></div>
+          <div class="object-cover max-w-md" x-show="tab === 'pizza' || tab === 'all'"><img loading="lazy" src="{{ asset('assets/images/gallery/food-galler-img-3.jpg') }}" alt="Shocked Kitty" title="Shocked Kitty"></div>
+          <div class="object-cover max-w-md" x-show="tab === 'dessert' || tab === 'all'"><img loading="lazy" src="{{ asset('assets/images/gallery/food-galler-img-4.jpg') }}" alt="Jumping puppy" title="Jumping puppy"></div>
+          <div class="object-cover max-w-md" x-show="tab === 'pizza' || tab === 'all'"><img loading="lazy" src="{{ asset('assets/images/gallery/food-galler-img-5.jpg') }}" alt="Sleeping Kitty" title="Sleeping Kitty"></div>
+          <div class="object-cover max-w-md" x-show="tab === 'dessert' || tab === 'all'"><img loading="lazy" src="{{ asset('assets/images/gallery/food-galler-img-6.jpg') }}" alt="Happy Puppy" title="Happy Puppy"></div>
         </div>
       </section>
 </div>

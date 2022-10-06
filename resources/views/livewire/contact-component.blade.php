@@ -5,7 +5,7 @@
         </h1>
         <div class="grid grid-cols-1 mt-10 mb-10 md:grid-cols-2">
             <div class="mt-2 md:mr-4 dark:bg-gray-800 sm:rounded-lg">
-                <img src="{{ asset('assets/images/contact/order-img.jpg') }}" alt="" class="object-cover w-full">
+                <img loading="lazy" src="{{ asset('assets/images/contact/order-img.jpg') }}" alt="" class="object-cover w-full">
             </div>
             <form class="flex flex-col justify-center m-2 md:m-0" wire:submit.prevent="sendMessage">
                 @if (Session::has('message'))
