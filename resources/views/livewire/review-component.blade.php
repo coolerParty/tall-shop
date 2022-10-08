@@ -4,7 +4,6 @@
     <div class="container mx-auto mt-10 mb-10">
         <div class="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
             @foreach($reviews as $review)
-
             <div
                 class="p-3 transition duration-150 ease-in-out transform bg-white hover:shadow-lg hover:rounded hover:scale-102">
                 <div class="m-5">
