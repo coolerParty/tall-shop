@@ -1,4 +1,5 @@
 <div class="w-full pt-10 pb-10 bg-orange-200">
+    @section('title', 'Gallery' )
     <h3 class="mt-10 text-3xl font-semibold text-center capitalize">Our Gallery</h3>
     <h1 class="text-5xl font-bold tracking-tighter text-center text-orange-500 capitalize mb-10">Our Untold Stories</h1>
 
