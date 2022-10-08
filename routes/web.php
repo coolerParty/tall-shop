@@ -24,6 +24,7 @@ use App\Http\Livewire\Admin\Users\UserComponent;
 use App\Http\Livewire\Admin\Users\UserEditComponent;
 use App\Http\Livewire\CartComponent;
 use App\Http\Livewire\CheckoutComponent;
+use App\Http\Livewire\GalleryComponent;
 use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\MenuComponent;
 use App\Http\Livewire\Product\ProductDetailsComponent;
@@ -40,6 +41,8 @@ Route::get('/menu', MenuComponent::class)->name('menu');
 Route::get('/cart', CartComponent::class)->name('cart.index');
 Route::get('/wishlist', WishlistComponent::class)->name('wishlist.index');
 Route::get('/product/{slug}', ProductDetailsComponent::class)->name('product.details');
+Route::get('/gallery', GalleryComponent::class)->name('gallery');
+
 Route::get('/thank-you', function () {
     return view('thank-you');
 })->name('thankyou');
