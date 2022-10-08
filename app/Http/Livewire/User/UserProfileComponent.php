@@ -11,7 +11,7 @@ class UserProfileComponent extends Component
 {
     public function render()
     {
-        $userProfile = Profile::select('id', 'user_id', 'image', 'mobile', 'line1', 'line2', 'city', 'province', 'country', 'zipcode')
+        $userProfile = Profile::select('id', 'user_id', 'mobile', 'line1', 'line2', 'city', 'province', 'country', 'zipcode')
             ->where('user_id', Auth::user()->id)->first();
         if (!$userProfile) {
             $profile = new Profile();
