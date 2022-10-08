@@ -1,10 +1,10 @@
 <div>
-    @section('title', 'Admin / Product')
+    @section('title', 'Admin / Gallery')
     <!-- Main content header -->
     <div
         class="flex flex-col items-start justify-between pb-6 space-y-4 border-b lg:items-center lg:space-y-0 lg:flex-row">
-        <h1 class="text-2xl font-semibold whitespace-nowrap">Product</h1>
-        @can('product-create')
+        <h1 class="text-2xl font-semibold whitespace-nowrap">Gallery</h1>
+        @can('gallery-create')
         <a href="#" wire:click="showAddModal()"
             class="inline-flex items-center px-6 py-2 space-x-1 text-white bg-purple-600 rounded-md shadow hover:bg-opacity-95">
             <span>
@@ -39,15 +39,7 @@
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
-                                    quantity
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
                                     featured
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
-                                    stock_status
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
@@ -148,14 +140,14 @@
                             <!-- flash message End -->
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            @forelse($products as $product)
+                            @forelse($galleries as $gallery)
                             <tr class="transition-all hover:bg-gray-100 ">
                                 <td class="px-3 py-2 whitespace-nowrap">
-                                    @if($product->image)
-                                    <a href="{{ asset('storage/assets/product/large') }}/{{ $product->image }}"
+                                    @if($gallery->image)
+                                    <a href="{{ asset('storage/assets/gallery/large') }}/{{ $gallery->image }}"
                                         target="_blank"><img
                                             class="object-cover w-10 h-10 rounded-md cursor-pointer hover:shadow-lg"
-                                            src="{{ asset('storage/assets/product/thumbnail') }}/{{ $product->image }}" /></a>
+                                            src="{{ asset('storage/assets/gallery/thumbnail') }}/{{ $gallery->image }}" /></a>
                                     @else
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
                                         fill="currentColor">
@@ -166,64 +158,47 @@
                                     @endif
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="text-sm font-semibold text-gray-900">{{ $product->name }}</div>
+                                    <div class="text-sm font-semibold text-gray-900">{{ $gallery->name }}</div>
                                 </td>
                                 <td class="px-6 py-4 text-gray-900 dark:text-white">
-                                    <div class="text-sm text-gray-900">{{ $product->category->name }}</div>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div class="text-sm font-semibold text-gray-900">{{ $product->quantity }}</div>
+                                    <div class="text-sm text-gray-900">{{ $gallery->category->name }}</div>
                                 </td>
                                 <td class="px-6 py-4 text-center text-gray-900 dark:text-white">
-                                    @can('product-edit')
+                                    @can('gallery-edit')
                                     <input
                                         class="float-left h-5 align-top bg-gray-300 bg-no-repeat bg-contain rounded-full shadow-sm appearance-none cursor-pointer form-check-input w-9 focus:outline-none"
-                                        type="checkbox" role="switch" id="flexSwitchCheckChecked" {{ ($product->featured
-                                    == 1)? 'checked' : '' }} wire:click.prevent="updateFeatured({{ $product->id }},{{
-                                    $product->featured }})">
+                                        type="checkbox" role="switch" id="flexSwitchCheckChecked" {{ ($gallery->featured
+                                    == 1)? 'checked' : '' }} wire:click.prevent="updateFeatured({{ $gallery->id }},{{
+                                    $gallery->featured }})">
                                     @else
                                     <div
-                                        class="text-sm py-1 px-3 rounded-full text-gray-800 {{ ($product->featured == 1) ? 'bg-green-200' : 'bg-gray-200' }}">
-                                        {{ ($product->featured == 1) ? 'Active' : 'Inactive' }}</div>
+                                        class="text-sm py-1 px-3 rounded-full text-gray-800 {{ ($gallery->featured == 1) ? 'bg-green-200' : 'bg-gray-200' }}">
+                                        {{ ($gallery->featured == 1) ? 'Active' : 'Inactive' }}</div>
                                     @endcan
                                 </td>
                                 <td class="px-6 py-4 text-center text-gray-900 dark:text-white">
-                                    @can('product-edit')
+                                    @can('gallery-edit')
                                     <input
                                         class="float-left h-5 align-top bg-gray-300 bg-no-repeat bg-contain rounded-full shadow-sm appearance-none cursor-pointer form-check-input w-9 focus:outline-none"
-                                        type="checkbox" role="switch" id="flexSwitchCheckChecked" {{
-                                        ($product->stock_status == 'instock')? 'checked' : '' }}
-                                    wire:click.prevent="updateStocked({{ $product->id }},'{{ $product->stock_status
-                                    }}')">
+                                        type="checkbox" role="switch" id="flexSwitchCheckChecked" {{ ($gallery->active
+                                    == 1)? 'checked' : '' }} wire:click.prevent="updateActive({{ $gallery->id }},{{
+                                    $gallery->active }})">
                                     @else
                                     <div
-                                        class="text-sm py-1 px-3 rounded-full text-gray-800 {{ ($product->stock_status == 'instock') ? 'bg-green-200' : 'bg-gray-200' }}">
-                                        {{ ($product->stock_status == 'instock' ) ? 'Instock' : 'Out of Stock' }}</div>
-                                    @endcan
-                                </td>
-                                <td class="px-6 py-4 text-center text-gray-900 dark:text-white">
-                                    @can('product-edit')
-                                    <input
-                                        class="float-left h-5 align-top bg-gray-300 bg-no-repeat bg-contain rounded-full shadow-sm appearance-none cursor-pointer form-check-input w-9 focus:outline-none"
-                                        type="checkbox" role="switch" id="flexSwitchCheckChecked" {{ ($product->active
-                                    == 1)? 'checked' : '' }} wire:click.prevent="updateActive({{ $product->id }},{{
-                                    $product->active }})">
-                                    @else
-                                    <div
-                                        class="text-sm py-1 px-3 rounded-full text-gray-800 {{ ($product->active == 1) ? 'bg-green-200' : 'bg-gray-200' }}">
-                                        {{ ($product->active == 1) ? 'Active' : 'Inactive' }}</div>
+                                        class="text-sm py-1 px-3 rounded-full text-gray-800 {{ ($gallery->active == 1) ? 'bg-green-200' : 'bg-gray-200' }}">
+                                        {{ ($gallery->active == 1) ? 'Active' : 'Inactive' }}</div>
                                     @endcan
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                    @can('slider-edit')
-                                    <x-link-success wire:click="showEditModal({{ $product->id }})" href="#"> Edit
+                                    @can('gallery-edit')
+                                    <x-link-success wire:click="showEditModal({{ $gallery->id }})" href="#"> Edit
                                     </x-link-success>
 
-                                    @can('slider-delete')
+                                    @can('gallery-delete')
                                     @endcan
                                     <x-link-danger href="#" class="btn btn-danger btn-sm text-light"
-                                        onclick="confirm('Are you sure, You want to delete this product?') || event.stopImmediatePropagation()"
-                                        wire:click.prevent="destroy({{ $product->id }})">
+                                        onclick="confirm('Are you sure, You want to delete this gallery?') || event.stopImmediatePropagation()"
+                                        wire:click.prevent="destroy({{ $gallery->id }})">
                                         Delete
                                     </x-link-danger>
                                     @endcan
@@ -232,14 +207,14 @@
                             @empty
                             <tr class="transition-all hover:bg-gray-100 hover:shadow-lg">
                                 <td class="px-6 py-4 text-center whitespace-nowrap" colspan="9">
-                                    <div class="text-sm font-medium text-gray-900">No Product Found</div>
+                                    <div class="text-sm font-medium text-gray-900">No gallery found</div>
                                 </td>
                             </tr>
                             @endforelse
                         </tbody>
                     </table>
                     <div class="p-4">
-                        {!! $products->links() !!}
+                        {!! $galleries->links() !!}
                     </div>
                 </div>
             </div>
@@ -263,13 +238,13 @@
             </svg>
         </div>
     </div>
-    {{-- Show-Product-Modal Start --}}
+    {{-- Show-gallery-Modal Start --}}
     <x-jet-dialog-modal wire:model="showModal">
         <x-slot name="title">
             @if($modalType == 1)
-            Product Create
+            Gallery Create
             @elseif($modalType == 2)
-            Product Edit
+            Gallery Edit
             @endif
         </x-slot>
         <x-slot name="content" class="w-full">
@@ -289,66 +264,7 @@
                                 @error('name')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                             </div>
 
-                            <div class="px-2 mt-4">
-                                <label class="text-gray-700 dark:text-gray-200" for="short_description">Short
-                                    Description</label>
-                                <textarea id="short_description" type="text" name="short_description"
-                                    value="{{ old('short_description') }}" wire:model.lazy="short_description" required
-                                    autofocus autocomplete="short_description"
-                                    class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring @error('short_description') border-red-500 @enderror"
-                                    rows="6"></textarea>
-                                @error('short_description')<p class="text-xs italic text-red-500">{{ $message }}</p>
-                                @enderror
-                            </div>
-
-                            <div class="px-2 mt-4">
-                                <label class="text-gray-700 dark:text-gray-200" for="description">Description</label>
-                                <textarea id="description" type="text" name="description"
-                                    value="{{ old('description') }}" wire:model.lazy="description" required autofocus
-                                    autocomplete="description"
-                                    class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring @error('description') border-red-500 @enderror"
-                                    rows="6"></textarea>
-                                @error('description')<p class="text-xs italic text-red-500">{{ $message }}</p>
-                                @enderror
-                            </div>
-
-
                             <div class="flex flex-wrap mt-4">
-                                <div class="w-full px-2 md:w-1/2">
-                                    <label class="text-gray-700 dark:text-gray-200" for="regular_price">Regular
-                                        Price</label>
-                                    <input id="regular_price" type="number" step="any" name="regular_price"
-                                        value="{{ old('regular_price') }}" wire:model.lazy="regular_price" required
-                                        autofocus autocomplete="regular_price"
-                                        class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-                                        @error('regular_price') border-red-500 @enderror">
-                                    @error('regular_price')<p class="text-xs italic text-red-500">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                                <div class="w-full px-2 md:w-1/2">
-                                    <label class="text-gray-700 dark:text-gray-200" for="sale_price">Sale Price</label>
-                                    <input id="sale_price" type="number" step="any" name="sale_price"
-                                        value="{{ old('sale_price') }}" wire:model.lazy="sale_price" required autofocus
-                                        autocomplete="sale_price" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring
-                                        @error('sale_price') border-red-500 @enderror">
-                                    @error('sale_price')<p class="text-xs italic text-red-500">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="flex flex-wrap mt-4">
-                                <div class="w-full px-2 md:w-1/2">
-                                    <label for="stock_status" class="text-gray-700 dark:text-gray-200">Stock
-                                        Status</label>
-                                    <select id="stock_status" name="stock_status" autocomplete="type-name"
-                                        wire:model.lazy="stock_status"
-                                        class="block w-full px-4 py-2 mt-2 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:outline-none focus:ring focus:border-blue-400 dark:focus:border-blue-300 sm:text-sm @error('stock_status') border-red-500 @enderror">
-                                        <option value="instock">Instock</option>
-                                        <option value="outofstock">Out of Stock</option>
-                                    </select>
-                                    @error('stock_status')<p class="text-xs italic text-red-500">{{ $message }}</p>
-                                    @enderror
-                                </div>
                                 <div class="w-full px-2 md:w-1/2">
                                     <label for="featured" class="text-gray-700 dark:text-gray-200">Featured</label>
                                     <select id="featured" name="featured" wire:model.lazy="featured"
@@ -357,16 +273,6 @@
                                         <option value="1">Show</option>
                                     </select>
                                     @error('featured')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
-                                </div>
-                            </div>
-
-                            <div class="flex flex-wrap mt-4">
-                                <div class="w-full px-2 md:w-1/2">
-                                    <label class="text-gray-700 dark:text-gray-200" for="quantity">Quantity</label>
-                                    <input id="quantity" type="number" name="quantity" value="{{ old('quantity') }}"
-                                        wire:model.lazy="quantity" required autofocus autocomplete="quantity" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring
-                                        @error('quantity') border-red-500 @enderror">
-                                    @error('quantity')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                                 </div>
                                 <div class="w-full px-2 md:w-1/2">
                                     <label for="category_id" class="text-gray-700 dark:text-gray-200">Category</label>
@@ -426,7 +332,7 @@
                                         class="block w-full cursor-pointer">Remove Selected Image</x-link-danger>
                                     @elseif($image)
                                     <img class="object-cover rounded place-content-center w-30 h-30"
-                                        src="{{ asset('storage/assets/product/medium') }}/{{ $image }}" alt="">
+                                        src="{{ asset('storage/assets/gallery/medium') }}/{{ $image }}" alt="">
                                     @endif
                                     @endif
                                 </div>
@@ -457,5 +363,5 @@
                 class="text-white bg-gray-600 hover:bg-gray-800 cursor-pointer">Close</x-link-danger>
         </x-slot>
     </x-jet-dialog-modal>
-    {{-- Show-Product-Modal End --}}
+    {{-- Show-gallery-Modal End --}}
 </div>

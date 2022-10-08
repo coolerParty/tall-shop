@@ -3,6 +3,7 @@
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Livewire\Admin\AdminDashboardComponent;
+use App\Http\Livewire\Admin\Gallery\AdminGalleryComponent;
 use App\Http\Livewire\Admin\Category\AdminCategoryAddComponent;
 use App\Http\Livewire\Admin\Category\AdminCategoryComponent;
 use App\Http\Livewire\Admin\Category\AdminCategoryEditComponent;
@@ -93,5 +94,8 @@ Route::middleware([
     Route::get('/orders', AdminOrderComponent::class)->name('order.index');
     Route::get('/orders/{order_id}', AdminOrderDetailsComponent::class)->name('order.show');
 
-    Route::get('/contact-us', AdminContactComponent::class)->name('contact');
+    Route::get('/contact-us', AdminContactComponent::class)->name('contact.index');
+
+    Route::get('/galleries', AdminGalleryComponent::class)->name('gallery.index');
+
 });

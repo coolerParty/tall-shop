@@ -43,6 +43,10 @@ class PermissionSeeder extends Seeder
 				'category-edit',
 				'category-show',
 				'category-delete',
+                'gallery-create',
+				'gallery-edit',
+				'gallery-show',
+				'gallery-delete',
                 'order-show',
                 'contact-show',
 
@@ -91,6 +95,10 @@ class PermissionSeeder extends Seeder
 				'category-edit',
 				'category-show',
 				'category-delete',
+                'gallery-create',
+				'gallery-edit',
+				'gallery-show',
+				'gallery-delete',
                 'order-show',
                 'contact-show',
 			];
