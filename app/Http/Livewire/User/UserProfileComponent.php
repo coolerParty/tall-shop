@@ -13,13 +13,14 @@ class UserProfileComponent extends Component
     {
         $userProfile = Profile::select('id', 'user_id', 'mobile', 'line1', 'line2', 'city', 'province', 'country', 'zipcode')
             ->where('user_id', Auth::user()->id)->first();
-        if (!$userProfile) {
+        if (empty($userProfile)) {
             $profile = new Profile();
             $profile->user_id = Auth::user()->id;
             $profile->save();
-            return redirect()->to(route('user.profile'));
+
+            redirect()->to(route('user.profile'));
         }
-        $user = User::select('name', 'lastname', 'email', 'profile_photo_path')->find(Auth::user()->id);
+        $user = User::select('name', 'lastname', 'email', 'profile_photo_path')->where('id',Auth::user()->id)->first();
 
         return view('livewire.user.user-profile-component', ['userProfile' => $userProfile, 'user' => $user])
                             ->layout('layouts.front');

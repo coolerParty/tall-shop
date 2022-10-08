@@ -46,14 +46,16 @@
                         src="{{
                             asset('storage/assets/user/profile-photo/large')
                         }}/{{ $user->profile_photo_path }}"
+                        width="100%"
                         alt=""
                     />
                     @else
                     <img
-                        class="w-3/4 p-5 mx-auto rounded-ful"
+                        class="w-3/4 p-5 mx-auto rounded-full"
                         src="{{
                             asset('storage/assets/user/profile-photo/large')
                         }}/default.png"
+                        width="100%"
                         alt=""
                     />
                     @endif
