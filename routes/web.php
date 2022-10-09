@@ -43,9 +43,7 @@ Route::get('/wishlist', WishlistComponent::class)->name('wishlist.index');
 Route::get('/product/{slug}', ProductDetailsComponent::class)->name('product.details');
 Route::get('/gallery', GalleryComponent::class)->name('gallery');
 
-Route::get('/thank-you', function () {
-    return view('thank-you');
-})->name('thankyou');
+Route::view('/thank-you', 'thank-you')->name('thankyou');
 
 
 // users

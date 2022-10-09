@@ -11,7 +11,6 @@ use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Carbon\Carbon;
 use Intervention\Image\Facades\Image;
-use Illuminate\Support\Str;
 
 class AdminGalleryComponent extends Component
 {
@@ -29,7 +28,7 @@ class AdminGalleryComponent extends Component
     public $gallery_id;
     public $gal; // short for gallery
     public $showModal = false;
-    public $modalType = 1; // 1 for store, 2 for edit
+    public $modalType = 1;      // 1 for store, 2 for edit
 
     public function rules(): array
     {
@@ -55,7 +54,7 @@ class AdminGalleryComponent extends Component
         $this->authorize('gallery-edit');
         $this->resetGallery();
         $this->resetValidation();
-        $this->modalType = 2;
+        $this->modalType  = 2;
         $this->gallery_id = $gallery_id;
         $this->loadGallery();
         $this->showModal = true;
@@ -63,12 +62,12 @@ class AdminGalleryComponent extends Component
 
     public function loadGallery()
     {
-        $this->gal              = Gallery::findOrFail($this->gallery_id);
-        $this->name              = $this->gal->name;
-        $this->featured          = $this->gal->featured;
-        $this->image             = $this->gal->image;
-        $this->active            = $this->gal->active;
-        $this->category_id       = $this->gal->category_id;
+        $this->gal         = Gallery::findOrFail($this->gallery_id);
+        $this->name        = $this->gal->name;
+        $this->featured    = $this->gal->featured;
+        $this->image       = $this->gal->image;
+        $this->active      = $this->gal->active;
+        $this->category_id = $this->gal->category_id;
     }
 
     public function store()
@@ -76,11 +75,11 @@ class AdminGalleryComponent extends Component
         $this->authorize('gallery-create');
         $this->validate();
 
-        $gallery                    = new Gallery();
-        $gallery->name              = $this->name;
-        $gallery->featured          = $this->featured;
-        $gallery->active            = $this->active;
-        $gallery->category_id       = $this->category_id;
+        $gallery              = new Gallery();
+        $gallery->name        = $this->name;
+        $gallery->featured    = $this->featured;
+        $gallery->active      = $this->active;
+        $gallery->category_id = $this->category_id;
 
         if ($this->image) {
             $gallery->image = $this->saveImage($this->image);
@@ -96,29 +95,16 @@ class AdminGalleryComponent extends Component
         $this->authorize('gallery-create');
         $this->validate();
 
-        $gallery                    = Gallery::find($this->gallery_id);
+        $gallery = Gallery::find($this->gallery_id);
         if (empty($gallery)) {
             abort(404);
         }
-        $gallery->name              = $this->name;
-        $gallery->featured          = $this->featured;
-        $gallery->active            = $this->active;
-        $gallery->category_id       = $this->category_id;
-
+        $gallery->name        = $this->name;
+        $gallery->featured    = $this->featured;
+        $gallery->active      = $this->active;
+        $gallery->category_id = $this->category_id;
         if ($this->new_image) {
-
-            if (!empty($gallery->image) && file_exists('storage/assets/gallery/thumbnail' . '/' . $gallery->image)) {
-                unlink('storage/assets/gallery/thumbnail' . '/' . $gallery->image); // Deleting Image
-            }
-
-            if (!empty($gallery->image) && file_exists('storage/assets/gallery/medium' . '/' . $gallery->image)) {
-                unlink('storage/assets/gallery/medium' . '/' . $gallery->image); // Deleting Image
-            }
-
-            if (!empty($gallery->image) && file_exists('storage/assets/gallery/large' . '/' . $gallery->image)) {
-                unlink('storage/assets/gallery/large' . '/' . $gallery->image); // Deleting Image
-            }
-
+            $this->deleteImage($gallery->image);
             $gallery->image = $this->saveImage($this->new_image);
         }
         $gallery->save();
@@ -129,20 +115,38 @@ class AdminGalleryComponent extends Component
 
     public function saveImage($img)
     {
-        $imagename = Carbon::now()->timestamp . '.' . $img->extension();
+        $imageName = Carbon::now()->timestamp . '.' . $img->extension();
 
         $originalPath   = storage_path() . '/app/public/assets/gallery/large/';
         $mediumPath     = storage_path() . '/app/public/assets/gallery/medium/';
         $thumbnailPath  = storage_path() . '/app/public/assets/gallery/thumbnail/';
+
         $thumbnailImage = Image::make($img);
         $thumbnailImage->fit(800, 800);
-        $thumbnailImage->save($originalPath . $imagename);
+        $thumbnailImage->save($originalPath . $imageName);
         $thumbnailImage->fit(400, 400);
-        $thumbnailImage->save($mediumPath . $imagename);
+        $thumbnailImage->save($mediumPath . $imageName);
         $thumbnailImage->fit(100, 100);
-        $thumbnailImage->save($thumbnailPath . $imagename);
+        $thumbnailImage->save($thumbnailPath . $imageName);
 
-        return $imagename;
+        return $imageName;
+    }
+
+    public function deleteImage($galleryImage)
+    {
+        if (!empty($galleryImage)) {
+            if (file_exists('storage/assets/gallery/thumbnail' . '/' . $galleryImage)) {
+                unlink('storage/assets/gallery/thumbnail' . '/' . $galleryImage); // Deleting Image
+            }
+
+            if (file_exists('storage/assets/gallery/medium' . '/' . $galleryImage)) {
+                unlink('storage/assets/gallery/medium' . '/' . $galleryImage); // Deleting Image
+            }
+
+            if (file_exists('storage/assets/gallery/large' . '/' . $galleryImage)) {
+                unlink('storage/assets/gallery/large' . '/' . $galleryImage); // Deleting Image
+            }
+        }
     }
 
     public function closeModal()
@@ -153,16 +157,16 @@ class AdminGalleryComponent extends Component
     public function resetGallery()
     {
         $this->gallery_id = '';
-        $this->gal = []; // short for product
-        $this->showModal = false;
-        $this->modalType = 1;
+        $this->gal        = [];     // short for product
+        $this->showModal  = false;
+        $this->modalType  = 1;
 
-        $this->name = '';
-        $this->featured = false;
-        $this->image = null;
-        $this->active = false;
+        $this->name        = '';
+        $this->featured    = false;
+        $this->image       = null;
+        $this->active      = false;
         $this->category_id = '';
-        $this->new_image = null;
+        $this->new_image   = null;
     }
 
     public function removeImage()
@@ -183,11 +187,7 @@ class AdminGalleryComponent extends Component
         if (empty($gallery)) {
             abort(404);
         }
-        if ($gallery->image) {
-            unlink('storage/assets/gallery/large' . '/' . $gallery->image); // Deleting Image
-            unlink('storage/assets/gallery/medium' . '/' . $gallery->image); // Deleting Image
-            unlink('storage/assets/gallery/thumbnail' . '/' . $gallery->image); // Deleting Image
-        }
+        $this->deleteImage($gallery->image);
         $gallery->delete();
 
         return session()->flash('success', 'Gallery deleted successfully.');
@@ -228,7 +228,7 @@ class AdminGalleryComponent extends Component
         $categories = Category::select('id', 'name')->orderBy('name', 'ASC')->get();
 
         return view('livewire.admin.gallery.admin-gallery-component', [
-                'galleries' => $galleries, 'categories' => $categories
-            ])->layout('layouts.base');
+            'galleries' => $galleries, 'categories' => $categories
+        ])->layout('layouts.base');
     }
 }

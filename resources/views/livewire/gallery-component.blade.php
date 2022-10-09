@@ -1,52 +1,100 @@
-<div class="w-full pt-10 pb-10 bg-orange-200">
+<div class="w-full pb-10 bg-orange-200">
     @section('title', 'Gallery' )
-    <h3 class="mt-10 text-3xl font-semibold text-center capitalize">Our Gallery</h3>
-    <h1 class="text-5xl font-bold tracking-tighter text-center text-orange-500 capitalize mb-10">Our Untold Stories</h1>
+    <div class="w-full bg-white">
+        <nav class="container p-2 mx-auto ">
+            <ol class="flex list-reset">
+                <li><a href="#" class="text-blue-600 hover:text-blue-700">Home</a></li>
+                <li><span class="mx-2 text-gray-500">/</span></li>
+                <li><a href="#" class="text-blue-600 hover:text-blue-700">Library</a></li>
+                <li><span class="mx-2 text-gray-500">/</span></li>
+                <li class="text-gray-500">Data</li>
+            </ol>
+        </nav>
+    </div>
+    <h3 class="mt-10 text-3xl font-semibold text-center capitalize">
+        Our Gallery
+    </h3>
+    <h1 class="mb-10 text-5xl font-bold tracking-tighter text-center text-orange-500 capitalize">
+        Our Untold Stories
+    </h1>
 
     <section class="container mx-auto mt-10 mb-10" x-data="{ tab: 'all' }">
         <div class="">
-          <ul class="flex flex-wrap mb-5 justify-center p-2 space-x-1 text-xl font-semibold text-center">
-            <li class="">
-              <a href="#" class="bg-gray-100 px-5 py-2 underline hover:bg-orange-300 {{ ($category_selected_id == 0) ? 'bg-orange-400' : '' }}"
-              wire:click.prevent="selectCategory(0)"
-              >All</a>
-            </li>
-            @forelse($categories as $category)
-            <li class="">
-                <a href="#" class="bg-gray-100 px-5 py-2 underline hover:bg-orange-300 {{ ($category->id == $category_selected_id) ? 'bg-orange-400' : '' }}"
-                    wire:click.prevent="selectCategory({{ $category->id }})"
-                    >{{ $category->name }}</a>
-              </li>
-            @empty
-            <li class="">
-                <a href="#" @click.prevent="tab = 'pizza'" :class="{ 'active' : tab === 'pizza' }" class="bg-gray-100 px-5 py-2 underline hover:bg-orange-300">Pizza</a>
-              </li>
-              <li class="">
-                <a href="#" @click.prevent="tab = 'dessert'" :class="{ 'active' : tab === 'dessert' }" class="bg-gray-100 px-5 py-2 underline hover:bg-orange-300">Dessert</a>
-              </li>
-            @endforelse
-
-          </ul>
+            <ul class="flex flex-wrap justify-center p-2 mb-5 space-x-1 font-semibold text-center">
+                <li class="">
+                    <a href="#" class="bg-gray-100 px-5 py-2 uppercase hover:bg-orange-300 {{
+                            $categorySelectedId == 0 ? 'bg-orange-400' : ''
+                        }}" wire:click.prevent="selectCategory(0)">All</a>
+                </li>
+                @forelse($categories as $category)
+                <li class="">
+                    <a href="#"
+                        class="bg-gray-100 px-5 py-2 uppercase hover:bg-orange-300 {{ ($category->id == $categorySelectedId) ? 'bg-orange-400' : '' }}"
+                        wire:click.prevent="selectCategory({{ $category->id }})">{{ $category->name }}</a>
+                </li>
+                @empty
+                <li class="">
+                    <a href="#" @click.prevent="tab = 'pizza'" :class="{ 'active' : tab === 'pizza' }"
+                        class="px-5 py-2 underline bg-gray-100 hover:bg-orange-300">Pizza</a>
+                </li>
+                <li class="">
+                    <a href="#" @click.prevent="tab = 'dessert'" :class="{ 'active' : tab === 'dessert' }"
+                        class="px-5 py-2 underline bg-gray-100 hover:bg-orange-300">Dessert</a>
+                </li>
+                @endforelse
+            </ul>
         </div>
         <div class="grid grid-cols-2 gap-0 md:grid-cols-3">
             @forelse($galleries as $gallery)
-          <div class="object-cover max-w-md" x-show="tab === '{{ $gallery->category->name }}' || tab === 'all'"><img loading="lazy" src="{{ asset('storage/assets/gallery/large') }}/{{ $gallery->image }}" alt="{{ $gallery->name }}" title="{{ $gallery->name }}"></div>
-          @empty
-          <div class="object-cover max-w-md" x-show="tab === 'pizza' || tab === 'all'"><img loading="lazy" src="{{ asset('assets/images/gallery/food-galler-img-1.jpg') }}" alt="Running Kitty" title="Running Kitty"></div>
-          <div class="object-cover max-w-md" x-show="tab === 'dessert' || tab === 'all'"><img loading="lazy" src="{{ asset('assets/images/gallery/food-galler-img-2.jpg') }}" alt="Tiny puppy" title="Tiny puppy"></div>
-          <div class="object-cover max-w-md" x-show="tab === 'pizza' || tab === 'all'"><img loading="lazy" src="{{ asset('assets/images/gallery/food-galler-img-3.jpg') }}" alt="Shocked Kitty" title="Shocked Kitty"></div>
-          <div class="object-cover max-w-md" x-show="tab === 'dessert' || tab === 'all'"><img loading="lazy" src="{{ asset('assets/images/gallery/food-galler-img-4.jpg') }}" alt="Jumping puppy" title="Jumping puppy"></div>
-          <div class="object-cover max-w-md" x-show="tab === 'pizza' || tab === 'all'"><img loading="lazy" src="{{ asset('assets/images/gallery/food-galler-img-5.jpg') }}" alt="Sleeping Kitty" title="Sleeping Kitty"></div>
-          <div class="object-cover max-w-md" x-show="tab === 'dessert' || tab === 'all'"><img loading="lazy" src="{{ asset('assets/images/gallery/food-galler-img-6.jpg') }}" alt="Happy Puppy" title="Happy Puppy"></div>
-          @endforelse
+            <div class="object-cover max-w-md" x-show="tab === '{{ $gallery->category->name }}' || tab === 'all'">
+                <img loading="lazy" src="{{
+                        asset('storage/assets/gallery/large')
+                    }}/{{ $gallery->image }}" alt="{{ $gallery->name }}" title="{{ $gallery->name }}" />
+            </div>
+            @empty
+            <div class="object-cover max-w-md" x-show="tab === 'pizza' || tab === 'all'">
+                <img loading="lazy" src="{{
+                        asset('assets/images/gallery/food-galler-img-1.jpg')
+                    }}" alt="Running Kitty" title="Running Kitty" />
+            </div>
+            <div class="object-cover max-w-md" x-show="tab === 'dessert' || tab === 'all'">
+                <img loading="lazy" src="{{
+                        asset('assets/images/gallery/food-galler-img-2.jpg')
+                    }}" alt="Tiny puppy" title="Tiny puppy" />
+            </div>
+            <div class="object-cover max-w-md" x-show="tab === 'pizza' || tab === 'all'">
+                <img loading="lazy" src="{{
+                        asset('assets/images/gallery/food-galler-img-3.jpg')
+                    }}" alt="Shocked Kitty" title="Shocked Kitty" />
+            </div>
+            <div class="object-cover max-w-md" x-show="tab === 'dessert' || tab === 'all'">
+                <img loading="lazy" src="{{
+                        asset('assets/images/gallery/food-galler-img-4.jpg')
+                    }}" alt="Jumping puppy" title="Jumping puppy" />
+            </div>
+            <div class="object-cover max-w-md" x-show="tab === 'pizza' || tab === 'all'">
+                <img loading="lazy" src="{{
+                        asset('assets/images/gallery/food-galler-img-5.jpg')
+                    }}" alt="Sleeping Kitty" title="Sleeping Kitty" />
+            </div>
+            <div class="object-cover max-w-md" x-show="tab === 'dessert' || tab === 'all'">
+                <img loading="lazy" src="{{
+                        asset('assets/images/gallery/food-galler-img-6.jpg')
+                    }}" alt="Happy Puppy" title="Happy Puppy" />
+            </div>
+            @endforelse
         </div>
-        @if($galleries_total > $image_max_number)
-        <div class="text-center mt-10">
-            <button type="button" class="px-4 py-2 text-white capitalize bg-orange-500 shadow hover:bg-orange-600 md:text-xl md:py-3 md:px-5 hover:tracking-wider" wire:click="viewMoreImage">View More</button>
+        @if($galleriesTotal > $imageMaxNumber)
+        <div class="mt-10 text-center">
+            <button type="button"
+                class="px-4 py-2 text-white capitalize bg-orange-500 shadow hover:bg-orange-600 md:text-xl md:py-3 md:px-5 hover:tracking-wider"
+                wire:click="viewMoreImage">
+                View More
+            </button>
         </div>
         @endif
-      </section>
-      <div wire:loading.delay.long>
+    </section>
+    <div wire:loading.delay.long>
         <!-- Loading screen -->
         <div show="true"
             class="fixed inset-0 z-[200] flex items-center justify-center text-white bg-black bg-opacity-10 text-3xl">
