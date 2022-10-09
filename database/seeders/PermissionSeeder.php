@@ -47,6 +47,10 @@ class PermissionSeeder extends Seeder
 				'gallery-edit',
 				'gallery-show',
 				'gallery-delete',
+                'review-create',
+				'review-edit',
+				'review-show',
+				'review-delete',
                 'order-show',
                 'contact-show',
 
@@ -99,6 +103,10 @@ class PermissionSeeder extends Seeder
 				'gallery-edit',
 				'gallery-show',
 				'gallery-delete',
+                'review-create',
+				'review-edit',
+				'review-show',
+				'review-delete',
                 'order-show',
                 'contact-show',
 			];

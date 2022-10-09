@@ -79,6 +79,7 @@
                     {{ (route('admin.coupon.index') == substr(url()->current(), 0, strlen(route('admin.coupon.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('admin.category.index') == substr(url()->current(), 0, strlen(route('admin.category.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('admin.gallery.index') == substr(url()->current(), 0, strlen(route('admin.gallery.index')) )) ? 'bg-gray-100' : '' }}
+                    {{ (route('admin.review.index') == substr(url()->current(), 0, strlen(route('admin.review.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('admin.contact.index') == substr(url()->current(), 0, strlen(route('admin.contact.index')) )) ? 'bg-gray-100' : '' }}
                 " :class="{'justify-center': !isSidebarOpen}" x-ref="button" x-on:click="toggle()"
                     :aria-expanded="open" :aria-controls="$id('dropdown-button')">
@@ -103,7 +104,7 @@
                     x-transition:leave="transition ease-in duration-300"
                     x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
                     :id="$id('dropdown-button')" style="display: none;">
-                    @can('order-access')
+                    @can('order-show')
                     <li title="Orders">
                         <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
                         {{ (route('admin.order.index') == substr(url()->current(), 0, strlen(route('admin.order.index')) )) ? 'bg-gray-100' : '' }}
@@ -158,7 +159,7 @@
                         </a>
                     </li>
                     @endcan
-                    @can('coupon-access')
+                    @can('coupon-show')
                     <li title="Coupon">
                         <a class="flex items-center p-2 space-x-2 text-sm border-t border-b hover:bg-gray-100
                         {{ (route('admin.coupon.index') == substr(url()->current(), 0, strlen(route('admin.coupon.index')) )) ? 'bg-gray-100' : '' }}
@@ -172,7 +173,7 @@
                         </a>
                     </li>
                     @endcan
-                    @can('dashboard-access')
+                    @can('category-show')
                     <li title="Category">
                         <a class="flex items-center p-2 space-x-2 text-sm border-t border-b hover:bg-gray-100
                         {{ (route('admin.category.index') == substr(url()->current(), 0, strlen(route('admin.category.index')) )) ? 'bg-gray-100' : '' }}
@@ -186,7 +187,7 @@
                         </a>
                     </li>
                     @endcan
-                    @can('gallery-access')
+                    @can('gallery-show')
                     <li title="Gallery">
                         <a class="flex items-center p-2 space-x-2 text-sm border-t border-b hover:bg-gray-100
                         {{ (route('admin.gallery.index') == substr(url()->current(), 0, strlen(route('admin.gallery.index')) )) ? 'bg-gray-100' : '' }}
@@ -200,11 +201,11 @@
                         </a>
                     </li>
                     @endcan
-                    @can('dashboard-access')
+                    @can('review-show')
                     <li title="Review">
                         <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
-                        {{ (route('admin.homeslider.index') == substr(url()->current(), 0, strlen(route('admin.homeslider.index')) )) ? 'bg-gray-100' : '' }}
-                        " :class="{'justify-center': !isSidebarOpen}" href="{{ route('admin.homeslider.index') }}">
+                        {{ (route('admin.review.index') == substr(url()->current(), 0, strlen(route('admin.review.index')) )) ? 'bg-gray-100' : '' }}
+                        " :class="{'justify-center': !isSidebarOpen}" href="{{ route('admin.review.index') }}">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
                                     fill="currentColor">
