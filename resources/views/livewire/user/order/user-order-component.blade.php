@@ -3,11 +3,9 @@
     <div class="w-full bg-white">
         <nav class="container p-2 mx-auto ">
             <ol class="flex list-reset">
-                <li><a href="#" class="text-blue-600 hover:text-blue-700">Home</a></li>
+                <li><a href="{{ route('home') }}" class="text-blue-600 hover:text-blue-700">Home</a></li>
                 <li><span class="mx-2 text-gray-500">/</span></li>
-                <li><a href="#" class="text-blue-600 hover:text-blue-700">Library</a></li>
-                <li><span class="mx-2 text-gray-500">/</span></li>
-                <li class="text-gray-500">Data</li>
+                <li class="text-gray-500">Order History</li>
             </ol>
         </nav>
     </div>

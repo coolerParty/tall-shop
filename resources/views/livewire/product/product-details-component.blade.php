@@ -1,14 +1,14 @@
 <div class="w-full bg-orange-200">
-    @section('title', 'Product Details')
+    @section('title',  $name )
     <!-- Main content header -->
     <div class="w-full bg-white">
         <nav class="container p-2 mx-auto ">
             <ol class="flex list-reset">
-                <li><a href="#" class="text-blue-600 hover:text-blue-700">Home</a></li>
+                <li><a href="{{ route('home') }}" class="text-blue-600 hover:text-blue-700">Home</a></li>
                 <li><span class="mx-2 text-gray-500">/</span></li>
-                <li><a href="#" class="text-blue-600 hover:text-blue-700">Library</a></li>
+                <li><a href="{{ route('menu') }}" class="text-blue-600 hover:text-blue-700">Menu</a></li>
                 <li><span class="mx-2 text-gray-500">/</span></li>
-                <li class="text-gray-500">Data</li>
+                <li class="text-gray-500">{{ $name }}</li>
             </ol>
         </nav>
     </div>
