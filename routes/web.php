@@ -19,6 +19,7 @@ use App\Http\Livewire\Admin\Homeslider\HomeSliderComponent;
 use App\Http\Livewire\Admin\HomeSlider\HomeSliderEditComponent;
 use App\Http\Livewire\Admin\Order\AdminOrderComponent;
 use App\Http\Livewire\Admin\Order\AdminOrderDetailsComponent;
+use App\Http\Livewire\Admin\Review\AdminReviewComponent;
 use App\Http\Livewire\Admin\Users\UserAddComponent;
 use App\Http\Livewire\Admin\Users\UserComponent;
 use App\Http\Livewire\Admin\Users\UserEditComponent;
@@ -98,5 +99,7 @@ Route::middleware([
     Route::get('/contact-us', AdminContactComponent::class)->name('contact.index');
 
     Route::get('/galleries', AdminGalleryComponent::class)->name('gallery.index');
+
+    Route::get('/reviews', AdminReviewComponent::class)->name('review.index');
 
 });

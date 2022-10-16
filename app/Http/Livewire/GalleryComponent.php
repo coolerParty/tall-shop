@@ -22,7 +22,7 @@ class GalleryComponent extends Component
         $this->categorySelectedId = $cat_id;
     }
 
-    public function getTotalCount()
+    public function getTotalGalleryCount()
     {
         return Gallery::where('active', true)
             ->when($this->categorySelectedId <> 0, function ($q) {
@@ -53,7 +53,7 @@ class GalleryComponent extends Component
 
     public function render()
     {
-        $this->galleriesTotal = $this->getTotalCount();
+        $this->galleriesTotal = $this->getTotalGalleryCount();
         $galleries = $this->getGalleries();
         $categories = $this->getCategories();
 
