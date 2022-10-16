@@ -166,7 +166,7 @@
                                 <td class="px-6 py-4 text-center text-gray-900 dark:text-white">
                                     @can('gallery-edit')
                                     <input
-                                        class="float-left h-5 align-top bg-gray-300 bg-no-repeat bg-contain rounded-full shadow-sm appearance-none cursor-pointer form-check-input w-9 focus:outline-none"
+                                        class="h-5 align-top bg-gray-300 bg-no-repeat bg-contain rounded-full shadow-sm appearance-none cursor-pointer form-check-input w-9 focus:outline-none"
                                         type="checkbox" role="switch" id="flexSwitchCheckChecked" {{ ($gallery->featured
                                     == 1)? 'checked' : '' }} wire:click.prevent="updateFeatured({{ $gallery->id }},{{
                                     $gallery->featured }})">
@@ -179,7 +179,7 @@
                                 <td class="px-6 py-4 text-center text-gray-900 dark:text-white">
                                     @can('gallery-edit')
                                     <input
-                                        class="float-left h-5 align-top bg-gray-300 bg-no-repeat bg-contain rounded-full shadow-sm appearance-none cursor-pointer form-check-input w-9 focus:outline-none"
+                                        class="h-5 align-top bg-gray-300 bg-no-repeat bg-contain rounded-full shadow-sm appearance-none cursor-pointer form-check-input w-9 focus:outline-none"
                                         type="checkbox" role="switch" id="flexSwitchCheckChecked" {{ ($gallery->active
                                     == 1)? 'checked' : '' }} wire:click.prevent="updateActive({{ $gallery->id }},{{
                                     $gallery->active }})">
@@ -360,7 +360,7 @@
             </form>
             @endif
             <x-link-danger type="button" wire:click.prevent="closeModal"
-                class="text-white bg-gray-600 hover:bg-gray-800 cursor-pointer">Close</x-link-danger>
+                class="text-white bg-gray-600 cursor-pointer hover:bg-gray-800">Close</x-link-danger>
         </x-slot>
     </x-jet-dialog-modal>
     {{-- Show-gallery-Modal End --}}

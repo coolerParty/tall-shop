@@ -47,7 +47,7 @@
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
-                                    stock_status
+                                    stock status
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
@@ -175,36 +175,39 @@
                                     <div class="text-sm font-semibold text-gray-900">{{ $product->quantity }}</div>
                                 </td>
                                 <td class="px-6 py-4 text-center text-gray-900 dark:text-white">
-                                    @can('product-edit')
-                                    <input
-                                        class="float-left h-5 align-top bg-gray-300 bg-no-repeat bg-contain rounded-full shadow-sm appearance-none cursor-pointer form-check-input w-9 focus:outline-none"
-                                        type="checkbox" role="switch" id="flexSwitchCheckChecked" {{ ($product->featured
-                                    == 1)? 'checked' : '' }} wire:click.prevent="updateFeatured({{ $product->id }},{{
-                                    $product->featured }})">
-                                    @else
-                                    <div
-                                        class="text-sm py-1 px-3 rounded-full text-gray-800 {{ ($product->featured == 1) ? 'bg-green-200' : 'bg-gray-200' }}">
-                                        {{ ($product->featured == 1) ? 'Active' : 'Inactive' }}</div>
-                                    @endcan
+                                        @can('product-edit')
+                                        <input
+                                            class="h-5 align-top bg-gray-300 bg-no-repeat bg-contain rounded-full shadow-sm appearance-none cursor-pointer form-check-input w-9 focus:outline-none"
+                                            type="checkbox" role="switch" id="flexSwitchCheckChecked" {{
+                                            ($product->featured
+                                        == 1)? 'checked' : '' }} wire:click.prevent="updateFeatured({{ $product->id
+                                        }},{{
+                                        $product->featured }})">
+                                        @else
+                                        <div
+                                            class="text-sm py-1 px-3 rounded-full text-gray-800 {{ ($product->featured == 1) ? 'bg-green-200' : 'bg-gray-200' }}">
+                                            {{ ($product->featured == 1) ? 'Active' : 'Inactive' }}</div>
+                                        @endcan
+                                </td>
+                                <td class="px-6 py-4 text-center text-gray-900 dark:text-white">
+                                        @can('product-edit')
+                                        <input
+                                            class="h-5 align-top bg-gray-300 bg-no-repeat bg-contain rounded-full shadow-sm appearance-none cursor-pointer form-check-input w-9 focus:outline-none"
+                                            type="checkbox" role="switch" id="flexSwitchCheckChecked" {{
+                                            ($product->stock_status == 'instock')? 'checked' : '' }}
+                                        wire:click.prevent="updateStocked({{ $product->id }},'{{ $product->stock_status
+                                        }}')">
+                                        @else
+                                        <div
+                                            class="text-sm py-1 px-3 rounded-full text-gray-800 {{ ($product->stock_status == 'instock') ? 'bg-green-200' : 'bg-gray-200' }}">
+                                            {{ ($product->stock_status == 'instock' ) ? 'Instock' : 'Out of Stock' }}
+                                        </div>
+                                        @endcan
                                 </td>
                                 <td class="px-6 py-4 text-center text-gray-900 dark:text-white">
                                     @can('product-edit')
                                     <input
-                                        class="float-left h-5 align-top bg-gray-300 bg-no-repeat bg-contain rounded-full shadow-sm appearance-none cursor-pointer form-check-input w-9 focus:outline-none"
-                                        type="checkbox" role="switch" id="flexSwitchCheckChecked" {{
-                                        ($product->stock_status == 'instock')? 'checked' : '' }}
-                                    wire:click.prevent="updateStocked({{ $product->id }},'{{ $product->stock_status
-                                    }}')">
-                                    @else
-                                    <div
-                                        class="text-sm py-1 px-3 rounded-full text-gray-800 {{ ($product->stock_status == 'instock') ? 'bg-green-200' : 'bg-gray-200' }}">
-                                        {{ ($product->stock_status == 'instock' ) ? 'Instock' : 'Out of Stock' }}</div>
-                                    @endcan
-                                </td>
-                                <td class="px-6 py-4 text-center text-gray-900 dark:text-white">
-                                    @can('product-edit')
-                                    <input
-                                        class="float-left h-5 align-top bg-gray-300 bg-no-repeat bg-contain rounded-full shadow-sm appearance-none cursor-pointer form-check-input w-9 focus:outline-none"
+                                        class="h-5 align-top bg-gray-300 bg-no-repeat bg-contain rounded-full shadow-sm appearance-none cursor-pointer form-check-input w-9 focus:outline-none"
                                         type="checkbox" role="switch" id="flexSwitchCheckChecked" {{ ($product->active
                                     == 1)? 'checked' : '' }} wire:click.prevent="updateActive({{ $product->id }},{{
                                     $product->active }})">
@@ -454,7 +457,7 @@
             </form>
             @endif
             <x-link-danger type="button" wire:click.prevent="closeModal"
-                class="text-white bg-gray-600 hover:bg-gray-800 cursor-pointer">Close</x-link-danger>
+                class="text-white bg-gray-600 cursor-pointer hover:bg-gray-800">Close</x-link-danger>
         </x-slot>
     </x-jet-dialog-modal>
     {{-- Show-Product-Modal End --}}

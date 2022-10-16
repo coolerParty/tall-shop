@@ -19,23 +19,23 @@
     <section class="container mx-auto mt-10 mb-10" x-data="{ tab: 'all' }">
         <div class="">
             <ul class="flex flex-wrap justify-center p-2 mb-5 space-x-1 font-semibold text-center">
-                <li class="">
+                <li class="mb-4">
                     <a href="#" class="bg-gray-100 px-5 py-2 uppercase hover:bg-orange-300 {{
                             $categorySelectedId == 0 ? 'bg-orange-400' : ''
                         }}" wire:click.prevent="selectCategory(0)">All</a>
                 </li>
                 @forelse($categories as $category)
-                <li class="">
+                <li class="mb-4">
                     <a href="#"
                         class="bg-gray-100 px-5 py-2 uppercase hover:bg-orange-300 {{ ($category->id == $categorySelectedId) ? 'bg-orange-400' : '' }}"
                         wire:click.prevent="selectCategory({{ $category->id }})">{{ $category->name }}</a>
                 </li>
                 @empty
-                <li class="">
+                <li class="mb-4">
                     <a href="#" @click.prevent="tab = 'pizza'" :class="{ 'active' : tab === 'pizza' }"
                         class="px-5 py-2 underline bg-gray-100 hover:bg-orange-300">Pizza</a>
                 </li>
-                <li class="">
+                <li class="mb-4">
                     <a href="#" @click.prevent="tab = 'dessert'" :class="{ 'active' : tab === 'dessert' }"
                         class="px-5 py-2 underline bg-gray-100 hover:bg-orange-300">Dessert</a>
                 </li>
