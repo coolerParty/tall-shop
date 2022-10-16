@@ -132,7 +132,7 @@
                                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                                     @can('category-edit')
                                     <x-link-success wire:click="showEditModal({{ $category->id }})"
-                                        class="text-xs text-white bg-green-600 hover:bg-green-500 cursor-pointer">
+                                        class="text-xs text-white cursor-pointer">
                                         Edit</x-link-success>
                                     @can('category-delete')
                                     @endcan
@@ -211,7 +211,7 @@
                 Update</button>
             @endif
             <x-link-danger type="button" wire:click.prevent="closeCategoryModal"
-                class="text-white bg-gray-600 hover:bg-gray-800 cursor-pointer">Close</x-link-danger>
+                class="text-white bg-gray-600 cursor-pointer hover:bg-gray-800">Close</x-link-danger>
         </x-slot>
     </x-jet-dialog-modal>
     {{-- Show-MovieDetail-Modal End --}}

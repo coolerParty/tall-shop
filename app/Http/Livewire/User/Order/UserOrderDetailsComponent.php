@@ -32,8 +32,8 @@ class UserOrderDetailsComponent extends Component
     {
         $this->resetReview();
         $this->resetValidation();
-        $this->showModal = true;
-        $this->modalType = 1;
+        $this->showModal     = true;
+        $this->modalType     = 1;
         $this->order_item_id = $order_item_id;
     }
 
@@ -41,7 +41,7 @@ class UserOrderDetailsComponent extends Component
     {
         $this->resetReview();
         $this->resetValidation();
-        $this->modalType = 2;
+        $this->modalType     = 2;
         $this->order_item_id = $order_item_id;
         $this->loadReview();
         $this->showModal = true;
@@ -58,7 +58,7 @@ class UserOrderDetailsComponent extends Component
         $review->order_item_id = $this->order_item_id;
         $review->save();
 
-        $orderItem = OrderItem::find($this->order_item_id);
+        $orderItem          = OrderItem::find($this->order_item_id);
         $orderItem->rstatus = true;
         $orderItem->save();
 
@@ -68,7 +68,7 @@ class UserOrderDetailsComponent extends Component
 
     public function loadReview()
     {
-        $this->rev       = Review::where('order_item_id',$this->order_item_id)->first();
+        $this->rev       = Review::where('order_item_id', $this->order_item_id)->first();
         $this->title     = $this->rev->title;
         $this->rating    = $this->rev->rating;
         $this->comment   = $this->rev->comment;
@@ -79,17 +79,17 @@ class UserOrderDetailsComponent extends Component
     {
         $this->validate();
 
-        $review                    = Review::find($this->review_id);
+        $review = Review::find($this->review_id);
         if (empty($review)) {
             abort(404);
         }
-        $review->title              = $this->title;
-        $review->rating = $this->rating;
-        $review->comment       = $this->comment;
+        $review->title   = $this->title;
+        $review->rating  = $this->rating;
+        $review->comment = $this->comment;
         $review->save();
 
         $this->resetReview();
-        return session()->flash('success', $review->title. ' review updated successfully.');
+        return session()->flash('success', $review->title . ' review updated successfully.');
     }
 
     public function closeModal()
@@ -108,7 +108,6 @@ class UserOrderDetailsComponent extends Component
         $this->title         = '';
         $this->rating        = 0;
         $this->comment       = '';
-
     }
 
     public function mount($order_id)
@@ -119,15 +118,13 @@ class UserOrderDetailsComponent extends Component
     public function cancelOrder()
     {
         $order = Order::where('id', $this->order_id)->where('user_id', Auth::user()->id)->first();
-        if(empty($order))
-        {
+        if (empty($order)) {
             return session()->flash('error_order_message', 'Error occurred! please try again.');
         }
-        if($order->status == 'delivered')
-        {
+        if ($order->status == 'delivered') {
             return session()->flash('error_order_message', 'Order already cancelled!');
         }
-        $order->status = 'canceled';
+        $order->status        = 'canceled';
         $order->canceled_date = DB::raw('CURRENT_DATE');
         $order->save();
         session()->flash('success_order_message', 'Order has been canceled successfully!');
@@ -140,7 +137,7 @@ class UserOrderDetailsComponent extends Component
         if (empty($order)) {
             abort(404);
         }
-        $orderItems = OrderItem::with('product')->select('id','product_id', 'order_id', 'price', 'quantity','rstatus')->where('order_id', $order->id)->get();
+        $orderItems = OrderItem::with('product')->select('id', 'product_id', 'order_id', 'price', 'quantity', 'rstatus')->where('order_id', $order->id)->get();
         return view('livewire.user.order.user-order-details-component', ['order' => $order, 'orderItems' => $orderItems])->layout('layouts.front');
     }
 }
