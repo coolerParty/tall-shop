@@ -27,7 +27,7 @@ class AdminReviewComponent extends Component
                 'products.name as pName','products.slug as pSlug','products.image as pImage',
                 'users.name as uName','profile_photo_path',
             )
-            ->paginate(20);
+            ->paginate(10);
 
         return view('livewire.admin.review.admin-review-component', ['reviews' => $reviews])->layout('layouts.base');
     }
