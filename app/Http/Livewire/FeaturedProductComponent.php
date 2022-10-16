@@ -10,16 +10,26 @@ class FeaturedProductComponent extends Component
 {
     public function store($product_id, $product_name, $product_price)
     {
-        Cart::instance('cart')->add($product_id, $product_name, 1, $product_price)->associate('App\Models\Product');
-        $this->emitTo('cart-count-component', 'refreshComponent'); // refresh cart count display top right menu
-        // session()->flash('cart_message', '"' . $product_name . '" has been added to cart!');
+        $citems = Cart::instance('cart')->content()->pluck('id');
+        if($citems->contains($product_id)){
+            $this->emitTo('cart-count-component', 'refreshComponent'); // refresh cart count display top right menu
+        }else{
+            Cart::instance('cart')->add($product_id, $product_name, 1, $product_price)->associate('App\Models\Product');
+            $this->emitTo('cart-count-component', 'refreshComponent'); // refresh cart count display top right menu
+            // session()->flash('cart_message', '"' . $product_name . '" has been added to cart!');
+        }
     }
 
     public function addToWishlist($product_id, $product_name, $product_price)
     {
-        Cart::instance('wishlist')->add($product_id, $product_name, 1, $product_price)->associate('App\Models\Product');
-        $this->emitTo('wishlist-count-component','refreshComponent'); // refresh wishlist count display top right menu
-        // session()->flash('cart_message', '"' . $product_name . '" has been added to wishlist!');
+        $witems = Cart::instance('wishlist')->content()->pluck('id');
+        if($witems->contains($product_id)){
+            $this->emitTo('wishlist-count-component','refreshComponent'); // refresh wishlist count display top right menu
+        }else{
+            Cart::instance('wishlist')->add($product_id, $product_name, 1, $product_price)->associate('App\Models\Product');
+            $this->emitTo('wishlist-count-component','refreshComponent'); // refresh wishlist count display top right menu
+            // session()->flash('cart_message', '"' . $product_name . '" has been added to wishlist!');
+        }
     }
 
     public function removeFromCart($product_id)

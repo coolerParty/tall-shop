@@ -5,7 +5,7 @@
         <div class="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
             @foreach($reviews as $review)
             <div
-                class="p-3 transition duration-150 ease-in-out transform bg-white hover:shadow-lg hover:rounded hover:scale-102">
+                class="relative p-3 pb-16 transition duration-150 ease-in-out transform bg-white hover:shadow-lg hover:rounded hover:scale-102">
                 <div class="m-5">
                     <div class="flex space-x-0.5">
                         <svg class="w-5 h-5 {{ ($review->rating != 0 && 1 <= $review->rating) ? 'text-yellow-300' : 'text-gray-300' }}"
@@ -49,7 +49,7 @@
                             </path>
                         </svg>
                     </div>
-                    <p class="mt-2 text-sm font-medium leading-5 text-gray-500">{{ $review->created_at }}</p>
+                    <p class="mt-2 text-sm font-medium leading-5 text-gray-500">{{ $review->created_at->toFormattedDateString() }}</p>
                 </div>
                 <div class="m-5 space-y-1">
                     <h3 class="font-semibold text-gray-800">{{ $review->title }}
@@ -57,7 +57,7 @@
                     <p class="text-sm leading-5 text-gray-500">{{ $review->comment }}</p>
                 </div>
 
-                <div class="flex items-center m-5 space-x-2">
+                <div class="absolute flex items-center m-5 space-x-2 bottom-2 left-2">
                     @if($review->orderItem->order->user->profile_photo_path)
                     <img class="object-cover w-8 h-8 border-2 border-purple-900 rounded-full"
                         src="{{ asset('storage/assets/user/profile-photo/thumbnail') }}/{{ $review->orderItem->order->user->profile_photo_path }}"

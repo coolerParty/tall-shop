@@ -9,7 +9,18 @@ class ReviewComponent extends Component
 {
     public function render()
     {
-        $reviews = Review::with('orderItem')->take(10)->get();
+        $reviews = Review::with('orderItem')
+            ->select(
+                'id',
+                'title',
+                'comment',
+                'rating',
+                'created_at',
+                'order_item_id'
+            )
+            ->orderBy('created_at', 'DESC')
+            ->take(9)
+            ->get();
         return view('livewire.review-component', ['reviews' => $reviews]);
     }
 }

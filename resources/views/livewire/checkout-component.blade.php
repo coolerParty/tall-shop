@@ -357,7 +357,7 @@
                     @endif
                 </div>
             </div>
-            <x-link-danger type="button" class="w-full px-5 py-5 cursor-pointer" wire:click.prevent="placeOrder">Place Order Now</x-link-danger>
+            <x-button-danger type="button" class="w-full px-5 py-5 cursor-pointer" wire:click.prevent="placeOrder" wire:loading.attr="disabled">Place Order Now</x-button-danger>
             @if (Session::has('checkout_message'))
                 <div class="p-5" role="alert">
                     <p class="italic text-red-500"> {{ Session::get('checkout_message') }}</p>
