@@ -16,18 +16,20 @@ class AdminUserSeeder extends Seeder
     public function run()
     {
         $adminUser = User::factory()->create([
-            'name'     => 'SuperAdmin',
-            'lastname' => 'Admin',
-            'email'    => 'superadmin@admin.com',
-            'password' => bcrypt('1234567890')
+            'name'               => 'SuperAdmin',
+            'lastname'           => 'Admin',
+            'email'              => 'superadmin@admin.com',
+            'password'           => bcrypt('1234567890'),
+            'profile_photo_path' => '1.jpg'
         ]);
         $adminUser->assignRole('super-admin');
 
         $adminUser = User::factory()->create([
-            'name'     => 'Admin',
-            'lastname' => 'Admin',
-            'email'    => 'admin@admin.com',
-            'password' => bcrypt('1234567890')
+            'name'               => 'Admin',
+            'lastname'           => 'Admin',
+            'email'              => 'admin@admin.com',
+            'password'           => bcrypt('1234567890'),
+            'profile_photo_path' => '2.jpg'
         ]);
         $adminUser->assignRole('admin');
     }
