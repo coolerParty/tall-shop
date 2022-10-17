@@ -266,6 +266,12 @@
             </svg>
         </div>
     </div>
+    <style>
+        .modal-body{
+            max-height: calc(100vh - 200px)!important;
+            overflow-y: auto!important;
+        }
+    </style>
     {{-- Show-Product-Modal Start --}}
     <x-jet-dialog-modal wire:model="showModal">
         <x-slot name="title">
@@ -276,9 +282,9 @@
             @endif
         </x-slot>
         <x-slot name="content" class="w-full">
-            <div class="w-full mt-10">
+            <div class="w-full mt-5 modal-body ">
                 <!-- <x-jet-validation-errors class="mb-4" /> -->
-                <section class="max-w-4xl mx-auto dark:bg-gray-800">
+                <section class="max-w-4xl p-10 mx-auto dark:bg-gray-800">
                     @if($modalType == 1)
                     <form wire:submit.prevent="store">
                         @elseif($modalType == 2)
@@ -287,7 +293,7 @@
                             <div class="px-2 mt-4 ">
                                 <label class="text-gray-700 dark:text-gray-200" for="name">name</label>
                                 <input id="name" type="text" name="name" value="{{ old('name') }}"
-                                    wire:model.lazy="name" required autofocus autocomplete="name" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring
+                                    wire:model.lazy="name" required autofocus autocomplete="name" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-gray-50 border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring
                                         @error('name') border-red-500 @enderror">
                                 @error('name')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                             </div>
@@ -298,7 +304,7 @@
                                 <textarea id="short_description" type="text" name="short_description"
                                     value="{{ old('short_description') }}" wire:model.lazy="short_description" required
                                     autofocus autocomplete="short_description"
-                                    class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring @error('short_description') border-red-500 @enderror"
+                                    class="block w-full px-4 py-2 mt-2 text-gray-700 bg-gray-50 border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring @error('short_description') border-red-500 @enderror"
                                     rows="6"></textarea>
                                 @error('short_description')<p class="text-xs italic text-red-500">{{ $message }}</p>
                                 @enderror
@@ -309,7 +315,7 @@
                                 <textarea id="description" type="text" name="description"
                                     value="{{ old('description') }}" wire:model.lazy="description" required autofocus
                                     autocomplete="description"
-                                    class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring @error('description') border-red-500 @enderror"
+                                    class="block w-full px-4 py-2 mt-2 text-gray-700 bg-gray-50 border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring @error('description') border-red-500 @enderror"
                                     rows="6"></textarea>
                                 @error('description')<p class="text-xs italic text-red-500">{{ $message }}</p>
                                 @enderror
@@ -323,7 +329,7 @@
                                     <input id="regular_price" type="number" step="any" name="regular_price"
                                         value="{{ old('regular_price') }}" wire:model.lazy="regular_price" required
                                         autofocus autocomplete="regular_price"
-                                        class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                        class="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-200 rounded-md bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                                         @error('regular_price') border-red-500 @enderror">
                                     @error('regular_price')<p class="text-xs italic text-red-500">{{ $message }}</p>
                                     @enderror
@@ -332,7 +338,7 @@
                                     <label class="text-gray-700 dark:text-gray-200" for="sale_price">Sale Price</label>
                                     <input id="sale_price" type="number" step="any" name="sale_price"
                                         value="{{ old('sale_price') }}" wire:model.lazy="sale_price" required autofocus
-                                        autocomplete="sale_price" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring
+                                        autocomplete="sale_price" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-gray-50 border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring
                                         @error('sale_price') border-red-500 @enderror">
                                     @error('sale_price')<p class="text-xs italic text-red-500">{{ $message }}</p>
                                     @enderror
@@ -345,7 +351,7 @@
                                         Status</label>
                                     <select id="stock_status" name="stock_status" autocomplete="type-name"
                                         wire:model.lazy="stock_status"
-                                        class="block w-full px-4 py-2 mt-2 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:outline-none focus:ring focus:border-blue-400 dark:focus:border-blue-300 sm:text-sm @error('stock_status') border-red-500 @enderror">
+                                        class="block w-full px-4 py-2 mt-2 bg-gray-50 border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:outline-none focus:ring focus:border-blue-400 dark:focus:border-blue-300 sm:text-sm @error('stock_status') border-red-500 @enderror">
                                         <option value="instock">Instock</option>
                                         <option value="outofstock">Out of Stock</option>
                                     </select>
@@ -355,7 +361,7 @@
                                 <div class="w-full px-2 md:w-1/2">
                                     <label for="featured" class="text-gray-700 dark:text-gray-200">Featured</label>
                                     <select id="featured" name="featured" wire:model.lazy="featured"
-                                        class="block w-full px-4 py-2 mt-2 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:outline-none focus:ring focus:border-blue-400 dark:focus:border-blue-300 sm:text-sm @error('featured') border-red-500 @enderror">
+                                        class="block w-full px-4 py-2 mt-2 bg-gray-50 border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:outline-none focus:ring focus:border-blue-400 dark:focus:border-blue-300 sm:text-sm @error('featured') border-red-500 @enderror">
                                         <option value="0">Don't Show</option>
                                         <option value="1">Show</option>
                                     </select>
@@ -367,14 +373,14 @@
                                 <div class="w-full px-2 md:w-1/2">
                                     <label class="text-gray-700 dark:text-gray-200" for="quantity">Quantity</label>
                                     <input id="quantity" type="number" name="quantity" value="{{ old('quantity') }}"
-                                        wire:model.lazy="quantity" required autofocus autocomplete="quantity" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring
+                                        wire:model.lazy="quantity" required autofocus autocomplete="quantity" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-gray-50 border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring
                                         @error('quantity') border-red-500 @enderror">
                                     @error('quantity')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                                 </div>
                                 <div class="w-full px-2 md:w-1/2">
                                     <label for="category_id" class="text-gray-700 dark:text-gray-200">Category</label>
                                     <select id="category_id" name="category_id" wire:model.lazy="category_id"
-                                        class="block w-full px-4 py-2 mt-2 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:outline-none focus:ring focus:border-blue-400 dark:focus:border-blue-300 sm:text-sm @error('category_id') border-red-500 @enderror">
+                                        class="block w-full px-4 py-2 mt-2 bg-gray-50 border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:outline-none focus:ring focus:border-blue-400 dark:focus:border-blue-300 sm:text-sm @error('category_id') border-red-500 @enderror">
                                         <option value="">Select Categories</option>
                                         @foreach($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -389,7 +395,7 @@
                                 <div class="w-full px-2 md:w-1/2">
                                     <label for="active" class="text-gray-700 dark:text-gray-200">Active</label>
                                     <select id="active" name="active" autocomplete="type-name" wire:model.lazy="active"
-                                        class="block w-full px-4 py-2 mt-2 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:outline-none focus:ring focus:border-blue-400 dark:focus:border-blue-300 sm:text-sm @error('active') border-red-500 @enderror">
+                                        class="block w-full px-4 py-2 mt-2 bg-gray-50 border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:outline-none focus:ring focus:border-blue-400 dark:focus:border-blue-300 sm:text-sm @error('active') border-red-500 @enderror">
                                         <option value="0">Don't Show</option>
                                         <option value="1">Show</option>
                                     </select>
@@ -399,14 +405,14 @@
                                     @if($modalType == 1)
                                     <label class="text-gray-700 dark:text-gray-200" for="image">Image</label>
                                     <input id="image" type="file" name="image" wire:model="image" autocomplete="image"
-                                        class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring @error('image') border-red-500 @enderror">
+                                        class="block w-full px-4 py-2 mt-2 text-gray-700 bg-gray-50 border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring @error('image') border-red-500 @enderror">
                                     @error('image')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                                     <div class="block w-full px-4 py-2 m-1 text-white bg-emerald-500 " wire:loading
                                         wire:target="image">
                                         Uploading...
                                     </div>
                                     @if ($image)
-                                    <img class="object-cover rounded place-content-center w-30 h-30"
+                                    <img class="object-cover mt-5 rounded place-content-center w-30 h-30"
                                         src="{{ $image->temporaryUrl() }}" alt="">
                                     <x-link-danger type="button" wire:click="removeImage"
                                         class="block w-full cursor-pointer">Remove Selected Image</x-link-danger>
@@ -415,7 +421,7 @@
                                     <label class="text-gray-700 dark:text-gray-200" for="new_image">Image</label>
                                     <input id="new_image" type="file" name="new_image" wire:model="new_image"
                                         autocomplete="new_image"
-                                        class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring @error('new_image') border-red-500 @enderror">
+                                        class="block w-full px-4 py-2 mt-2 text-gray-700 bg-gray-50 border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring @error('new_image') border-red-500 @enderror">
                                     @error('new_image')<p class="text-xs italic text-red-500">{{ $message }}</p>
                                     @enderror
                                     <div class="block w-full px-4 py-2 m-1 text-white bg-emerald-500 " wire:loading
@@ -423,12 +429,12 @@
                                         Uploading...
                                     </div>
                                     @if ($new_image)
-                                    <img class="object-cover rounded place-content-center w-30 h-30"
+                                    <img class="object-cover mt-5 rounded place-content-center w-30 h-30"
                                         src="{{ $new_image->temporaryUrl() }}" alt="">
                                     <x-link-danger type="button" wire:click="removeImage"
                                         class="block w-full cursor-pointer">Remove Selected Image</x-link-danger>
                                     @elseif($image)
-                                    <img class="object-cover rounded place-content-center w-30 h-30"
+                                    <img class="object-cover mt-5 rounded place-content-center w-30 h-30"
                                         src="{{ asset('storage/assets/product/medium') }}/{{ $image }}" alt="">
                                     @endif
                                     @endif
