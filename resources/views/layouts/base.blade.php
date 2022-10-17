@@ -76,7 +76,11 @@
     @livewireScripts
     @stack('scripts')
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.bundle.min.js"></script>
+
+
     <script>
+
+
         const setup = () => {
             var open = false;
             var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;

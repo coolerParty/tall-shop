@@ -41,7 +41,7 @@
                                     class="p-1 text-xs text-right text-gray-500 uppercase md:font-medium md:tracking-wider md:px-6 md:py-3">
                                     Total
                                 </th>
-                                <th scope="col" class="p-1 md:px-6 md:py-3">
+                                <th scope="col" class="p-1 text-right md:px-6 md:py-3">
                                     Action
                                 </th>
                             </tr>
@@ -405,7 +405,7 @@
                                     class="p-1 text-xs text-right text-gray-500 uppercase md:font-medium md:tracking-wider md:px-6 md:py-3">
                                     Price
                                 </th>
-                                <th scope="col" class="p-1 md:px-6 md:py-3">
+                                <th scope="col" class="p-1 text-right md:px-6 md:py-3">
                                     Action
                                 </th>
                             </tr>
