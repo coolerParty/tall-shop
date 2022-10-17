@@ -1,12 +1,28 @@
 <div class="px-3 pt-10 pb-10 mt-10 mb-10 font-sans leading-normal tracking-normal bg-orange-200">
     <h3 class="mt-10 text-3xl font-semibold text-center capitalize">customer's review </h3>
     <h1 class="text-5xl font-bold tracking-tighter text-center text-orange-500 capitalize">what they say</h1>
-    <div class="container mx-auto mt-10 mb-10">
+    <div class="container mx-auto mt-10 mb-10 text-center">
         <div class="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
             @foreach($reviews as $review)
             <div
-                class="relative p-3 pb-16 transition duration-150 ease-in-out transform bg-white hover:shadow-lg hover:rounded hover:scale-102">
-                <div class="m-5">
+                class="p-3 transition duration-150 ease-in-out transform bg-white hover:shadow-lg hover:rounded hover:scale-102">
+                <div class="grid m-5 space-x-2 place-items-center">
+                    @if($review->orderItem->order->user->profile_photo_path)
+                    <img class="object-cover w-32 h-auto border-4 border-purple-900 rounded-full"
+                        src="{{ asset('storage/assets/user/profile-photo/thumbnail') }}/{{ $review->orderItem->order->user->profile_photo_path }}"
+                        alt="" />
+                    @else
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-auto border-purple-900 rounded-full w-36"
+                        viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    @endif
+                    <div class="text-sm">
+                        <p class="font-semibold leading-5 text-gray-900">{{ $review->orderItem->order->user->name }}</p>
+                    </div>
+                </div>
+                <div class="grid m-5 place-items-center">
                     <div class="flex space-x-0.5">
                         <svg class="w-5 h-5 {{ ($review->rating != 0 && 1 <= $review->rating) ? 'text-yellow-300' : 'text-gray-300' }}"
                             fill="{{ ($review->rating != 0 && 1 <= $review->rating) ? 'currentColor' : 'none' }}"
@@ -49,30 +65,15 @@
                             </path>
                         </svg>
                     </div>
-                    <p class="mt-2 text-sm font-medium leading-5 text-gray-500">{{ $review->created_at->toFormattedDateString() }}</p>
+                    <p class="text-xs font-medium leading-5 text-gray-500">{{ $review->created_at->toFormattedDateString() }}</p>
                 </div>
                 <div class="m-5 space-y-1">
-                    <h3 class="font-semibold text-gray-800">{{ $review->title }}
+                    <h3 class="text-xl font-bold leading-6 text-gray-800">{{ $review->title }}
                     </h3>
-                    <p class="text-sm leading-5 text-gray-500">{{ $review->comment }}</p>
+                    <p class="text-sm leading-5 text-gray-500">"{{ $review->comment }}"</p>
                 </div>
 
-                <div class="absolute flex items-center m-5 space-x-2 bottom-2 left-2">
-                    @if($review->orderItem->order->user->profile_photo_path)
-                    <img class="object-cover w-8 h-8 border-2 border-purple-900 rounded-full"
-                        src="{{ asset('storage/assets/user/profile-photo/thumbnail') }}/{{ $review->orderItem->order->user->profile_photo_path }}"
-                        alt="" />
-                    @else
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 border-purple-900 rounded-full"
-                        viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                            clip-rule="evenodd" />
-                    </svg>
-                    @endif
-                    <div class="text-sm">
-                        <p class="font-semibold leading-5 text-gray-900">{{ $review->orderItem->order->user->name }}</p>
-                    </div>
-                </div>
+
             </div>
             @endforeach
         </div>

@@ -24,9 +24,9 @@ class ReviewRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'   => ['required', 'min:3', 'max:30', 'string'],
+            'title'   => ['required', 'min:3', 'max:100', 'string'],
             'rating'  => ['required', 'min:1', 'max:5','numeric'],
-            'comment' => ['required', 'string','max:300'],
+            'comment' => ['required', 'string','max:600'],
         ];
     }
 }
