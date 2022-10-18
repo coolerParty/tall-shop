@@ -6,8 +6,10 @@ use Livewire\Component;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
+use App\Models\Profile;
 use App\Models\Shipping;
 use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Cart;
@@ -48,6 +50,26 @@ class CheckoutComponent extends Component
     public $exp_month;
     public $exp_year;
     public $cvc;
+
+    public function mount()
+    {
+        $user = User::find(Auth::user()->id);
+        if($user){
+            $this->firstname = $user->name;
+            $this->lastname  = $user->lastname;
+            $this->email     = $user->email;
+
+            $profile        = Profile::where('user_id', Auth::user()->id)->first();
+            $this->mobile   = $profile->mobile;
+            $this->line1    = $profile->line1;
+            $this->line2    = $profile->line2;
+            $this->city     = $profile->city;
+            $this->province = $profile->province;
+            $this->country  = $profile->country;
+            $this->zipcode  = $profile->zipcode;
+        }
+
+    }
 
     public function updated($fields)
     {
