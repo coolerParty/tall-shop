@@ -1,5 +1,5 @@
-<div class="w-full">
-    <div class="container grid mx-auto mt-10 md:grid-cols-2 md:gap-2">
+<div class="w-full pt-10 pb-10">
+    <div class="container grid mx-auto mt-10 mb-10 md:grid-cols-2 md:gap-2">
         <div class=""><img loading="lazy" src="{{ asset('assets/images/about/about-img.png') }}" alt=""></div>
         <div class="p-5 mt-5 md:mt-10 md:p-0">
             <h1 class="mb-5 text-3xl font-semibold tracking-tight">Welcome To Our Restaurant</h1>
@@ -20,7 +20,6 @@
                 </div>
              </div>
         </div>
-
     </div>
 
   </div>

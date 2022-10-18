@@ -9,56 +9,70 @@
             @foreach($products as $product)
             <div class="relative pb-5 m-1 overflow-hidden rounded-lg md:m-0">
 
-                <a class="border-gray-800 hover:border-b-2" href="{{ route('product.details', ['slug' => $product->slug ]) }}"><img loading="lazy" src="{{ asset('storage/assets/product/medium') }}/{{ $product->image }}" alt=""
-                    class="object-cover w-full transition duration-500 ease-in-out delay-300 rounded-lg shadow-lg hover:-translate-y-1 hover:scale-150"
-                    ></a>
-                    <a class="" href="{{ route('product.details', ['slug' => $product->slug ]) }}">
-                        <div class="p-2 mx-2 space-y-1 text-center transition duration-500 ease-in-out delay-300 bg-white rounded-lg shadow-lg -mt-9 opacity-95 hover:bg-gray-900 hover:text-white hover:-translate-y-2 ">
-                    <h1 class="text-xl font-bold tracking-normal capitalize">{{ $product->name }}</h1>
-                    <div class="flex justify-center">
-                        <div class="flex space-x-0.5">
-                            <svg class="w-5 h-5 {{ ($product->ratings->count() != 0 && 1 <= ($product->ratings->sum('rating') / $product->ratings->count())) ? 'text-yellow-300' : 'text-gray-300' }}" fill="{{ ($product->ratings->count() != 0 && 1 <= ($product->ratings->sum('rating') / $product->ratings->count())) ? 'currentColor' : 'none' }}" stroke-linecap="round"
-                                stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24" stroke="currentColor">
-                                <path
-                                    d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z">
-                                </path>
-                            </svg>
-                            <svg class="w-5 h-5 {{ ($product->ratings->count() != 0 && 2 <= ($product->ratings->sum('rating') / $product->ratings->count())) ? 'text-yellow-300' : 'text-gray-300' }}" fill="{{ ($product->ratings->count() != 0 && 2 <= ($product->ratings->sum('rating') / $product->ratings->count())) ? 'currentColor' : 'none' }}" stroke-linecap="round"
-                                stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24" stroke="currentColor">
-                                <path
-                                    d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z">
-                                </path>
-                            </svg>
-                            <svg class="w-5 h-5 {{ ($product->ratings->count() != 0 && 3 <= ($product->ratings->sum('rating') / $product->ratings->count())) ? 'text-yellow-300' : 'text-gray-300' }}" fill="{{ ($product->ratings->count() != 0 && 3 <= ($product->ratings->sum('rating') / $product->ratings->count())) ? 'currentColor' : 'none' }}" stroke-linecap="round"
-                                stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24" stroke="currentColor">
-                                <path
-                                    d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z">
-                                </path>
-                            </svg>
-                            <svg class="w-5 h-5 {{ ($product->ratings->count() != 0 && 4 <= ($product->ratings->sum('rating') / $product->ratings->count())) ? 'text-yellow-300' : 'text-gray-300' }}" fill="{{ ($product->ratings->count() != 0 && 4 <= ($product->ratings->sum('rating') / $product->ratings->count())) ? 'currentColor' : 'none' }}" stroke-linecap="round"
-                                stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24" stroke="currentColor">
-                                <path
-                                    d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z">
-                                </path>
-                            </svg>
-                            <svg class="w-5 h-5 {{ ($product->ratings->count() != 0 && 5 <= ($product->ratings->sum('rating') / $product->ratings->count())) ? 'text-yellow-300' : 'text-gray-300' }}" fill="{{ ($product->ratings->count() != 0 && 5 <= ($product->ratings->sum('rating') / $product->ratings->count())) ? 'currentColor' : 'none' }}" stroke-linecap="round"
-                                stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24" stroke="currentColor">
-                                <path
-                                    d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z">
-                                </path>
-                            </svg>
+                <a class="border-gray-800 hover:border-b-2"
+                    href="{{ route('product.details', ['slug' => $product->slug ]) }}"><img loading="lazy"
+                        src="{{ asset('storage/assets/product/medium') }}/{{ $product->image }}" alt=""
+                        class="object-cover w-full transition duration-500 ease-in-out delay-300 rounded-lg shadow-lg hover:-translate-y-1 hover:scale-150"></a>
+                <a class="" href="{{ route('product.details', ['slug' => $product->slug ]) }}">
+                    <div
+                        class="p-2 mx-2 space-y-1 text-center transition duration-500 ease-in-out delay-300 bg-white rounded-lg shadow-lg -mt-9 opacity-95 hover:bg-gray-900 hover:text-white hover:-translate-y-2 ">
+                        <h1 class="text-xl font-bold tracking-normal capitalize">{{ $product->name }}</h1>
+                        <div class="flex justify-center">
+                            <div class="flex space-x-0.5">
+                                <svg class="w-5 h-5 {{ ($product->ratings->count() != 0 && 1 <= ($product->ratings->sum('rating') / $product->ratings->count())) ? 'text-yellow-300' : 'text-gray-300' }}"
+                                    fill="{{ ($product->ratings->count() != 0 && 1 <= ($product->ratings->sum('rating') / $product->ratings->count())) ? 'currentColor' : 'none' }}"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path
+                                        d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z">
+                                    </path>
+                                </svg>
+                                <svg class="w-5 h-5 {{ ($product->ratings->count() != 0 && 2 <= ($product->ratings->sum('rating') / $product->ratings->count())) ? 'text-yellow-300' : 'text-gray-300' }}"
+                                    fill="{{ ($product->ratings->count() != 0 && 2 <= ($product->ratings->sum('rating') / $product->ratings->count())) ? 'currentColor' : 'none' }}"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path
+                                        d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z">
+                                    </path>
+                                </svg>
+                                <svg class="w-5 h-5 {{ ($product->ratings->count() != 0 && 3 <= ($product->ratings->sum('rating') / $product->ratings->count())) ? 'text-yellow-300' : 'text-gray-300' }}"
+                                    fill="{{ ($product->ratings->count() != 0 && 3 <= ($product->ratings->sum('rating') / $product->ratings->count())) ? 'currentColor' : 'none' }}"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path
+                                        d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z">
+                                    </path>
+                                </svg>
+                                <svg class="w-5 h-5 {{ ($product->ratings->count() != 0 && 4 <= ($product->ratings->sum('rating') / $product->ratings->count())) ? 'text-yellow-300' : 'text-gray-300' }}"
+                                    fill="{{ ($product->ratings->count() != 0 && 4 <= ($product->ratings->sum('rating') / $product->ratings->count())) ? 'currentColor' : 'none' }}"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path
+                                        d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z">
+                                    </path>
+                                </svg>
+                                <svg class="w-5 h-5 {{ ($product->ratings->count() != 0 && 5 <= ($product->ratings->sum('rating') / $product->ratings->count())) ? 'text-yellow-300' : 'text-gray-300' }}"
+                                    fill="{{ ($product->ratings->count() != 0 && 5 <= ($product->ratings->sum('rating') / $product->ratings->count())) ? 'currentColor' : 'none' }}"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path
+                                        d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z">
+                                    </path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="flex items-end justify-center gap-2">
+                            @if($product->sale_price > 0)
+                            <div class="text-xl text-orange-500 font-semitbold">${{ $product->sale_price }}</div>
+                            <div class="text-base text-gray-500 line-through font-semitbold">${{ $product->regular_price
+                                }}
+                            </div>
+                            @else
+                            <div class="text-xl text-orange-500 font-semitbold">${{ $product->regular_price }}</div>
+                            @endif
                         </div>
                     </div>
-                    <div class="flex items-end justify-center gap-2">
-                        @if($product->sale_price > 0)
-                        <div class="text-xl text-orange-500 font-semitbold">${{ $product->sale_price }}</div>
-                        <div class="text-base text-gray-500 line-through font-semitbold">${{ $product->regular_price }}
-                        </div>
-                        @else
-                        <div class="text-xl text-orange-500 font-semitbold">${{ $product->regular_price }}</div>
-                        @endif
-                    </div>
-                </div></a>
+                </a>
                 @if ($witems->contains($product->id))
                 <a href="#" wire:click.prevent="removeFromWishlist({{ $product->id }})"
                     class="absolute p-2 bg-gray-500 rounded-full cursor-pointer hover:bg-gray-600 top-2 right-12 md:top-2 md:right-12">
