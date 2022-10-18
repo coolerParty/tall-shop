@@ -27,7 +27,7 @@
                             data-swiper-parallax-duration="1000"
                             >
                             {{ $slider->title }}</h3>
-                        <a href="{{ $slider->link }}" class="px-4 py-2 m-5 capitalize bg-orange-500 shadow hover:bg-orange-600 md:text-xl md:py-3 md:px-5 hover:tracking-wider">get started</a>
+                        <a href="{{ $slider->link }}" class="px-6 py-3 mt-3 font-bold text-white capitalize transition duration-500 ease-in-out delay-300 bg-orange-500 shadow hover:-translate-y-1 hover:bg-indigo-500">get started</a>
                     </div>
                 </div>
             </div>

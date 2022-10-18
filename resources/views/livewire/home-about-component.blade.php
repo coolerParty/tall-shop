@@ -4,7 +4,7 @@
         <div class="p-5 mt-5 md:mt-10 md:p-0">
             <h1 class="mb-5 text-3xl font-semibold tracking-tight">Welcome To Our Restaurant</h1>
             <p class="mb-10 leading-loose">Lorem Ipsum Dolor Sit Amet Consectetur Adipisicing Elit. Nisi Optio At, Saepe Accusamus Dolorum, Quos Eos Nesciunt Amet Exercitationem Illum Quis Nostrum, Repellat Quaerat Eum Debitis Fugit Alias Magnam Omnis!</p>
-            <a href="#" class="px-4 py-2 text-white capitalize bg-orange-500 shadow hover:bg-orange-600 md:text-xl md:py-3 md:px-5 hover:tracking-wider">Read More</a>
+            <a href="#" class="px-6 py-3 mt-3 font-bold text-white capitalize transition duration-500 ease-in-out delay-300 bg-orange-500 shadow hover:-translate-y-1 hover:bg-indigo-500">Read More</a>
             <div class="grid grid-cols-3 gap-2 mt-10">
                 <div class="p-5 text-center bg-gray-100 cols-1">
                    <img loading="lazy" class="mx-auto" src="{{ asset('assets/images/about/about-icon-1.png') }}" alt="">
