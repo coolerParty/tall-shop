@@ -7,11 +7,14 @@
         <div class="grid grid-cols-2 gap-0 mt-10 mb-10 md:gap-2 lg:gap-3 md:grid-cols-3 lg:grid-cols-4">
 
             @foreach($products as $product)
-            <div class="relative pb-5 m-1 rounded md:m-0">
+            <div class="relative pb-5 m-1 overflow-hidden rounded-lg md:m-0">
 
-                <img loading="lazy" src="{{ asset('storage/assets/product/medium') }}/{{ $product->image }}" alt=""
-                    class="w-full rounded-lg shadow-lg">
-                <div class="p-2 mx-2 text-center bg-white rounded-lg shadow-lg -mt-9 opacity-95">
+                <a class="border-gray-800 hover:border-b-2" href="{{ route('product.details', ['slug' => $product->slug ]) }}"><img loading="lazy" src="{{ asset('storage/assets/product/medium') }}/{{ $product->image }}" alt=""
+                    class="object-cover w-full transition duration-500 ease-in-out delay-300 rounded-lg shadow-lg hover:-translate-y-1 hover:scale-150"
+                    ></a>
+                    <a class="" href="{{ route('product.details', ['slug' => $product->slug ]) }}">
+                        <div class="p-2 mx-2 space-y-1 text-center transition duration-500 ease-in-out delay-300 bg-white rounded-lg shadow-lg -mt-9 opacity-95 hover:bg-gray-900 hover:text-white hover:-translate-y-2 ">
+                    <h1 class="text-xl font-bold tracking-normal capitalize">{{ $product->name }}</h1>
                     <div class="flex justify-center">
                         <div class="flex space-x-0.5">
                             <svg class="w-5 h-5 {{ ($product->ratings->count() != 0 && 1 <= ($product->ratings->sum('rating') / $product->ratings->count())) ? 'text-yellow-300' : 'text-gray-300' }}" fill="{{ ($product->ratings->count() != 0 && 1 <= ($product->ratings->sum('rating') / $product->ratings->count())) ? 'currentColor' : 'none' }}" stroke-linecap="round"
@@ -46,7 +49,6 @@
                             </svg>
                         </div>
                     </div>
-                    <h1 class="text-xl font-bold tracking-tighter capitalize "><a class="border-gray-800 hover:border-b-2" href="{{ route('product.details', ['slug' => $product->slug ]) }}">{{ $product->name }}</a></h1>
                     <div class="flex items-end justify-center gap-2">
                         @if($product->sale_price > 0)
                         <div class="text-xl text-orange-500 font-semitbold">${{ $product->sale_price }}</div>
@@ -56,7 +58,7 @@
                         <div class="text-xl text-orange-500 font-semitbold">${{ $product->regular_price }}</div>
                         @endif
                     </div>
-                </div>
+                </div></a>
                 @if ($witems->contains($product->id))
                 <a href="#" wire:click.prevent="removeFromWishlist({{ $product->id }})"
                     class="absolute p-2 bg-gray-500 rounded-full cursor-pointer hover:bg-gray-600 top-2 right-12 md:top-2 md:right-12">
