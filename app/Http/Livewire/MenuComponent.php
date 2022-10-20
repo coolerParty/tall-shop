@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Category;
 use App\Models\Product;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -70,12 +71,16 @@ class MenuComponent extends Component
         }
 
         $products = Product::with('ratings')
-            ->select('id', 'name', 'regular_price', 'sale_price', 'short_description', 'image', 'slug')
+            ->select('id', 'name', 'regular_price', 'sale_price', 'short_description', 'image', 'slug', 'category_id')
             ->orderBy('name', 'ASC')
             ->where('active', 1)
-            ->paginate(8);
+            ->get();
         $witems = Cart::instance('wishlist')->content()->pluck('id');
         $citems = Cart::instance('cart')->content()->pluck('id');
-        return view('livewire.menu-component', ['products' => $products, 'witems' => $witems, 'citems' => $citems])->layout('layouts.front');
+
+        $catId = array_unique($products->pluck('category_id')->all());
+        $categories = Category::select('id','name')->whereIn('id', $catId)->get();
+
+        return view('livewire.menu-component', ['products' => $products, 'witems' => $witems, 'citems' => $citems, 'categories' => $categories])->layout('layouts.front');
     }
 }

@@ -46,13 +46,17 @@
             <h1 class="p-1 text-5xl font-bold tracking-tighter text-orange-500 capitalize md:p-0">Our Delicious Food
             </h1>
             <div class="w-full p-1 mt-10 md:p-0">
-                <div class="grid gap-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                @foreach($categories as $category)
+                <div class="w-full mb-10 bg-gray-800 border rounded-lg shadow-lg">
+                    <h1 class="p-10 text-5xl font-bold tracking-tighter text-gray-300 uppercase">{{ $category->name }}</h1>
+                <div class="grid gap-1 p-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 
                     @foreach($products as $product)
-                    <div class="relative w-full p-1 bg-white border rounded-lg md:m-0 md:border-0">
-                        <div class="relative w-full">
-                            <a href="{{ route('product.details', ['slug' => $product->slug ]) }}"><img src="{{ asset('storage/assets/product/medium') }}/{{ $product->image }}" alt=""
-                                class="object-cover w-full rounded-lg aspect-square"></a>
+                        @if($category->id == $product->category_id)
+                    <div class="relative w-full p-1 border rounded-lg bg-gray-50 md:m-0 md:border-0">
+                        <div class="relative w-full overflow-hidden rounded-lg">
+                            <a href="{{ route('product.details', ['slug' => $product->slug ]) }}"><img loading="lazy" src="{{ asset('storage/assets/product/medium') }}/{{ $product->image }}" alt=""
+                                class="object-cover w-full transition duration-500 ease-in-out delay-300 rounded-lg aspect-square hover:-translate-y-1 hover:scale-150"></a>
                             <div class="absolute top-2 right-2">
                                 @if($product->sale_price > 0)
                                 <span class="px-2 py-1 text-base font-semibold text-white bg-orange-500 shadow-lg">${{
@@ -157,13 +161,16 @@
 
                         </div>
                     </div>
+                        @endif
                     @endforeach
 
 
                 </div>
+                </div>
+                @endforeach
             </div>
         </div>
-        <div class="w-full p-2 m-2 md:p-0">{!! $products->links() !!}</div>
+        <!-- <div class="w-full p-2 m-2 md:p-0"></div> -->
 
     </div>
 

@@ -15,7 +15,7 @@
                         class="object-cover w-full transition duration-500 ease-in-out delay-300 rounded-lg shadow-lg hover:-translate-y-1 hover:scale-150"></a>
                 <a class="" href="{{ route('product.details', ['slug' => $product->slug ]) }}">
                     <div
-                        class="p-2 mx-2 space-y-1 text-center transition duration-500 ease-in-out delay-300 bg-white rounded-lg shadow-lg -mt-9 opacity-95 hover:bg-gray-900 hover:text-white hover:-translate-y-2 ">
+                        class="p-2 mx-2 space-y-1 text-center transition duration-500 ease-in-out delay-300 bg-white rounded-lg shadow-lg -mt-9 opacity-95 hover:bg-gray-800 hover:text-white hover:-translate-y-2 ">
                         <h1 class="text-xl font-bold tracking-normal capitalize">{{ $product->name }}</h1>
                         <div class="flex justify-center">
                             <div class="flex space-x-0.5">

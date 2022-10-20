@@ -76,9 +76,7 @@
                     <span class="ml-2 text-3xl font-bold text-gray-800">${{ $regular_price }}</span>
                     @endif
                 </div>
-                <p class="text-gray-600">Quibusdam non a ipsam dolor adipisci quo. Impedit voluptates est sit ad
-                    possimus non natus. Quisquam
-                    officiis quo facere nemo omnis et eos exercitationem.</p>
+                <p class="text-gray-600">{{ $product->short_description}}</p>
 
                 <div class="text-base text-gray-800">
                     <span class="text-xs text-gray-500 capitalize">stock available : </span> <b>{{ $quantity }}</b>
@@ -159,9 +157,8 @@
             <div class="w-full px-5 py-2 bg-gray-100 rounded-t">
                 <h5 class="text-lg font-semibold text-gray-800">Product Description</h5>
             </div>
-            <div class="p-5">
-                Quia consequatur autem expedita ut et. Deserunt tempora neque et ut. Odio nemo et dolore corrupti.
-                Nesciunt quos natus sequi voluptas magnam suscipit vero repudiandae.
+            <div class="p-5 text-gray-600">
+                {{ $product->description }}
             </div>
         </div>
         <div class="mt-5 mb-5 bg-white rounded">
